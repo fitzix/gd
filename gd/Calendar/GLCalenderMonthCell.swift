@@ -12,9 +12,9 @@ struct GLCalenderExpandIndicator {
     
     var expanded = false
     // 已展开空白行第一个cell序列号
-    var expandedIndex = 1000
+    var expandedIndex = -1
     // 选中的cell系列号
-    var selectedIndex = 1000
+    var selectedIndex = -1
     
     
 }
@@ -32,14 +32,15 @@ class GLCalenderMonthCell: UICollectionViewCell {
         
         self.collectionView = UICollectionView(frame: bounds, collectionViewLayout: layout)
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = -1
+        layout.minimumInteritemSpacing = -1
         
         
         addSubview(collectionView)
         
         collectionView.isScrollEnabled = false
-        // TODO 注册
+        collectionView.register(GLCalenderDayCell.self, forCellWithReuseIdentifier: "GLCalenderDayCell")
+        collectionView.register(GLTaskListCell.self, forCellWithReuseIdentifier: "GLTaskListCell")
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -79,9 +80,9 @@ class GLCalenderMonthCell: UICollectionViewCell {
                 // 判断是否是点击已展开cell
                 if indexPath.item == self.calenderExpandIndicator.selectedIndex {
                     // 关闭删除空白行
-                    self.calenderExpandIndicator.selectedIndex = 1000
+                    self.calenderExpandIndicator.selectedIndex = -1
                     self.calenderExpandIndicator.expanded = false
-                    self.calenderExpandIndicator.expandedIndex = 1000
+                    self.calenderExpandIndicator.expandedIndex = -1
                     self.collectionView.performBatchUpdates({ [weak self] in
                         guard let `self` = self else {
                             return
@@ -110,10 +111,10 @@ class GLCalenderMonthCell: UICollectionViewCell {
                         cell.backgroundColor = UIColor.white
                     }
                     
-                    self.calenderExpandIndicator.selectedIndex = 1000
+                    self.calenderExpandIndicator.selectedIndex = -1
                     self.calenderExpandIndicator.expanded = false
                     let needCloseIndex = self.calenderExpandIndicator.expandedIndex
-                    self.calenderExpandIndicator.expandedIndex = 1000
+                    self.calenderExpandIndicator.expandedIndex = -1
                     
                     self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: UICollectionViewScrollPosition.top, animated: true)
                     self.collectionView.deleteItems(at: [IndexPath(item: needCloseIndex, section: 0)])
@@ -140,3 +141,23 @@ class GLCalenderMonthCell: UICollectionViewCell {
         }
     }
 }
+
+extension GLCalenderMonthCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if self.calenderExpandIndicator.expanded {
+            return 36
+        }
+        return 35
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if calenderExpandIndicator.expanded {
+            // 展开行
+            if calenderExpandIndicator.expandedIndex == indexPath.item {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLTaskListCell", for: indexPath) as! GLTaskListCell
+                return cell
+            }
+        }
+    }
+}
+

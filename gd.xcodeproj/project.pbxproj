@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2FF684AAE4E92CB4EE1F0C52 /* GLTaskListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF68AB38A98353A5F786B84 /* GLTaskListCell.swift */; };
 		C422916320DB488C0070F261 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C422916220DB488C0070F261 /* MainTabBarViewController.swift */; };
 		C42B5DBF20DC09B500BEA3D6 /* AgendaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B5DBE20DC09B500BEA3D6 /* AgendaViewController.swift */; };
 		C478ED7020DA5382007A4A3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C478ED6F20DA5382007A4A3F /* AppDelegate.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2FF68AB38A98353A5F786B84 /* GLTaskListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLTaskListCell.swift; sourceTree = "<group>"; };
 		C422916220DB488C0070F261 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		C42B5DBE20DC09B500BEA3D6 /* AgendaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaViewController.swift; sourceTree = "<group>"; };
 		C478ED6C20DA5382007A4A3F /* gd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gd.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,6 +138,7 @@
 				C4F1418920E0D5460044B393 /* ExpandCalender.swift */,
 				C4F1419220E0FC8D0044B393 /* GLCalenderMonthCell.swift */,
 				C4F1419420E114340044B393 /* GLCalenderDayCell.swift */,
+				2FF68AB38A98353A5F786B84 /* GLTaskListCell.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				C4F1419520E114340044B393 /* GLCalenderDayCell.swift in Sources */,
 				C4F1418A20E0D5460044B393 /* ExpandCalender.swift in Sources */,
 				C4F1418D20E0DAAA0044B393 /* DateUtil.swift in Sources */,
+				2FF684AAE4E92CB4EE1F0C52 /* GLTaskListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
