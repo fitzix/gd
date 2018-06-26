@@ -152,7 +152,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="2" title="" image="icon_main_bar" badgeValue="5" selectedImage="powerButton_highlight" id="cPa-gy-q4n">
+                    <tabBarItem key="tabBarItem" tag="2" title="" image="icon_main_bar" badgeValue="5" id="cPa-gy-q4n">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                 </viewController>
@@ -228,6 +228,5 @@
         <image name="icon_left_arrow" width="16" height="16"/>
         <image name="icon_main_bar" width="38" height="38"/>
         <image name="icon_today" width="23" height="23"/>
-        <image name="powerButton_highlight" width="35" height="35"/>
     </resources>
 </document>

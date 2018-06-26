@@ -17,18 +17,16 @@ class AgendaTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
         self.tableView.tableFooterView = UIView()
         
         //创建一个重用的单元格
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "wifiCell")
-        setup()
+        print(UINib(nibName: "GLAgendaTableSectionHeader", bundle: nil))
+        self.tableView.register(UINib(nibName: "GLAgendaTableSectionHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "GLAgendaTableSectionHeader")
+//        setup()
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -38,14 +36,15 @@ class AgendaTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 10
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let counts = agendaTableList?.count else {
-            return 0
-        }
-        return counts
+//        guard let counts = agendaTableList?.count else {
+//            return 0
+//        }
+//        return counts
+        return 5
     }
 
     
@@ -55,8 +54,12 @@ class AgendaTableViewController: UITableViewController {
         cell.textLabel?.text = "2222222"
         return cell
     }
-  
-
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tableView.dequeueReusableHeaderFooterView(withIdentifier: "GLAgendaTableSectionHeader")
+    }
+    
+    
     func setup() {
         let req = GLHttpUtil.shared.request(.getAgendaList, parameters: ["viewType": 3, "date": Date().toString(format: .isoDate)])
         req.responseObject { [weak self] (response: DataResponse<GLAgendaListResp>) in
