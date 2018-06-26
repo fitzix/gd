@@ -5,5 +5,9 @@
 
 import UIKit
 class GLTaskListCell: UICollectionViewCell {
-
+    let tableView = UITableView()
+    
+    func loadData(model: String) {
+        
+    }
 }

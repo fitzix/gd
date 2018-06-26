@@ -10,44 +10,43 @@
 		2FF684AAE4E92CB4EE1F0C52 /* GLTaskListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF68AB38A98353A5F786B84 /* GLTaskListCell.swift */; };
 		C422916320DB488C0070F261 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C422916220DB488C0070F261 /* MainTabBarViewController.swift */; };
 		C42B5DBF20DC09B500BEA3D6 /* AgendaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B5DBE20DC09B500BEA3D6 /* AgendaViewController.swift */; };
+		C44BCBE320E1DC1A0036AAE5 /* DateHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F1418E20E0E2170044B393 /* DateHelper.framework */; };
+		C44BCBE420E1DC1A0036AAE5 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48640F520DB8B090055AA1A /* Eureka.framework */; };
+		C44BCBE520E1DC1A0036AAE5 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48640FD20DBAF480055AA1A /* SnapKit.framework */; };
+		C44BCBEB20E214B70036AAE5 /* AgendaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BCBEA20E214B70036AAE5 /* AgendaTableViewCell.swift */; };
+		C44BCBEE20E21C8A0036AAE5 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44BCBEC20E21C8A0036AAE5 /* Alamofire.framework */; };
+		C44BCBF120E220CD0036AAE5 /* AgendaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C44BCBF020E220CD0036AAE5 /* AgendaTableViewCell.xib */; };
+		C44BCBF320E228490036AAE5 /* AgendaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BCBF220E228490036AAE5 /* AgendaTableViewController.swift */; };
+		C44BCBF620E22F3F0036AAE5 /* GLResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BCBF520E22F3F0036AAE5 /* GLResp.swift */; };
+		C44BCBF920E232290036AAE5 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44BCBF720E232290036AAE5 /* AlamofireObjectMapper.framework */; };
+		C44BCBFA20E232290036AAE5 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44BCBF820E232290036AAE5 /* ObjectMapper.framework */; };
+		C44BCC0120E24CED0036AAE5 /* GLHttpUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BCC0020E24CED0036AAE5 /* GLHttpUtil.swift */; };
 		C478ED7020DA5382007A4A3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C478ED6F20DA5382007A4A3F /* AppDelegate.swift */; };
 		C478ED7220DA5382007A4A3F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C478ED7120DA5382007A4A3F /* FirstViewController.swift */; };
 		C478ED7420DA5382007A4A3F /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C478ED7320DA5382007A4A3F /* SecondViewController.swift */; };
 		C478ED7720DA5382007A4A3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C478ED7520DA5382007A4A3F /* Main.storyboard */; };
 		C478ED7920DA5384007A4A3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C478ED7820DA5384007A4A3F /* Assets.xcassets */; };
 		C478ED7C20DA5384007A4A3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C478ED7A20DA5384007A4A3F /* LaunchScreen.storyboard */; };
-		C48640F620DB8B090055AA1A /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48640F520DB8B090055AA1A /* Eureka.framework */; };
-		C48640F820DB8B370055AA1A /* Eureka.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C48640F520DB8B090055AA1A /* Eureka.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C48640FF20DBAF4E0055AA1A /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48640FD20DBAF480055AA1A /* SnapKit.framework */; };
-		C486410020DBAF4E0055AA1A /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C48640FD20DBAF480055AA1A /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C4F1418A20E0D5460044B393 /* ExpandCalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F1418920E0D5460044B393 /* ExpandCalender.swift */; };
+		C4F1418A20E0D5460044B393 /* GLExpandCalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F1418920E0D5460044B393 /* GLExpandCalender.swift */; };
 		C4F1418D20E0DAAA0044B393 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F1418C20E0DAAA0044B393 /* DateUtil.swift */; };
-		C4F1419020E0E21D0044B393 /* DateHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F1418E20E0E2170044B393 /* DateHelper.framework */; };
-		C4F1419120E0E21D0044B393 /* DateHelper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C4F1418E20E0E2170044B393 /* DateHelper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C4F1419320E0FC8D0044B393 /* GLCalenderMonthCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F1419220E0FC8D0044B393 /* GLCalenderMonthCell.swift */; };
 		C4F1419520E114340044B393 /* GLCalenderDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F1419420E114340044B393 /* GLCalenderDayCell.swift */; };
+		C4F28DCB20E1D8D7001CCB24 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F28DCA20E1D8D7001CCB24 /* TaskModel.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		C48640F120DB88FA0055AA1A /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				C48640F820DB8B370055AA1A /* Eureka.framework in Embed Frameworks */,
-				C4F1419120E0E21D0044B393 /* DateHelper.framework in Embed Frameworks */,
-				C486410020DBAF4E0055AA1A /* SnapKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2FF68AB38A98353A5F786B84 /* GLTaskListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLTaskListCell.swift; sourceTree = "<group>"; };
 		C422916220DB488C0070F261 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		C42B5DBE20DC09B500BEA3D6 /* AgendaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaViewController.swift; sourceTree = "<group>"; };
+		C44BCBEA20E214B70036AAE5 /* AgendaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaTableViewCell.swift; sourceTree = "<group>"; };
+		C44BCBEC20E21C8A0036AAE5 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		C44BCBED20E21C8A0036AAE5 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		C44BCBF020E220CD0036AAE5 /* AgendaTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgendaTableViewCell.xib; sourceTree = "<group>"; };
+		C44BCBF220E228490036AAE5 /* AgendaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaTableViewController.swift; sourceTree = "<group>"; };
+		C44BCBF520E22F3F0036AAE5 /* GLResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLResp.swift; sourceTree = "<group>"; };
+		C44BCBF720E232290036AAE5 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = Carthage/Build/iOS/AlamofireObjectMapper.framework; sourceTree = "<group>"; };
+		C44BCBF820E232290036AAE5 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
+		C44BCC0020E24CED0036AAE5 /* GLHttpUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLHttpUtil.swift; sourceTree = "<group>"; };
 		C478ED6C20DA5382007A4A3F /* gd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C478ED6F20DA5382007A4A3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C478ED7120DA5382007A4A3F /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -58,11 +57,12 @@
 		C478ED7D20DA5384007A4A3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C48640F520DB8B090055AA1A /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = Carthage/Build/iOS/Eureka.framework; sourceTree = "<group>"; };
 		C48640FD20DBAF480055AA1A /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
-		C4F1418920E0D5460044B393 /* ExpandCalender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandCalender.swift; sourceTree = "<group>"; };
+		C4F1418920E0D5460044B393 /* GLExpandCalender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLExpandCalender.swift; sourceTree = "<group>"; };
 		C4F1418C20E0DAAA0044B393 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		C4F1418E20E0E2170044B393 /* DateHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DateHelper.framework; path = Carthage/Build/iOS/DateHelper.framework; sourceTree = "<group>"; };
 		C4F1419220E0FC8D0044B393 /* GLCalenderMonthCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLCalenderMonthCell.swift; sourceTree = "<group>"; };
 		C4F1419420E114340044B393 /* GLCalenderDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLCalenderDayCell.swift; sourceTree = "<group>"; };
+		C4F28DCA20E1D8D7001CCB24 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,9 +70,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C48640FF20DBAF4E0055AA1A /* SnapKit.framework in Frameworks */,
-				C4F1419020E0E21D0044B393 /* DateHelper.framework in Frameworks */,
-				C48640F620DB8B090055AA1A /* Eureka.framework in Frameworks */,
+				C44BCBF920E232290036AAE5 /* AlamofireObjectMapper.framework in Frameworks */,
+				C44BCBFA20E232290036AAE5 /* ObjectMapper.framework in Frameworks */,
+				C44BCBEE20E21C8A0036AAE5 /* Alamofire.framework in Frameworks */,
+				C44BCBE320E1DC1A0036AAE5 /* DateHelper.framework in Frameworks */,
+				C44BCBE420E1DC1A0036AAE5 /* Eureka.framework in Frameworks */,
+				C44BCBE520E1DC1A0036AAE5 /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +85,10 @@
 		C4007C6A20DB7E3600D49866 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C44BCBF720E232290036AAE5 /* AlamofireObjectMapper.framework */,
+				C44BCBF820E232290036AAE5 /* ObjectMapper.framework */,
+				C44BCBEC20E21C8A0036AAE5 /* Alamofire.framework */,
+				C44BCBED20E21C8A0036AAE5 /* SwiftyJSON.framework */,
 				C4F1418E20E0E2170044B393 /* DateHelper.framework */,
 				C48640FD20DBAF480055AA1A /* SnapKit.framework */,
 				C48640F520DB8B090055AA1A /* Eureka.framework */,
@@ -96,8 +103,26 @@
 				C478ED7320DA5382007A4A3F /* SecondViewController.swift */,
 				C478ED7120DA5382007A4A3F /* FirstViewController.swift */,
 				C42B5DBE20DC09B500BEA3D6 /* AgendaViewController.swift */,
+				C44BCBF220E228490036AAE5 /* AgendaTableViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		C44BCBE920E214940036AAE5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C44BCBEA20E214B70036AAE5 /* AgendaTableViewCell.swift */,
+				C44BCBF020E220CD0036AAE5 /* AgendaTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C44BCBF420E22F040036AAE5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C44BCBF520E22F3F0036AAE5 /* GLResp.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C478ED6320DA5382007A4A3F = {
@@ -120,6 +145,8 @@
 		C478ED6E20DA5382007A4A3F /* gd */ = {
 			isa = PBXGroup;
 			children = (
+				C44BCBF420E22F040036AAE5 /* Model */,
+				C44BCBE920E214940036AAE5 /* Views */,
 				C4F1418B20E0DA880044B393 /* Utils */,
 				C4F1418820E0D4E60044B393 /* Calendar */,
 				C422916420DB554D0070F261 /* Controller */,
@@ -135,10 +162,11 @@
 		C4F1418820E0D4E60044B393 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				C4F1418920E0D5460044B393 /* ExpandCalender.swift */,
+				C4F1418920E0D5460044B393 /* GLExpandCalender.swift */,
 				C4F1419220E0FC8D0044B393 /* GLCalenderMonthCell.swift */,
 				C4F1419420E114340044B393 /* GLCalenderDayCell.swift */,
 				2FF68AB38A98353A5F786B84 /* GLTaskListCell.swift */,
+				C4F28DCA20E1D8D7001CCB24 /* TaskModel.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -147,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				C4F1418C20E0DAAA0044B393 /* DateUtil.swift */,
+				C44BCC0020E24CED0036AAE5 /* GLHttpUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -161,7 +190,7 @@
 				C478ED6820DA5382007A4A3F /* Sources */,
 				C478ED6920DA5382007A4A3F /* Frameworks */,
 				C478ED6A20DA5382007A4A3F /* Resources */,
-				C48640F120DB88FA0055AA1A /* Embed Frameworks */,
+				C44BCBE620E1DC4E0036AAE5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -213,10 +242,39 @@
 				C478ED7C20DA5384007A4A3F /* LaunchScreen.storyboard in Resources */,
 				C478ED7920DA5384007A4A3F /* Assets.xcassets in Resources */,
 				C478ED7720DA5382007A4A3F /* Main.storyboard in Resources */,
+				C44BCBF120E220CD0036AAE5 /* AgendaTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C44BCBE620E1DC4E0036AAE5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/DateHelper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Eureka.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AlamofireObjectMapper.framework",
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/DateHelper.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Eureka.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ObjectMapper.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AlamofireObjectMapper.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C478ED6820DA5382007A4A3F /* Sources */ = {
@@ -226,11 +284,16 @@
 				C422916320DB488C0070F261 /* MainTabBarViewController.swift in Sources */,
 				C478ED7420DA5382007A4A3F /* SecondViewController.swift in Sources */,
 				C478ED7020DA5382007A4A3F /* AppDelegate.swift in Sources */,
+				C44BCBF620E22F3F0036AAE5 /* GLResp.swift in Sources */,
 				C4F1419320E0FC8D0044B393 /* GLCalenderMonthCell.swift in Sources */,
+				C4F28DCB20E1D8D7001CCB24 /* TaskModel.swift in Sources */,
 				C42B5DBF20DC09B500BEA3D6 /* AgendaViewController.swift in Sources */,
+				C44BCBF320E228490036AAE5 /* AgendaTableViewController.swift in Sources */,
 				C478ED7220DA5382007A4A3F /* FirstViewController.swift in Sources */,
+				C44BCBEB20E214B70036AAE5 /* AgendaTableViewCell.swift in Sources */,
 				C4F1419520E114340044B393 /* GLCalenderDayCell.swift in Sources */,
-				C4F1418A20E0D5460044B393 /* ExpandCalender.swift in Sources */,
+				C44BCC0120E24CED0036AAE5 /* GLHttpUtil.swift in Sources */,
+				C4F1418A20E0D5460044B393 /* GLExpandCalender.swift in Sources */,
 				C4F1418D20E0DAAA0044B393 /* DateUtil.swift in Sources */,
 				2FF684AAE4E92CB4EE1F0C52 /* GLTaskListCell.swift in Sources */,
 			);

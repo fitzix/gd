@@ -23,38 +23,50 @@ class GLCalenderMonthCell: UICollectionViewCell {
     
     // 展开实际上是添加空白行, targetIndex为需要添加空白行的第一个cell序列号
     var targetIndex = 0
+    var taskModel: TaskModel!
     
     var collectionView: UICollectionView!
     var calenderExpandIndicator = GLCalenderExpandIndicator()
     
     func makeCollectionView() {
-        let layout = UICollectionViewFlowLayout()
+        // 重用cell
+        if collectionView == nil {
+            let layout = UICollectionViewFlowLayout()
+            
+            self.collectionView = UICollectionView(frame: bounds, collectionViewLayout: layout)
+            layout.scrollDirection = .vertical
+            layout.minimumLineSpacing = 0
+            layout.minimumInteritemSpacing = 0
+            
         
-        self.collectionView = UICollectionView(frame: bounds, collectionViewLayout: layout)
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = -1
-        layout.minimumInteritemSpacing = -1
-        
-        
-        addSubview(collectionView)
-        
-        collectionView.isScrollEnabled = false
-        collectionView.register(GLCalenderDayCell.self, forCellWithReuseIdentifier: "GLCalenderDayCell")
-        collectionView.register(GLTaskListCell.self, forCellWithReuseIdentifier: "GLTaskListCell")
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.reloadData()
-        
-        collectionView.isPagingEnabled = true
-        collectionView.backgroundColor = UIColor.white
-        
-        collectionView.snp.makeConstraints { ConstraintMaker in
-            ConstraintMaker.top.equalToSuperview()
-            ConstraintMaker.bottom.equalToSuperview()
-            ConstraintMaker.left.equalToSuperview()
-            ConstraintMaker.right.equalToSuperview()
+            addSubview(collectionView)
+            
+            
+            collectionView.isScrollEnabled = false
+            collectionView.register(GLCalenderDayCell.self, forCellWithReuseIdentifier: "GLCalenderDayCell")
+            collectionView.register(GLTaskListCell.self, forCellWithReuseIdentifier: "GLTaskListCell")
+            
+            collectionView.dataSource = self
+            collectionView.delegate = self
+            collectionView.reloadData()
+            collectionView.backgroundColor = UIColor.white
+            
+            collectionView.isPagingEnabled = true
+            
+            collectionView.snp.makeConstraints { ConstraintMaker in
+                ConstraintMaker.top.equalToSuperview()
+                ConstraintMaker.bottom.equalToSuperview()
+                ConstraintMaker.left.equalToSuperview()
+                ConstraintMaker.right.equalToSuperview()
+            }
         }
+    }
+    
+    // TODO 加载数据
+    func loadData(withModel model: TaskModel) {
+        self.taskModel = model
+        collectionView.reloadData()
+        self.calenderExpandIndicator = GLCalenderExpandIndicator()
     }
     
     
@@ -151,12 +163,60 @@ extension GLCalenderMonthCell: UICollectionViewDelegateFlowLayout, UICollectionV
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // 展开状态
         if calenderExpandIndicator.expanded {
-            // 展开行
+            // 空白cell
             if calenderExpandIndicator.expandedIndex == indexPath.item {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLTaskListCell", for: indexPath) as! GLTaskListCell
-                return cell
+                let taskCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLTaskListCell", for: indexPath) as! GLTaskListCell
+                taskCell.loadData(model: "")
+                return taskCell
             }
+            var index = indexPath.item
+            if self.calenderExpandIndicator.expandedIndex < index {
+                index -= 1
+            }
+            let dayCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLCalenderDayCell", for: indexPath) as! GLCalenderDayCell
+            dayCell.loadData(model: "")
+            let cellDate = self.taskModel.date.dateFor(.startOfWeek).adjust(.day, offset: index)
+            dayCell.dayLabel.text = cellDate.toString(format: .custom("dd"))
+            // TODO 颜色调整
+            return dayCell
+        // 未展开状态
+        } else {
+            let dayCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLCalenderDayCell", for: indexPath) as! GLCalenderDayCell
+            dayCell.layer.borderWidth = 0.3
+            dayCell.layer.borderColor = UIColor.lightGray.cgColor
+            dayCell.loadData(model: "")
+            let cellDate = self.taskModel.date.dateFor(.startOfWeek).adjust(.day, offset: indexPath.item)
+            //TODO CELL 颜色
+            dayCell.dayLabel.text = cellDate.toString(format: .custom("dd"))
+            return dayCell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if self.calenderExpandIndicator.expanded && self.calenderExpandIndicator.expandedIndex == indexPath.item
+        {
+            return CGSize.init(width: self.bounds.width, height: self.bounds.height/3)
+        }
+        return CGSize.init(width: self.bounds.width/7, height: self.bounds.height/5)
+    }
+    
+    // 选择事件
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // TODO 点击后颜色变化
+//        if let dayCell = self.collectionView.cellForItem(at: indexPath) as? GLCalenderDayCell {
+//
+//        }
+        if calenderExpandIndicator.expanded {
+            if calenderExpandIndicator.expandedIndex == indexPath.item { return }
+            var index = indexPath.item
+            if calenderExpandIndicator.expandedIndex < index {
+                index -= 1
+            }
+            self.expandAction(indexPath: IndexPath(item: index, section: 0))
+        } else {
+            self.expandAction(indexPath: indexPath)
         }
     }
 }

@@ -11,7 +11,7 @@ import SnapKit
 import DateHelper
 
 class GLCalender: UIView {
-    typealias GLCalenderMonthWillChane = (String) -> Void
+    typealias GLCalenderMonthWillChane = (_ month: Date) -> Void
     
     var WillChangeMonth: GLCalenderMonthWillChane!
     // MARK:
@@ -34,7 +34,7 @@ class GLCalender: UIView {
         self.startDate = GLDateUtil.timeFormat().date(from: start)!
         self.endDate = GLDateUtil.timeFormat().date(from: end)!
         self.monthCount = Int(endDate.since(startDate, in: .month))
-        
+        makeCollectionView(bounds: self.frame)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -45,8 +45,10 @@ class GLCalender: UIView {
         let layout = UICollectionViewFlowLayout()
         
         self.collectionView = UICollectionView(frame: bounds, collectionViewLayout: layout)
-        layout.scrollDirection = .vertical
+        layout.scrollDirection = .horizontal
         addSubview(collectionView)
+        
+        collectionView.register(GLCalenderMonthCell.self, forCellWithReuseIdentifier: "GLCalenderMonthCell")
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -59,21 +61,14 @@ class GLCalender: UIView {
             ConstraintMaker.left.equalToSuperview()
             ConstraintMaker.right.equalToSuperview()
         }
+        orientationCurrentDate()
     }
     
     func orientationCurrentDate() {
-        if Date() > self.startDate && Date() < self.endDate {
-            let index = Int(Date().since(self.startDate, in: .month)) - 1
-            let rect = self.collectionView.layoutAttributesForItem(at: IndexPath(row: index, section: 0))?.frame
-            collectionView.contentOffset = (rect?.origin)!
-            let monthData = self.startDate.adjust(.month, offset: index)
-            if monthData.compare(.isThisYear) {
-                monthString = monthData.toString(style: .month)
-            } else {
-                monthString = monthData.toString(format: .isoYearMonth).replacingOccurrences(of: "-", with: "年") + "月"
-            }
-            self.WillChangeMonth(monthString)
-        }
+        let index = Int(Date().since(self.startDate, in: .month)) - 1
+        let rect = self.collectionView.layoutAttributesForItem(at: IndexPath(row: index, section: 0))?.frame
+        collectionView.contentOffset = (rect?.origin)!
+        self.WillChangeMonth(startDate.adjust(.month, offset: index))
     }
 }
 
@@ -84,7 +79,12 @@ extension GLCalender: UICollectionViewDelegate, UICollectionViewDelegateFlowLayo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLCalenderMonthCell", for: indexPath) as! GLCalenderMonthCell
+        cell.makeCollectionView()
+        let taskModel = TaskModel()
+        taskModel.date = self.startDate.adjust(.month, offset: indexPath.item)
+        cell.loadData(withModel: taskModel)
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -104,14 +104,9 @@ extension GLCalender: UICollectionViewDelegate, UICollectionViewDelegateFlowLayo
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print(collectionView.indexPathsForVisibleItems)
         let index = collectionView.indexPathsForVisibleItems.last?.item
-        let monthData = startDate.adjust(.month, offset: index!)
-        if monthData.compare(.isThisYear) {
-            monthString = monthData.toString(style: .month)
-        } else {
-            monthString = monthData.toString(format: .isoYearMonth).replacingOccurrences(of: "-", with: "年") + "月"
-        }
-        WillChangeMonth(monthString)
+        WillChangeMonth(startDate.adjust(.month, offset: index!))
     }
 }
 
