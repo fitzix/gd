@@ -112,4 +112,9 @@ class AgendaTableViewController: UITableViewController {
         hidesBottomBarWhenPushed = false
 //        present(tvc!, animated: true, completion: nil)
     }
+    @IBAction func tttttt(_ sender: UIBarButtonItem) {
+        let tvc = self.storyboard?.instantiateViewController(withIdentifier: "AgendaDetailViewController") as! AgendaDetailViewController
+        present(tvc, animated: true, completion: nil)
+        
+    }
 }

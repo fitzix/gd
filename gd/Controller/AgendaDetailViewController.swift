@@ -10,13 +10,15 @@ import UIKit
 
 class AgendaDetailViewController: UIViewController {
 
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
 //        self.navigationController?.navigationBar.backgroundColor
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationBar.shadowImage = UIImage()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,7 +39,7 @@ class AgendaDetailViewController: UIViewController {
     }
     */
 
-    @IBAction func removeView(_ sender: UIButton) {
+    @IBAction func removeView(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
 }
