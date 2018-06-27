@@ -7,7 +7,13 @@
 //
 
 import UIKit
+import DateHelper
 
 class GLAgendaTableSectionHeader: UITableViewHeaderFooterView {
     
+    @IBOutlet weak var labelHeaderBtn: UIButton!
+    
+    func reloadData(headerDate: Date) {
+        labelHeaderBtn.titleLabel?.text = headerDate.toString(format: .isoYearMonth)
+    }
 }
