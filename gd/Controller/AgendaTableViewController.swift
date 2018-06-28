@@ -27,16 +27,16 @@ class AgendaTableViewController: UITableViewController {
         
         self.tableView.tableFooterView = UIView()
         
-        setup()
+//        setup()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: true)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        navigationController?.setNavigationBarHidden(true, animated: true)
+//    }
+//
+//    override func viewWillDisappear(_ animated: Bool) {
+//        navigationController?.setNavigationBarHidden(false, animated: true)
+//    }
     
 
     override func didReceiveMemoryWarning() {
