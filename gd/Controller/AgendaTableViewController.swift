@@ -98,7 +98,8 @@ class AgendaTableViewController: UITableViewController {
                 return
             }
             let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "AgendaDetailViewController") as! AgendaDetailViewController
-//            detailVC.glAgendaData = info
+            print(info.toJSON())
+            detailVC.glAgendaResp = info
             self?.navigationController?.pushViewController(detailVC, animated: true)
         }
         

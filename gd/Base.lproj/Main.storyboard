@@ -218,6 +218,12 @@
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="createUserLabel" destination="OnA-ZS-LAw" id="uBG-GI-hmM"/>
+                        <outlet property="detailImg" destination="CxE-5K-1t5" id="FSH-Qq-cUZ"/>
+                        <outlet property="eventTypeLabel" destination="YVX-cC-CoE" id="WzR-XI-40O"/>
+                        <outlet property="userCountLabel" destination="RRV-Gz-uAe" id="6Ic-cN-xQg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YkJ-dW-1Du" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -238,7 +244,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="bsu-qD-ln2">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="Vla-LN-uaG"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="BWN-42-2I2"/>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
@@ -273,7 +279,7 @@
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="GPr-8h-XC1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" backIndicatorImage="icon_left_arrow" backIndicatorTransitionMaskImage="icon_left_arrow" id="GPr-8h-XC1">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
