@@ -10,6 +10,8 @@
 		2FF684AAE4E92CB4EE1F0C52 /* GLTaskListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF68AB38A98353A5F786B84 /* GLTaskListCell.swift */; };
 		C422916320DB488C0070F261 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C422916220DB488C0070F261 /* MainTabBarViewController.swift */; };
 		C42B5DBF20DC09B500BEA3D6 /* AgendaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B5DBE20DC09B500BEA3D6 /* AgendaViewController.swift */; };
+		C43FAAA020E482CF00F9F954 /* GLAgendaDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = C43FAA9F20E482CF00F9F954 /* GLAgendaDetailHeader.xib */; };
+		C43FAAA420E4BC9600F9F954 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43FAAA320E4BC9500F9F954 /* Kingfisher.framework */; };
 		C44BCBE320E1DC1A0036AAE5 /* DateHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F1418E20E0E2170044B393 /* DateHelper.framework */; };
 		C44BCBE420E1DC1A0036AAE5 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48640F520DB8B090055AA1A /* Eureka.framework */; };
 		C44BCBE520E1DC1A0036AAE5 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48640FD20DBAF480055AA1A /* SnapKit.framework */; };
@@ -44,6 +46,8 @@
 		2FF68AB38A98353A5F786B84 /* GLTaskListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLTaskListCell.swift; sourceTree = "<group>"; };
 		C422916220DB488C0070F261 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		C42B5DBE20DC09B500BEA3D6 /* AgendaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaViewController.swift; sourceTree = "<group>"; };
+		C43FAA9F20E482CF00F9F954 /* GLAgendaDetailHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GLAgendaDetailHeader.xib; sourceTree = "<group>"; };
+		C43FAAA320E4BC9500F9F954 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		C44BCBEA20E214B70036AAE5 /* GLAgendaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLAgendaTableViewCell.swift; sourceTree = "<group>"; };
 		C44BCBEC20E21C8A0036AAE5 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		C44BCBED20E21C8A0036AAE5 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
@@ -82,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C43FAAA420E4BC9600F9F954 /* Kingfisher.framework in Frameworks */,
 				C44BCBF920E232290036AAE5 /* AlamofireObjectMapper.framework in Frameworks */,
 				C44BCBFA20E232290036AAE5 /* ObjectMapper.framework in Frameworks */,
 				C44BCBEE20E21C8A0036AAE5 /* Alamofire.framework in Frameworks */,
@@ -97,6 +102,7 @@
 		C4007C6A20DB7E3600D49866 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C43FAAA320E4BC9500F9F954 /* Kingfisher.framework */,
 				C44BCBF720E232290036AAE5 /* AlamofireObjectMapper.framework */,
 				C44BCBF820E232290036AAE5 /* ObjectMapper.framework */,
 				C44BCBEC20E21C8A0036AAE5 /* Alamofire.framework */,
@@ -128,6 +134,7 @@
 				C44BCBF020E220CD0036AAE5 /* GLAgendaTableViewCell.xib */,
 				C460061620E29C5500B09186 /* GLAgendaTableSectionHeader.swift */,
 				C4B5282520E29F800088111B /* GLAgendaTableSectionHeader.xib */,
+				C43FAA9F20E482CF00F9F954 /* GLAgendaDetailHeader.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -274,6 +281,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C43FAAA020E482CF00F9F954 /* GLAgendaDetailHeader.xib in Resources */,
 				C4B5282620E29F800088111B /* GLAgendaTableSectionHeader.xib in Resources */,
 				C478ED7C20DA5384007A4A3F /* LaunchScreen.storyboard in Resources */,
 				C478ED7920DA5384007A4A3F /* Assets.xcassets in Resources */,
@@ -297,6 +305,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AlamofireObjectMapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PKHUD.framework",
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/DateHelper.framework",
@@ -305,6 +315,8 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ObjectMapper.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AlamofireObjectMapper.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PKHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

@@ -174,3 +174,18 @@ class GLAgendaListResp: GLBaseResp {
         info <- map["info"]
     }
 }
+
+// 事件详情
+class GLAgendaDetailResp: GLBaseResp {
+    var info: GLAgendaResp?
+    
+    required init?(map: Map) {
+        super.init(map: map)
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        
+        info <- map["info"]
+    }
+}

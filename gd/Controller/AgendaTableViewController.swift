@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireObjectMapper
+import PKHUD
 
 class AgendaTableViewController: UITableViewController {
     
@@ -78,43 +79,35 @@ class AgendaTableViewController: UITableViewController {
         return cell
     }
     
-//  ============================================================
-    func setup() {
-        let req = GLHttpUtil.shared.request(.getAgendaList, parameters: ["viewType": 3, "date": "2018-06-01"])
-        req.responseObject { [weak self] (response: DataResponse<GLAgendaListResp>) in
-            guard let result = response.result.value, result.ok else {
-                print("出错了")
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let rowData = agendaTableList?[indexPath.section][indexPath.row] else {
+            return
+        }
+    
+        GLHttpUtil.shared.request(.getDetail, appendUrl: "/\(rowData.id!)") { [weak self] (resp: GLAgendaDetailResp?) in
+            guard let resp = resp, let info = resp.info else {
                 return
             }
-            self?.agendaTableList = self?.flatAgendaList(dataList: result.info!)
+            let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "AgendaDetailViewController") as! AgendaDetailViewController
+            detailVC.glAgendaData = info
+            self?.present(detailVC, animated: true, completion: nil)
+        }
+        
+    }
+    
+//  ============================================================
+    func setup() {
+        GLHttpUtil.shared.request(.getAgendaList, parameters: ["viewType": 3, "date": Date().toString(format: .isoDate)]) { [weak self] (resp: GLAgendaListResp?) in
+            guard let resp = resp, let info = resp.info else {
+                return
+            }
+            self?.agendaTableList = GLHttpUtil.flatAgendaList(dataList: info)
             self?.tableView.reloadData()
         }
     }
     
-    func flatAgendaList(dataList: [GLAgendaResp]) -> [[GLAgendaResp]] {
-//        let dayKeys = Array(Set(dataList.compactMap { $0.beginDate })).sorted(by: <)
-        let monthKeys = Array(Set(dataList.compactMap{ $0.beginDate?.prefix(7) })).sorted(by: <)
-        var result = [[GLAgendaResp]]()
-        
-        monthKeys.forEach {
-            let tempKey = $0
-            let tempList = dataList.filter{ $0.beginDate?.prefix(7) == tempKey }
-            result.append(tempList)
-        }
-        return result
-    }
-    
     @objc func didSelectHeader(_ sender: UIButton) {
         print(sender.tag)
-        let tvc = self.storyboard?.instantiateViewController(withIdentifier: "AgendaDetailViewController")
-        hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(tvc!, animated: true)
-        hidesBottomBarWhenPushed = false
-//        present(tvc!, animated: true, completion: nil)
-    }
-    @IBAction func tttttt(_ sender: UIBarButtonItem) {
-        let tvc = self.storyboard?.instantiateViewController(withIdentifier: "AgendaDetailViewController") as! AgendaDetailViewController
-        present(tvc, animated: true, completion: nil)
-        
     }
 }
