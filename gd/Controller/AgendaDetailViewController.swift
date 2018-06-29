@@ -20,10 +20,8 @@ class AgendaDetailViewController: UIViewController {
 //
 //    @IBOutlet weak var eventTypeLabel: UILabel!
     
-    
     var glAgendaResp: GLAgendaResp? {
         didSet {
-            print(glAgendaResp?.userList?[0].nickname)
 //            if let icon = glAgendaResp?.userList?[0].icon {
 //                print(icon)
 //                detailImg.kf.setImage(with: URL(string: icon))
@@ -37,21 +35,20 @@ class AgendaDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
 //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         
     }
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = UIColor(red:0.00, green:0.48, blue:1.00, alpha:1.00)
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.shadowImage = UIImage()
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.navigationBar.barTintColor = .white
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        navigationController?.navigationBar.isTranslucent = false
+//        navigationController?.navigationBar.barTintColor = UIColor(red:0.00, green:0.48, blue:1.00, alpha:1.00)
+//        navigationController?.navigationBar.tintColor = .white
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        navigationController?.navigationBar.isTranslucent = true
+//        navigationController?.navigationBar.barTintColor = .white
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
