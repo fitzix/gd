@@ -58,8 +58,8 @@ class AgendaViewController: FormViewController {
                 $0.placeholder = "请输入你的摘要\n例如: 1.讨论产品设计风格\n2.确定产品风格"
                 $0.value = "摘要:\n"
                 $0.textAreaHeight = .dynamic(initialTextViewHeight: 200)
-        }
-        tableView.tableFooterView = UIView()
+            }
+            tableView.tableFooterView = UIView()
     }
 
     override func didReceiveMemoryWarning() {

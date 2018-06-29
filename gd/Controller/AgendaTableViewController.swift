@@ -27,17 +27,8 @@ class AgendaTableViewController: UITableViewController {
         
         self.tableView.tableFooterView = UIView()
         
-//        setup()
+        setup()
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-//    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        navigationController?.setNavigationBarHidden(false, animated: true)
-//    }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -98,9 +89,10 @@ class AgendaTableViewController: UITableViewController {
                 return
             }
             let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "AgendaDetailViewController") as! AgendaDetailViewController
-            print(info.toJSON())
             detailVC.glAgendaResp = info
+            
             self?.navigationController?.pushViewController(detailVC, animated: true)
+        
         }
         
     }

@@ -30,11 +30,11 @@ class GLHttpUtil: NSObject {
         
         HUD.show(.progress)
         
-        
         let req = Alamofire.request("\(httpGateway)\(url.rawValue)\(appendUrl ?? "")", method: method, parameters: parameters, encoding: encoding, headers: headers)
         print("发送请求: \(req)")
         
         req.responseObject { (response: DataResponse<T>) in
+            print(response.result.value?.toJSON())
             guard let result = response.result.value, result.ok else {
                 HUD.flash(.error, delay: 1.0)
                 print("请求出错了")

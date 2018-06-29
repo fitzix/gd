@@ -32,8 +32,8 @@
 		C47D007420E362BE001318B7 /* IBExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47D007320E362BE001318B7 /* IBExtension.swift */; };
 		C47D007720E368AD001318B7 /* GLColorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47D007620E368AD001318B7 /* GLColorConfig.swift */; };
 		C47D007920E36EE7001318B7 /* GLColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47D007820E36EE7001318B7 /* GLColorUtil.swift */; };
-		C499FE4420E3B65000421465 /* AgendaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C499FE4320E3B65000421465 /* AgendaDetailViewController.swift */; };
 		C4B5282620E29F800088111B /* GLAgendaTableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4B5282520E29F800088111B /* GLAgendaTableSectionHeader.xib */; };
+		C4DD525E20E60D9D00A39CE5 /* AgendaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD525D20E60D9D00A39CE5 /* AgendaDetailViewController.swift */; };
 		C4F1418A20E0D5460044B393 /* GLExpandCalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F1418920E0D5460044B393 /* GLExpandCalender.swift */; };
 		C4F1418D20E0DAAA0044B393 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F1418C20E0DAAA0044B393 /* DateUtil.swift */; };
 		C4F1419320E0FC8D0044B393 /* GLCalenderMonthCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F1419220E0FC8D0044B393 /* GLCalenderMonthCell.swift */; };
@@ -69,8 +69,8 @@
 		C47D007820E36EE7001318B7 /* GLColorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLColorUtil.swift; sourceTree = "<group>"; };
 		C48640F520DB8B090055AA1A /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = Carthage/Build/iOS/Eureka.framework; sourceTree = "<group>"; };
 		C48640FD20DBAF480055AA1A /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
-		C499FE4320E3B65000421465 /* AgendaDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaDetailViewController.swift; sourceTree = "<group>"; };
 		C4B5282520E29F800088111B /* GLAgendaTableSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GLAgendaTableSectionHeader.xib; sourceTree = "<group>"; };
+		C4DD525D20E60D9D00A39CE5 /* AgendaDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaDetailViewController.swift; sourceTree = "<group>"; };
 		C4F1418920E0D5460044B393 /* GLExpandCalender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLExpandCalender.swift; sourceTree = "<group>"; };
 		C4F1418C20E0DAAA0044B393 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		C4F1418E20E0E2170044B393 /* DateHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DateHelper.framework; path = Carthage/Build/iOS/DateHelper.framework; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 				C478ED7120DA5382007A4A3F /* FirstViewController.swift */,
 				C42B5DBE20DC09B500BEA3D6 /* AgendaViewController.swift */,
 				C44BCBF220E228490036AAE5 /* AgendaTableViewController.swift */,
-				C499FE4320E3B65000421465 /* AgendaDetailViewController.swift */,
+				C4DD525D20E60D9D00A39CE5 /* AgendaDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -331,7 +331,7 @@
 				C44BCBF620E22F3F0036AAE5 /* GLResp.swift in Sources */,
 				C4F1419320E0FC8D0044B393 /* GLCalenderMonthCell.swift in Sources */,
 				C4F28DCB20E1D8D7001CCB24 /* TaskModel.swift in Sources */,
-				C499FE4420E3B65000421465 /* AgendaDetailViewController.swift in Sources */,
+				C4DD525E20E60D9D00A39CE5 /* AgendaDetailViewController.swift in Sources */,
 				C42B5DBF20DC09B500BEA3D6 /* AgendaViewController.swift in Sources */,
 				C44BCBF320E228490036AAE5 /* AgendaTableViewController.swift in Sources */,
 				C47D007420E362BE001318B7 /* IBExtension.swift in Sources */,
