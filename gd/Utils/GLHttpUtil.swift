@@ -16,7 +16,7 @@ class GLHttpUtil: NSObject {
     let httpGateway = "http://192.168.3.194:15000"
     
     let headers: HTTPHeaders = [
-        "Authorization": "a200",
+        "Authorization": "a100",
         "Accept": "application/json"
     ]
     

@@ -30,8 +30,10 @@
 		C478ED7920DA5384007A4A3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C478ED7820DA5384007A4A3F /* Assets.xcassets */; };
 		C478ED7C20DA5384007A4A3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C478ED7A20DA5384007A4A3F /* LaunchScreen.storyboard */; };
 		C47D007420E362BE001318B7 /* IBExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47D007320E362BE001318B7 /* IBExtension.swift */; };
-		C47D007720E368AD001318B7 /* GLColorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47D007620E368AD001318B7 /* GLColorConfig.swift */; };
+		C47D007720E368AD001318B7 /* GLConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47D007620E368AD001318B7 /* GLConfig.swift */; };
 		C47D007920E36EE7001318B7 /* GLColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47D007820E36EE7001318B7 /* GLColorUtil.swift */; };
+		C484FF6320E9D980004890E1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C484FF6220E9D980004890E1 /* Extensions.swift */; };
+		C484FF6620EA1886004890E1 /* GLFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C484FF6520EA1886004890E1 /* GLFormatter.swift */; };
 		C4B5282620E29F800088111B /* GLAgendaTableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4B5282520E29F800088111B /* GLAgendaTableSectionHeader.xib */; };
 		C4DD525E20E60D9D00A39CE5 /* AgendaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD525D20E60D9D00A39CE5 /* AgendaDetailViewController.swift */; };
 		C4F1418A20E0D5460044B393 /* GLExpandCalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F1418920E0D5460044B393 /* GLExpandCalender.swift */; };
@@ -48,7 +50,6 @@
 		C43FAAA320E4BC9500F9F954 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		C44BCBEA20E214B70036AAE5 /* GLAgendaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLAgendaTableViewCell.swift; sourceTree = "<group>"; };
 		C44BCBEC20E21C8A0036AAE5 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		C44BCBED20E21C8A0036AAE5 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		C44BCBF020E220CD0036AAE5 /* GLAgendaTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GLAgendaTableViewCell.xib; sourceTree = "<group>"; };
 		C44BCBF220E228490036AAE5 /* AgendaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaTableViewController.swift; sourceTree = "<group>"; };
 		C44BCBF520E22F3F0036AAE5 /* GLResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLResp.swift; sourceTree = "<group>"; };
@@ -65,8 +66,10 @@
 		C478ED7B20DA5384007A4A3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C478ED7D20DA5384007A4A3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C47D007320E362BE001318B7 /* IBExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBExtension.swift; sourceTree = "<group>"; };
-		C47D007620E368AD001318B7 /* GLColorConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLColorConfig.swift; sourceTree = "<group>"; };
+		C47D007620E368AD001318B7 /* GLConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLConfig.swift; sourceTree = "<group>"; };
 		C47D007820E36EE7001318B7 /* GLColorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLColorUtil.swift; sourceTree = "<group>"; };
+		C484FF6220E9D980004890E1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		C484FF6520EA1886004890E1 /* GLFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLFormatter.swift; sourceTree = "<group>"; };
 		C48640F520DB8B090055AA1A /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = Carthage/Build/iOS/Eureka.framework; sourceTree = "<group>"; };
 		C48640FD20DBAF480055AA1A /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		C4B5282520E29F800088111B /* GLAgendaTableSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GLAgendaTableSectionHeader.xib; sourceTree = "<group>"; };
@@ -104,7 +107,6 @@
 				C44BCBF720E232290036AAE5 /* AlamofireObjectMapper.framework */,
 				C44BCBF820E232290036AAE5 /* ObjectMapper.framework */,
 				C44BCBEC20E21C8A0036AAE5 /* Alamofire.framework */,
-				C44BCBED20E21C8A0036AAE5 /* SwiftyJSON.framework */,
 				C4F1418E20E0E2170044B393 /* DateHelper.framework */,
 				C48640FD20DBAF480055AA1A /* SnapKit.framework */,
 				C48640F520DB8B090055AA1A /* Eureka.framework */,
@@ -184,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				C47D007320E362BE001318B7 /* IBExtension.swift */,
+				C484FF6220E9D980004890E1 /* Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -191,7 +194,7 @@
 		C47D007520E36885001318B7 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				C47D007620E368AD001318B7 /* GLColorConfig.swift */,
+				C47D007620E368AD001318B7 /* GLConfig.swift */,
 			);
 			name = Config;
 			path = "New Group";
@@ -215,6 +218,7 @@
 				C4F1418C20E0DAAA0044B393 /* DateUtil.swift */,
 				C44BCC0020E24CED0036AAE5 /* GLHttpUtil.swift */,
 				C47D007820E36EE7001318B7 /* GLColorUtil.swift */,
+				C484FF6520EA1886004890E1 /* GLFormatter.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -337,7 +341,9 @@
 				C47D007420E362BE001318B7 /* IBExtension.swift in Sources */,
 				C460061720E29C5500B09186 /* GLAgendaTableSectionHeader.swift in Sources */,
 				C478ED7220DA5382007A4A3F /* FirstViewController.swift in Sources */,
-				C47D007720E368AD001318B7 /* GLColorConfig.swift in Sources */,
+				C47D007720E368AD001318B7 /* GLConfig.swift in Sources */,
+				C484FF6620EA1886004890E1 /* GLFormatter.swift in Sources */,
+				C484FF6320E9D980004890E1 /* Extensions.swift in Sources */,
 				C44BCBEB20E214B70036AAE5 /* GLAgendaTableViewCell.swift in Sources */,
 				C4F1419520E114340044B393 /* GLCalenderDayCell.swift in Sources */,
 				C44BCC0120E24CED0036AAE5 /* GLHttpUtil.swift in Sources */,

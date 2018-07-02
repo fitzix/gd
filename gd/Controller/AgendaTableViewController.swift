@@ -18,7 +18,7 @@ class AgendaTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.estimatedSectionHeaderHeight = 40
         
         //创建一个重用的单元格
@@ -30,10 +30,6 @@ class AgendaTableViewController: UITableViewController {
         setup()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // MARK: - Table view data source
 
@@ -99,7 +95,7 @@ class AgendaTableViewController: UITableViewController {
     
 //  ============================================================
     func setup() {
-        GLHttpUtil.shared.request(.getAgendaList, parameters: ["viewType": 3, "date": Date().toString(format: .isoDate)]) { [weak self] (resp: GLAgendaListResp?) in
+        GLHttpUtil.shared.request(.getAgendaList, parameters: ["viewType": 4, "date": Date().toString(format: .isoDate)]) { [weak self] (resp: GLAgendaListResp?) in
             guard let resp = resp, let info = resp.info else {
                 return
             }

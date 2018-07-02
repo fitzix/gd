@@ -49,7 +49,7 @@ class GLAgendaTableViewCell: UITableViewCell {
         detailView.backgroundColor = GLColorUtil.random(tableCellIndex: indexPath)
         
         titleLabel.text = glAgendaResp.title
-        timeLabel.text = "\(glAgendaResp.beginTime ?? "") ~ \(glAgendaResp.endTime ?? "")"
+        timeLabel.text = "\(glAgendaResp.beginTime?.prefix(5) ?? "") ~ \(glAgendaResp.endTime?.prefix(5) ?? "")"
         locationLabel.text = glAgendaResp.place
     }
 

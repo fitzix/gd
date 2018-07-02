@@ -14,6 +14,6 @@ class GLAgendaTableSectionHeader: UITableViewHeaderFooterView {
     @IBOutlet weak var labelHeaderBtn: UIButton!
     
     func reloadData(headerDate: Date) {
-        labelHeaderBtn.titleLabel?.text = headerDate.toString(format: .isoYearMonth)
+        labelHeaderBtn.setTitle(headerDate.toString(format: .isoYearMonth), for: .normal) 
     }
 }

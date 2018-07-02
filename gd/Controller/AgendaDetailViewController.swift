@@ -23,11 +23,14 @@ class AgendaDetailViewController: FormViewController {
     
     @IBOutlet weak var eventTypeLabel: UILabel!
     
+    @IBOutlet weak var editAgendaBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         loadData()
         
-        LabelRow.defaultCellUpdate = { cell, row in cell.textLabel?.textColor = .gray }
+//        LabelRow.defaultCellUpdate = { cell, row in cell.textLabel?.textColor = .gray }
         
         form
             +++ Section()
@@ -36,33 +39,17 @@ class AgendaDetailViewController: FormViewController {
                 $0.value = glAgendaResp?.title
             }
             <<< LabelRow () {
-                $0.title = "开始时间"
-                let date = Date(fromString: "\(glAgendaResp!.beginDate!) \(glAgendaResp!.beginTime!)", format: .custom("YYYY-MM-dd HH:mm:ss"))
-                $0.value = date?.toString(format: .custom("YYYY-MM-dd EE | HH:mm"))
-            }
-            <<< LabelRow () {
-                $0.title = "结束时间"
-                let date = Date(fromString: "\(glAgendaResp!.endDate!) \(glAgendaResp!.endTime!)", format: .custom("YYYY-MM-dd HH:mm:ss"))
-                $0.value = date?.toString(format: .custom("YYYY-MM-dd EE | HH:mm"))
+                // TODO 判断空值
+                $0.title = "时间"
+                let date = Date(fromString: glAgendaResp!.beginDate!, format: .custom("YYYY-MM-dd"))
+                $0.value = "\(date?.toString(format: .custom("YYYY-MM-dd EE | ")) ?? "")\(glAgendaResp?.beginTime?.prefix(5) ?? "") ~ \(glAgendaResp?.endTime?.prefix(5) ?? "")"
             }
             <<< LabelRow () {
                 $0.title = "提醒"
                 $0.value = glAgendaResp?.remind
             }
-            
-            <<< PushRow<String>() {
-                $0.title = "可选时间段"
-                $0.options = ["a", "b", "c", "d"]
-                $0.value = "a"
-                $0.selectorTitle = "Choose an Emoji!"
-                }.onPresent { from, to in
-                    to.dismissOnSelection = false
-                    to.dismissOnChange = false
-            }
-            
-            +++ Section()
             <<< LabelRow () {
-                $0.title = "摘要"
+                $0.title = "摘要:"
                 $0.value = ""
             }
             <<< TextAreaRow() {
@@ -70,21 +57,7 @@ class AgendaDetailViewController: FormViewController {
                 $0.disabled = true
                 $0.textAreaHeight = .dynamic(initialTextViewHeight: 110)
             }
-    }
-    
-    
-     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = UIColor(red:0.01, green:0.48, blue:1.00, alpha:1.00)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.isTranslucent = false
-    }
-    
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.tintColor = UIColor(red:0.01, green:0.48, blue:1.00, alpha:1.00)
-        navigationController?.navigationBar.isTranslucent = true
+        tableView.tableFooterView = UIView()
     }
     
     func loadData() {
@@ -94,5 +67,11 @@ class AgendaDetailViewController: FormViewController {
         createUserLabel.text = "\(glAgendaResp?.userList?[0].nickname ?? "--") 创建"
         userCountLabel.text = "\(glAgendaResp?.userList?.count ?? 0)人参与"
         eventTypeLabel.text = "\(glAgendaResp?.typeName ?? "日常")"
+    }
+    
+    @IBAction func editAgendaAction(_ sender: UIButton) {
+        let createAgendaController = self.storyboard?.instantiateViewController(withIdentifier: "AgendaViewController") as! AgendaViewController
+        createAgendaController.glAgendaResp = glAgendaResp
+        present(createAgendaController, animated: true, completion: nil)
     }
 }
