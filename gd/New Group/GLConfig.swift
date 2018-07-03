@@ -34,8 +34,6 @@ enum GLColorConf {
 enum GLAgendaType: Int {
     case focus, daily, casual, sport
     
-    static let values = [focus, daily, casual, sport]
-    
     var title: String {
         switch self {
         case .focus: return "专注"
@@ -44,21 +42,16 @@ enum GLAgendaType: Int {
         case .sport: return "运动"
         }
     }
-    
-    static func getTitleValues() -> [String] {
-        var resp: [String] = []
-        GLAgendaType.values.forEach { (item) in
-            resp.append(item.title)
-        }
-        return resp
-    }
 }
 
 // 提醒类型
-enum GLRemindType: Int {
-    case no, five, fifteen, thirty, hour, day
-    
-    static let values = [no, five, fifteen, thirty, hour, day]
+enum GLRemindType: String {
+    case no = "0"
+    case five = "1"
+    case fifteen = "2"
+    case thirty = "3"
+    case hour = "4"
+    case day = "5"
     
     var title: String {
         switch self {
@@ -70,22 +63,12 @@ enum GLRemindType: Int {
         case .day: return "一天"
         }
     }
-    
-    static func getTitleValues() -> [String] {
-        var resp: [String] = []
-        GLRemindType.values.forEach { (item) in
-            resp.append(item.title)
-        }
-        return resp
-    }
 }
 
 // 重复类型
 
 enum GLRepeatType: Int {
     case no, day, week, month, year
-    
-    static let values = [no, day, week, month, year]
     
     var title: String {
         switch self {
@@ -95,13 +78,5 @@ enum GLRepeatType: Int {
         case .month: return "每月"
         case .year: return "每年"
         }
-    }
-    
-    static func getTitleValues() -> [String] {
-        var resp: [String] = []
-        GLRepeatType.values.forEach { (item) in
-            resp.append(item.title)
-        }
-        return resp
     }
 }

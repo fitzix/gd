@@ -46,8 +46,18 @@ class AgendaDetailViewController: FormViewController {
             }
             <<< LabelRow () {
                 $0.title = "提醒"
-                $0.value = glAgendaResp?.remind
+                if let typeIndex = glAgendaResp?.remind {
+                    $0.value = GLRemindType(rawValue: typeIndex)?.title
+                }
             }
+            
+            <<< LabelRow () {
+                $0.title = "重复"
+                if let typeIndex = glAgendaResp?.repeatType {
+                    $0.value = GLRepeatType(rawValue: typeIndex)?.title
+                }
+            }
+            
             <<< LabelRow () {
                 $0.title = "摘要:"
                 $0.value = ""
@@ -72,6 +82,7 @@ class AgendaDetailViewController: FormViewController {
     @IBAction func editAgendaAction(_ sender: UIButton) {
         let createAgendaController = self.storyboard?.instantiateViewController(withIdentifier: "AgendaViewController") as! AgendaViewController
         createAgendaController.glAgendaResp = glAgendaResp
+        createAgendaController.isToCreate = false
         present(createAgendaController, animated: true, completion: nil)
     }
 }

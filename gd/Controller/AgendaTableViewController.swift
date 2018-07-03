@@ -102,6 +102,7 @@ class AgendaTableViewController: UITableViewController {
             self?.agendaTableList = GLHttpUtil.flatAgendaList(dataList: info)
             self?.tableView.reloadData()
         }
+        
     }
     
     @objc func didSelectHeader(_ sender: UIButton) {

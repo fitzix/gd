@@ -15,8 +15,8 @@ class GLCalender: UIView {
     
     var WillChangeMonth: GLCalenderMonthWillChane!
     // MARK:
-    var startDate = Date()
-    var endDate = Date()
+    let startDate = Date(fromString: "1970-01-01", format: .isoDate)!
+    let endDate = Date().adjust(.year, offset: 100)
     var monthCount:Int = 0
     var monthString = ""
     
@@ -26,13 +26,11 @@ class GLCalender: UIView {
         super.init(frame: frame)
     }
     
-    convenience init(frame: CGRect, start: String = "2000-01-01", end: String = "2100-12-31", willChangeMonth: GLCalenderMonthWillChane? = nil) {
+    convenience init(frame: CGRect, willChangeMonth: GLCalenderMonthWillChane? = nil) {
         self.init(frame: frame)
         if let monthBlock = willChangeMonth {
             self.WillChangeMonth = monthBlock
         }
-        self.startDate = GLDateUtil.timeFormat().date(from: start)!
-        self.endDate = GLDateUtil.timeFormat().date(from: end)!
         self.monthCount = Int(endDate.since(startDate, in: .month))
         makeCollectionView(bounds: self.frame)
     }

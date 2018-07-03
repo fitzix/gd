@@ -8,14 +8,19 @@
 
 import UIKit
 import Eureka
+import DateHelper
+import Alamofire
+import PKHUD
 
 class AgendaViewController: FormViewController {
     
     var glAgendaResp: GLAgendaResp?
+    var isToCreate = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        tableView.rowHeight = 40
         
         form
             +++ Section()
@@ -29,18 +34,16 @@ class AgendaViewController: FormViewController {
                 $0.add(rule: RuleMaxLength(maxLength: 10))
                 $0.add(rule: RuleRequired())
                 $0.validationOptions = .validatesOnChange
-                }.cellUpdate({ (cell, row) in
-                    if !row.isValid {
-                        cell.titleLabel?.textColor = .red
-                    }
-                })
+                }
             
-            
-            <<< SegmentedRow<String>("type") {
+            <<< SegmentedRow<Int>("type") {
                 $0.title = "性质"
-                $0.options = GLAgendaType.getTitleValues()
+                $0.options = [0, 1, 2, 3]
+                $0.displayValueFor = { type in
+                    return GLAgendaType(rawValue: type!)?.title
+                }
                 if let typeIndex = glAgendaResp?.type {
-                    $0.value = GLAgendaType(rawValue: typeIndex)?.title
+                    $0.value = typeIndex
                 } else {
                     $0.value = $0.options?.first
                 }
@@ -51,44 +54,62 @@ class AgendaViewController: FormViewController {
                     if let startTime = glAgendaResp.beginTime {
                         $0.value = Date(fromString: "\(glAgendaResp.beginDate!) \(startTime)", format: .custom("YYYY-MM-dd HH:mm:ss"))
                     } else {
+                        // TODO null 取备选时间
                         $0.value = Date(fromString: "", format: .isoDate)
                     }
                 } else{
-                    $0.value = Date()
+                    
+                    $0.value = Date().dateFor(.nearestHour(hour: 2))
                 }
+                
+                
                 let formatter = DateFormatter()
                 formatter.dateFormat = "YYYY-MM-dd EE | HH:mm"
                 $0.dateFormatter = formatter
-            }
+                }.cellUpdate({ (cell, row) in
+                    let endDateRow: TimeRow? = self.form.rowBy(tag: "endDate")
+                    endDateRow?.minimumDate = row.value
+                }).cellSetup({ (cell, row) in
+                    cell.datePicker.minuteInterval = 15
+                })
             <<< TimeRow("endDate"){
                 $0.title = "结束时间"
                 if let glAgendaResp = glAgendaResp, let endTime = glAgendaResp.endTime {
                     $0.value = Date(fromString: "\(glAgendaResp.endDate!) \(endTime)", format: .custom("YYYY-MM-dd HH:mm:ss"))
                 } else {
-                    $0.value = Date(timeIntervalSinceNow: 3600)
+                    $0.value = Date().dateFor(.nearestHour(hour: 2)).adjust(.hour, offset: 1)
                 }
                 let formatter = DateFormatter()
                 formatter.dateFormat = "HH:mm"
                 $0.dateFormatter = formatter
-                }
+                }.cellSetup({ (cell, row) in
+                    cell.datePicker.minuteInterval = 15
+                })
             //            <<< LocationRow(){
             //                $0.title = "LocationRow"
             //                $0.value = CLLocation(latitude: -34.91, longitude: -56.1646)
             //            }
             <<< PickerInputRow<String>("remind"){
                 $0.title = "提醒"
-                $0.options = GLRemindType.getTitleValues()
-                if let typeIndex = glAgendaResp?.type {
-                    $0.value = GLRemindType(rawValue: typeIndex)?.title
+                $0.options = ["0", "1", "2", "3", "4", "5"]
+                $0.displayValueFor = { type in
+                    return GLRemindType(rawValue: type!)?.title
+                }
+                if let typeIndex = glAgendaResp?.remind {
+                    $0.value = typeIndex
                 } else {
                     $0.value = $0.options.first
                 }
             }
-            <<< PickerInputRow<String>("repeatType"){
+            <<< PickerInputRow<Int>("repeatType"){
                 $0.title = "重复"
-                $0.options = GLRepeatType.getTitleValues()
-                if let typeIndex = glAgendaResp?.type {
-                    $0.value = GLRepeatType(rawValue: typeIndex)?.title
+                $0.options = [0, 1, 2, 3, 4]
+                $0.displayValueFor = { type in
+                    return GLRepeatType(rawValue: type!)?.title
+                }
+                
+                if let typeIndex = glAgendaResp?.repeatType {
+                    $0.value = typeIndex
                 } else {
                     $0.value = $0.options.first
                 }
@@ -96,9 +117,8 @@ class AgendaViewController: FormViewController {
             <<< LabelRow() {
                 $0.title = "摘要:"
                 $0.value = ""
-                }.cellSetup({ (cell, row) in
-                    cell.spec
-                })
+                }
+            
             <<< TextAreaRow("digestContent") {
                 $0.placeholder = "请输入你的摘要\n例如: 1.讨论产品设计风格\n2.确定产品风格"
                 if let value = glAgendaResp?.digestContent {
@@ -109,21 +129,44 @@ class AgendaViewController: FormViewController {
             tableView.tableFooterView = UIView()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
 
     @IBAction func removeView(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func confirmBtn(_ sender: UIButton) {
-        if let beginDate = form.values()["beginDate"] as? Date {
-            glAgendaResp?.beginDate = beginDate.toString(format: .isoDate)
+        let valid = form.validate()
+        
+        
+        if valid.isEmpty {
+            var values = form.values()
+            var resuestUrl = GLHttpUtil.GLRequestURL.createAgenda
+            var appendUrl: String?
+            
+            let beginDate = (values["beginDate"] as? Date)?.toString(format: .custom("YYYY-MM-dd HH:mm:ss"))
+            values["beginDate"] = beginDate?.prefix(10)
+            values["beginTime"] = beginDate?.suffix(8)
+            values["endDate"] = values["beginDate"]
+            values["endTime"] = (form.values()["endDate"] as? Date)?.toString(format: .custom("HH:mm:ss"))
+            
+            if !isToCreate {
+                appendUrl = "/\(glAgendaResp!.id!)"
+                resuestUrl = .updateAgenda
+            }
+            
+            
+            print(values)
+            GLHttpUtil.shared.request(resuestUrl, method: .post, parameters: values, appendUrl: appendUrl, encoding: JSONEncoding.default) { [weak self] (resp: GLBaseResp?) in
+                
+                self?.dismiss(animated: true, completion: nil)
+            }
+            
+            
+           
+        } else {
+             print(valid)
         }
-        if
-//        dismiss(animated: true, completion: nil)
     }
     
 }

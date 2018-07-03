@@ -21,6 +21,7 @@ class GLCalenderDayCell: UICollectionViewCell {
             dayLabel.textAlignment = .center
             addSubview(dayLabel)
             // snap约束
+            
         }
     }
 }
