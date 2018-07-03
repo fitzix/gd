@@ -67,6 +67,7 @@
 		C44BCBF820E232290036AAE5 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		C44BCC0020E24CED0036AAE5 /* GLHttpUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLHttpUtil.swift; sourceTree = "<group>"; };
 		C460061620E29C5500B09186 /* GLAgendaTableSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLAgendaTableSectionHeader.swift; sourceTree = "<group>"; };
+		C472BD1E20EBD21300081881 /* FSCalendar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FSCalendar.framework; path = Carthage/Build/iOS/FSCalendar.framework; sourceTree = "<group>"; };
 		C478ED6C20DA5382007A4A3F /* gd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C478ED6F20DA5382007A4A3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C478ED7120DA5382007A4A3F /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +114,7 @@
 		C4007C6A20DB7E3600D49866 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C472BD1E20EBD21300081881 /* FSCalendar.framework */,
 				C43FAAA320E4BC9500F9F954 /* Kingfisher.framework */,
 				C44BCBF720E232290036AAE5 /* AlamofireObjectMapper.framework */,
 				C44BCBF820E232290036AAE5 /* ObjectMapper.framework */,
@@ -537,6 +539,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.fitzix.gd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -559,6 +562,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.fitzix.gd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

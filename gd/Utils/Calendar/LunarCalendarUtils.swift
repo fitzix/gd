@@ -47,10 +47,10 @@ class LunarCalendarUtils {
         getAllSolarTermsJD(year: mYear - 1, start: CalendarConstant.WINTER_SOLSTICE, solarTerms: &mSolarTermsJD)
         
         // 最近一个冬至
-        let lastDongZhi = CalendarUtils.sharedInstance.jdLocalTimetoTD(localJD: mSolarTermsJD[0])
+        let lastDongZhi = CalendarUtils.shared.jdLocalTimetoTD(localJD: mSolarTermsJD[0])
         // 与冬至最近的一个朔日
-        var tmpShuo = CalendarUtils.sharedInstance.calculateMoonShuoJD(tdJD: lastDongZhi)
-        tmpShuo = CalendarUtils.sharedInstance.jdTDtoLocalTime(tdJD: tmpShuo)
+        var tmpShuo = CalendarUtils.shared.calculateMoonShuoJD(tdJD: lastDongZhi)
+        tmpShuo = CalendarUtils.shared.jdTDtoLocalTime(tdJD: tmpShuo)
         
         if tmpShuo > mSolarTermsJD[0] {
             tmpShuo -= 29.53
@@ -60,10 +60,10 @@ class LunarCalendarUtils {
     }
     
     func getNewMoonJDs(jd: Double, newMoon: inout [Double]) {
-        var tdJD = CalendarUtils.sharedInstance.jdLocalTimetoTD(localJD: jd)
+        var tdJD = CalendarUtils.shared.jdLocalTimetoTD(localJD: jd)
         for i in 0 ..< CalendarConstant.NEW_MOON_CALC_COUNT {
-            var shuoJD = CalendarUtils.sharedInstance.calculateMoonShuoJD(tdJD: tdJD)
-            shuoJD = CalendarUtils.sharedInstance.jdTDtoLocalTime(tdJD: shuoJD)
+            var shuoJD = CalendarUtils.shared.calculateMoonShuoJD(tdJD: tdJD)
+            shuoJD = CalendarUtils.shared.jdTDtoLocalTime(tdJD: shuoJD)
             newMoon[i] = shuoJD
             
             tdJD += 29.5
@@ -76,8 +76,8 @@ class LunarCalendarUtils {
         var st = start
         var y = year
         while i < 25 {
-            let jd = CalendarUtils.sharedInstance.calculateSolarTerms(year: y, angle: st * 15)
-            solarTerms[i] = CalendarUtils.sharedInstance.jdTDtoLocalTime(tdJD: jd)
+            let jd = CalendarUtils.shared.calculateSolarTerms(year: y, angle: st * 15)
+            solarTerms[i] = CalendarUtils.shared.jdTDtoLocalTime(tdJD: jd)
             i += 1
             if st == CalendarConstant.WINTER_SOLSTICE {
                 y += 1
@@ -159,7 +159,7 @@ class LunarCalendarUtils {
     func buildMonthAllDaysInfo(mi: inout MonthInfo) -> Bool {
         var info: DAY_INFO = DAY_INFO()
         for i in 0 ..< mi.mInfo.days {
-            let today = CalendarUtils.sharedInstance.calcJulianDay(mYear, month: mi.mInfo.month, day: i + 1, hour: 0, min: 0, second: 1)
+            let today = CalendarUtils.shared.calcJulianDay(mYear, month: mi.mInfo.month, day: i + 1, hour: 0, min: 0, second: 1)
             info.dayNo = i + 1
             info.week = (mi.mInfo.weekOf1stDay + i) % CalendarConstant.DAYS_FOR_WEEK
             let cm = findChnMonthInfo(todayJD: today)
@@ -176,8 +176,8 @@ class LunarCalendarUtils {
     func buildMonthInfo(month: Int) -> Bool {
         var info: MONTH_INFO = MONTH_INFO()
         info.month = month
-        info.weekOf1stDay = CalendarUtils.sharedInstance.getWeekDayBy(mYear, month: month, day: 1)
-        info.days = CalendarUtils.sharedInstance.getDaysOfMonthBy(mYear, month: info.month)
+        info.weekOf1stDay = CalendarUtils.shared.getWeekDayBy(mYear, month: month, day: 1)
+        info.days = CalendarUtils.shared.getDaysOfMonthBy(mYear, month: info.month)
         var mi = MonthInfo(info: info)
         
         if buildMonthAllDaysInfo(mi: &mi) {
@@ -221,7 +221,7 @@ class LunarCalendarUtils {
         }
 
         var dt: CalendarUtils.WZDayTime = CalendarUtils.WZDayTime(0, 0, 0)
-        CalendarUtils.sharedInstance.getDayTimeFromJulianDay(mSolarTermsJD[CalendarConstant.SPRING_BEGINS_INDEX], dt: &dt)
+        CalendarUtils.shared.getDayTimeFromJulianDay(mSolarTermsJD[CalendarConstant.SPRING_BEGINS_INDEX], dt: &dt)
         
         month = dt.month
         day = dt.day
