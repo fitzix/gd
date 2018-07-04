@@ -106,6 +106,16 @@ class AgendaTableViewController: UITableViewController {
     }
     
     @objc func didSelectHeader(_ sender: UIButton) {
-        print(sender.tag)
+        guard let beginDate = agendaTableList?[sender.tag][0].beginDate, let headerDate = Date(fromString: beginDate, format: .isoDate) else {
+            return
+        }
+        
+        
+        
+        let monthVC = storyboard?.instantiateViewController(withIdentifier: "MonthViewController") as! MonthViewController
+        monthVC.startDate = headerDate
+        
+        navigationController?.pushViewController(monthVC, animated: true)
+        
     }
 }

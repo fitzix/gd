@@ -15,10 +15,7 @@ class GLCalender: UIView {
     
     var WillChangeMonth: GLCalenderMonthWillChane!
     // MARK:
-    let startDate = Date(fromString: "1970-01-01", format: .isoDate)!
-    let endDate = Date().adjust(.year, offset: 100)
-    var monthCount:Int = 0
-    var monthString = ""
+    let startDate = Date(fromString: GLConfig.CAL_START_DATE, format: .isoDate)!
     
     fileprivate var collectionView: UICollectionView!
     
@@ -31,7 +28,7 @@ class GLCalender: UIView {
         if let monthBlock = willChangeMonth {
             self.WillChangeMonth = monthBlock
         }
-        self.monthCount = Int(endDate.since(startDate, in: .month))
+
         makeCollectionView(bounds: self.frame)
     }
     
@@ -59,10 +56,9 @@ class GLCalender: UIView {
             ConstraintMaker.left.equalToSuperview()
             ConstraintMaker.right.equalToSuperview()
         }
-        orientationCurrentDate()
     }
     
-    func orientationCurrentDate() {
+    func orientationCurrentDate(start: Date) {
         let index = Int(Date().since(self.startDate, in: .month)) - 1
         let rect = self.collectionView.layoutAttributesForItem(at: IndexPath(row: index, section: 0))?.frame
         collectionView.contentOffset = (rect?.origin)!
@@ -73,7 +69,8 @@ class GLCalender: UIView {
 extension GLCalender: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return monthCount
+        let endDate = Date().adjust(.year, offset: GLConfig.CAL_END_DATE_AFTER_NOW_YEAR)
+        return Int(endDate.since(startDate, in: .month))
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

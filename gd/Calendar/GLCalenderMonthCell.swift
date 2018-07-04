@@ -178,18 +178,18 @@ extension GLCalenderMonthCell: UICollectionViewDelegateFlowLayout, UICollectionV
             let dayCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLCalenderDayCell", for: indexPath) as! GLCalenderDayCell
             dayCell.loadData(model: "")
             let cellDate = self.taskModel.date.dateFor(.startOfWeek).adjust(.day, offset: index)
-            dayCell.dayLabel.text = cellDate.toString(format: .custom("dd"))
+            dayCell.dayLabel.text = "\(cellDate.toString(format: .custom("dd")))\n\(EventKitUtil.shared.getHolidayTitle(date: cellDate))"
             // TODO 颜色调整
             return dayCell
         // 未展开状态
         } else {
             let dayCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLCalenderDayCell", for: indexPath) as! GLCalenderDayCell
-            dayCell.layer.borderWidth = 0.3
+            dayCell.layer.borderWidth = 0.2
             dayCell.layer.borderColor = UIColor.lightGray.cgColor
             dayCell.loadData(model: "")
             let cellDate = self.taskModel.date.dateFor(.startOfWeek).adjust(.day, offset: indexPath.item)
             //TODO CELL 颜色
-            dayCell.dayLabel.text = cellDate.toString(format: .custom("dd"))
+            dayCell.dayLabel.text = "\(cellDate.toString(format: .custom("dd")))\n\(EventKitUtil.shared.getHolidayTitle(date: cellDate))"
             return dayCell
         }
     }

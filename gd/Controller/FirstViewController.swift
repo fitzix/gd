@@ -13,10 +13,6 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let cal = GLCalender(frame: view.bounds) { (date) in
-            print(date)
-        }
-        view.addSubview(cal)
     }
 
     override func didReceiveMemoryWarning() {
