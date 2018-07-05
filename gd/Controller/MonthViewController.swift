@@ -10,37 +10,37 @@ import UIKit
 
 class MonthViewController: UIViewController {
     
-    @IBOutlet weak var monthButton: UIButton!
+    @IBOutlet weak var headerView: UIView!
     
-    @IBOutlet weak var calenderView: UIView!
+    @IBOutlet weak var slackView: UIStackView!
+    @IBOutlet weak var monthButton: UIButton!
     
     
     var startDate: Date = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        let calView = GLCalender(frame: calenderView.bounds) { [weak self] (date) in
-            self?.monthButton.setTitle(date.toString(format: .isoYearMonth), for: .normal)
-        }
-        calView.orientationCurrentDate(start: startDate)
-        
-        print("calView",calView.bounds)
-        print("calenderView", calenderView.bounds)
-        calenderView.addSubview(calView)
+        self.edgesForExtendedLayout = []
 
-        calView.snp.makeConstraints { (constraintMaker) in
-            constraintMaker.top.equalToSuperview()
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        let tabBarHeight = tabBarController?.tabBar.frame.height
+        let calHeight = view.bounds.height - (statusBarHeight + tabBarHeight!) - (25 + 44)
+        
+        let calender = GLCalender(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: calHeight )) { (date) in
+            self.monthButton.setTitle(date.toString(format: .isoYearMonth), for: .normal)
+        }
+        calender.orientationCurrentDate(start: startDate)
+        tabBarController?.tabBar.backgroundColor = .white
+        
+        view.addSubview(calender)
+        
+        calender.snp.makeConstraints { (constraintMaker) in
+            constraintMaker.top.equalTo(slackView.snp.bottom)
             constraintMaker.left.equalToSuperview()
             constraintMaker.right.equalToSuperview()
             constraintMaker.bottom.equalToSuperview()
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillAppear(_ animated: Bool) {

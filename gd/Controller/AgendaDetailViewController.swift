@@ -29,9 +29,7 @@ class AgendaDetailViewController: FormViewController {
         super.viewDidLoad()
         
         loadData()
-        
-//        LabelRow.defaultCellUpdate = { cell, row in cell.textLabel?.textColor = .gray }
-        
+
         form
             +++ Section()
             <<< LabelRow () {

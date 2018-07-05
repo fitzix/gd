@@ -155,8 +155,6 @@ class AgendaViewController: FormViewController {
                 resuestUrl = .updateAgenda
             }
             
-            
-            print(values)
             GLHttpUtil.shared.request(resuestUrl, method: .post, parameters: values, appendUrl: appendUrl, encoding: JSONEncoding.default) { [weak self] (resp: GLBaseResp?) in
                 
                 self?.dismiss(animated: true, completion: nil)

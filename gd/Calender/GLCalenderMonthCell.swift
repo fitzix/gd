@@ -32,13 +32,11 @@ class GLCalenderMonthCell: UICollectionViewCell {
         // 重用cell
         if collectionView == nil {
             let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .vertical
             
             self.collectionView = UICollectionView(frame: bounds, collectionViewLayout: layout)
-            layout.scrollDirection = .vertical
-            layout.minimumLineSpacing = 0
-            layout.minimumInteritemSpacing = 0
-            
-        
+            collectionView.backgroundColor = UIColor.white
+           
             addSubview(collectionView)
             
             
@@ -49,7 +47,6 @@ class GLCalenderMonthCell: UICollectionViewCell {
             collectionView.dataSource = self
             collectionView.delegate = self
             collectionView.reloadData()
-            collectionView.backgroundColor = UIColor.white
             
             collectionView.isPagingEnabled = true
             
@@ -119,10 +116,6 @@ class GLCalenderMonthCell: UICollectionViewCell {
                         return
                     }
                     
-                    if let cell = self.collectionView.cellForItem(at: IndexPath(item: self.calenderExpandIndicator.selectedIndex, section: 0)) as? GLCalenderDayCell {
-                        cell.backgroundColor = UIColor.white
-                    }
-                    
                     self.calenderExpandIndicator.selectedIndex = -1
                     self.calenderExpandIndicator.expanded = false
                     let needCloseIndex = self.calenderExpandIndicator.expandedIndex
@@ -175,21 +168,44 @@ extension GLCalenderMonthCell: UICollectionViewDelegateFlowLayout, UICollectionV
             if self.calenderExpandIndicator.expandedIndex < index {
                 index -= 1
             }
+            
             let dayCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLCalenderDayCell", for: indexPath) as! GLCalenderDayCell
+            
+            if calenderExpandIndicator.selectedIndex == indexPath.item {
+                dayCell.backgroundColor = UIColor.groupTableViewBackground.withAlphaComponent(0.7)
+            } else {
+                dayCell.backgroundColor = nil
+            }
+            
             dayCell.loadData(model: "")
             let cellDate = self.taskModel.date.dateFor(.startOfWeek).adjust(.day, offset: index)
-            dayCell.dayLabel.text = "\(cellDate.toString(format: .custom("dd")))\n\(EventKitUtil.shared.getHolidayTitle(date: cellDate))"
-            // TODO 颜色调整
+            
+            if !cellDate.compare(.isSameMonth(as: taskModel.date)) {
+                dayCell.dayLabel.text = ""
+                dayCell.lunarLabel.text = ""
+                return dayCell
+            }
+            
+            
+            dayCell.dayLabel.text = cellDate.toString(format: .custom("dd"))
+            dayCell.lunarLabel.text = EventKitUtil.shared.getHolidayTitle(date: cellDate)
             return dayCell
         // 未展开状态
         } else {
             let dayCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLCalenderDayCell", for: indexPath) as! GLCalenderDayCell
-            dayCell.layer.borderWidth = 0.2
-            dayCell.layer.borderColor = UIColor.lightGray.cgColor
             dayCell.loadData(model: "")
+            dayCell.backgroundColor = nil
+            
             let cellDate = self.taskModel.date.dateFor(.startOfWeek).adjust(.day, offset: indexPath.item)
-            //TODO CELL 颜色
-            dayCell.dayLabel.text = "\(cellDate.toString(format: .custom("dd")))\n\(EventKitUtil.shared.getHolidayTitle(date: cellDate))"
+            
+            if !cellDate.compare(.isSameMonth(as: taskModel.date)) {
+                dayCell.dayLabel.text = ""
+                dayCell.lunarLabel.text = ""
+                return dayCell
+            }
+            
+            dayCell.dayLabel.text = cellDate.toString(format: .custom("dd"))
+            dayCell.lunarLabel.text = EventKitUtil.shared.getHolidayTitle(date: cellDate)
             return dayCell
         }
     }
@@ -204,10 +220,6 @@ extension GLCalenderMonthCell: UICollectionViewDelegateFlowLayout, UICollectionV
     
     // 选择事件
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO 点击后颜色变化
-//        if let dayCell = self.collectionView.cellForItem(at: indexPath) as? GLCalenderDayCell {
-//
-//        }
         if calenderExpandIndicator.expanded {
             if calenderExpandIndicator.expandedIndex == indexPath.item { return }
             var index = indexPath.item
@@ -218,6 +230,18 @@ extension GLCalenderMonthCell: UICollectionViewDelegateFlowLayout, UICollectionV
         } else {
             self.expandAction(indexPath: indexPath)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(0, 0, 0, 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }
 

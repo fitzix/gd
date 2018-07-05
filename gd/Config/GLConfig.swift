@@ -9,8 +9,8 @@
 import UIKit
 
 class GLConfig {
-    static let CAL_START_DATE = "2017-01-01"
-    static let CAL_END_DATE_AFTER_NOW_YEAR = 2
+    static let CAL_START_DATE = "1960-01-01"
+    static let CAL_END_DATE_AFTER_NOW_YEAR = 100
 }
 
 

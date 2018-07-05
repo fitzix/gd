@@ -29,14 +29,14 @@ class GLCalender: UIView {
             self.WillChangeMonth = monthBlock
         }
 
-        makeCollectionView(bounds: self.frame)
+        makeCollectionView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func makeCollectionView(bounds: CGRect) {
+    func makeCollectionView() {
         let layout = UICollectionViewFlowLayout()
         
         self.collectionView = UICollectionView(frame: bounds, collectionViewLayout: layout)
@@ -59,8 +59,10 @@ class GLCalender: UIView {
     }
     
     func orientationCurrentDate(start: Date) {
-        let index = Int(Date().since(self.startDate, in: .month)) - 1
+        
+        let index = Int(start.since(self.startDate, in: .month)) - 1
         let rect = self.collectionView.layoutAttributesForItem(at: IndexPath(row: index, section: 0))?.frame
+        
         collectionView.contentOffset = (rect?.origin)!
         self.WillChangeMonth(startDate.adjust(.month, offset: index))
     }
@@ -99,7 +101,6 @@ extension GLCalender: UICollectionViewDelegate, UICollectionViewDelegateFlowLayo
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print(collectionView.indexPathsForVisibleItems)
         let index = collectionView.indexPathsForVisibleItems.last?.item
         WillChangeMonth(startDate.adjust(.month, offset: index!))
     }

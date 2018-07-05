@@ -73,7 +73,7 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OzP-d1-pIs" userLabel="Content">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OzP-d1-pIs" userLabel="Content">
                                 <rect key="frame" x="0.0" y="108" width="375" height="557"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
@@ -351,24 +351,9 @@
             <point key="canvasLocation" x="-1770" y="785"/>
         </scene>
         <!--Month View Controller-->
-        <scene sceneID="LZG-tR-OyV">
-            <objects>
-                <viewController storyboardIdentifier="MonthViewController" id="bcG-yX-0vu" customClass="MonthViewController" customModule="gd" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="sJq-K1-smU">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="qWC-eM-v4d"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EUv-PZ-VdF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3698" y="1821"/>
-        </scene>
-        <!--View Controller-->
         <scene sceneID="rrv-zY-mSh">
             <objects>
-                <viewController id="DMZ-dl-PRW" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MonthViewController" id="DMZ-dl-PRW" customClass="MonthViewController" customModule="gd" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TpD-xg-D47">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -376,17 +361,11 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBC-o6-gl5" userLabel="Header">
                                 <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lfo-fD-g4D">
-                                        <rect key="frame" x="160" y="7" width="55" height="30"/>
-                                        <state key="normal" title="2018.07"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6v-hb-SC0">
-                                        <rect key="frame" x="321" y="8" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="buttonShow:" destination="DMZ-dl-PRW" eventType="touchUpInside" id="uf6-vI-grC"/>
-                                        </connections>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lfo-fD-g4D">
+                                        <rect key="frame" x="155" y="5" width="65" height="34"/>
+                                        <state key="normal" title="2018.07">
+                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -453,21 +432,13 @@
                                     <constraint firstAttribute="height" constant="25" id="cun-0X-KZ5"/>
                                 </constraints>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2UP-aO-KO1">
-                                <rect key="frame" x="0.0" y="113" width="375" height="616"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="2UP-aO-KO1" firstAttribute="bottom" secondItem="KUT-9g-UYN" secondAttribute="bottom" id="9wG-gi-r4j"/>
                             <constraint firstItem="gBC-o6-gl5" firstAttribute="trailing" secondItem="KUT-9g-UYN" secondAttribute="trailing" id="Pv0-Um-Gsw"/>
                             <constraint firstItem="gBC-o6-gl5" firstAttribute="leading" secondItem="KUT-9g-UYN" secondAttribute="leading" id="QXh-aB-jZm"/>
                             <constraint firstItem="NaG-Ys-H2m" firstAttribute="top" secondItem="gBC-o6-gl5" secondAttribute="bottom" id="Que-3S-HdF"/>
                             <constraint firstItem="KUT-9g-UYN" firstAttribute="trailing" secondItem="NaG-Ys-H2m" secondAttribute="trailing" id="X3B-pX-OZ6"/>
-                            <constraint firstItem="2UP-aO-KO1" firstAttribute="leading" secondItem="KUT-9g-UYN" secondAttribute="leading" id="Xhq-rz-YdA"/>
-                            <constraint firstItem="2UP-aO-KO1" firstAttribute="trailing" secondItem="KUT-9g-UYN" secondAttribute="trailing" id="bLS-Ps-iLa"/>
-                            <constraint firstItem="2UP-aO-KO1" firstAttribute="top" secondItem="NaG-Ys-H2m" secondAttribute="bottom" id="f7P-Qj-g8P"/>
                             <constraint firstItem="NaG-Ys-H2m" firstAttribute="leading" secondItem="KUT-9g-UYN" secondAttribute="leading" id="qgI-dY-lxE"/>
                             <constraint firstItem="gBC-o6-gl5" firstAttribute="top" secondItem="KUT-9g-UYN" secondAttribute="top" id="uLj-6W-qkG"/>
                         </constraints>
@@ -476,8 +447,9 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="calenderView" destination="2UP-aO-KO1" id="aHj-rE-3I3"/>
+                        <outlet property="headerView" destination="gBC-o6-gl5" id="mal-SA-ake"/>
                         <outlet property="monthButton" destination="Lfo-fD-g4D" id="Kqj-aP-Ckh"/>
+                        <outlet property="slackView" destination="NaG-Ys-H2m" id="nJV-vP-Dr6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tbk-Jt-f59" userLabel="First Responder" sceneMemberID="firstResponder"/>

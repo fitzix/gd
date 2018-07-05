@@ -42,6 +42,6 @@ class EventKitUtil {
         if let title = holidayStore[date.toString(format: .isoDate)] {
             return title
         }
-        return ""
+        return LunarUtil.shared.string(from:date)
     }
 }

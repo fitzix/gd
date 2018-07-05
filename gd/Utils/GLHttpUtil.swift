@@ -7,7 +7,6 @@
 //
 
 import Alamofire
-import PKHUD
 
 class GLHttpUtil: NSObject {
     
@@ -27,22 +26,16 @@ class GLHttpUtil: NSObject {
         case updateAgenda = "/agenda/update"
     }
     
-    
+    // 基础请求方法
     public func request<T: GLBaseResp>(_ url: GLRequestURL, method: Alamofire.HTTPMethod = .get, parameters: Parameters? = nil, appendUrl: String? = nil, encoding: ParameterEncoding = URLEncoding.default, completion: @escaping (T?) -> Void) {
-        
-        HUD.show(.progress)
-        
         let req = Alamofire.request("\(httpGateway)\(url.rawValue)\(appendUrl ?? "")", method: method, parameters: parameters, encoding: encoding, headers: headers)
-        debugPrint(req)
-        
+        print(req)
         req.responseObject { (response: DataResponse<T>) in
             guard let result = response.result.value, result.ok else {
-                HUD.flash(.error, delay: 1.0)
-                print("请求出错了")
+                print("请求失败")
                 completion(nil)
                 return
             }
-            HUD.hide()
             completion(result)
         }
     }
