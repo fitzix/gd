@@ -123,6 +123,10 @@ class GLAgendaResp: Mappable {
         
     }
     
+    init() {
+        
+    }
+    
     func mapping(map: Map) {
         beginDate <- map["beginDate"]
         beginTime <- map["beginTime"]

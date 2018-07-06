@@ -14,9 +14,6 @@ import CRRefresh
 
 class AgendaTableViewController: UITableViewController {
     
-    var agendaTableList: [[GLAgendaResp]]?
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,17 +31,22 @@ class AgendaTableViewController: UITableViewController {
         normalHeaderAnimator.trigger = 130
         normalFooterAnimator.trigger = 40
         tableView.cr.addHeadRefresh(animator: normalHeaderAnimator) { [weak self] in
-            self?.loadData {
+            GLAgendaDataUtil.shared.loadData(after: false) { succeed in
                 self?.tableView.cr.endHeaderRefresh()
+                if succeed {
+                    self?.tableView.reloadData()
+                }
             }
         }
         tableView.cr.beginHeaderRefresh()
         
-        /// animator: 你的下拉加载的Animator, 默认是NormalFootAnimator
         tableView.cr.addFootRefresh(animator: normalFooterAnimator) { [weak self] in
-            self?.loadData(down: false, completion: {
+            GLAgendaDataUtil.shared.loadData { succeed in
                 self?.tableView.cr.endLoadingMore()
-            })
+                if succeed {
+                   self?.tableView.reloadData()
+                }
+            }
         }
     }
 
@@ -52,51 +54,43 @@ class AgendaTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        guard let counts = agendaTableList?.count else {
-            return 0
-        }
-        return counts
+        return GLAgendaDataUtil.shared.agendaArray.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let counts = agendaTableList?[section].count else {
-            return 0
-        }
-        return counts
+        return GLAgendaDataUtil.shared.agendaArray[section].count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //用重用的方式获取标识为wifiCell的cell
+        //用重用的方式获取标识cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "GLAgendaTableViewCell", for: indexPath) as! GLAgendaTableViewCell
+        let data = GLAgendaDataUtil.shared.agendaArray[indexPath.section]
         
         var isHeader = true
-        if indexPath.row != 0, let agendaArray = agendaTableList?[indexPath.section], let current = agendaArray[indexPath.row].beginDate, let pre = agendaArray[indexPath.row - 1].beginDate, current == pre  {
+        if indexPath.row != 0, data[indexPath.row].beginDate == data[indexPath.row - 1].beginDate {
             isHeader = false
         }
         
-        cell.reloadData(glAgendaResp: agendaTableList![indexPath.section][indexPath.row], indexPath: indexPath.row, isHeader: isHeader)
+        cell.reloadData(glAgendaResp: data[indexPath.row], indexPath: indexPath.row, isHeader: isHeader)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let beginDate = agendaTableList?[section][0].beginDate, let headerDate = Date(fromString: beginDate, format: .isoDate) else {
-            return nil
-        }
+        let headerDate = Date(fromString: GLAgendaDataUtil.shared.agendaArray[section][0].beginDate!, format: .isoDate)
         
         let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "GLAgendaTableSectionHeader") as? GLAgendaTableSectionHeader
         cell?.labelHeaderBtn.tag = section
         cell?.labelHeaderBtn.addTarget(self, action: #selector(didSelectHeader(_:)), for: .touchUpInside)
         
-        cell?.reloadData(headerDate: headerDate)
+        cell?.reloadData(headerDate: headerDate!)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let rowData = GLAgendaDataUtil.shared.agendaArray[indexPath.section][indexPath.row]
         
-        guard let rowData = agendaTableList?[indexPath.section][indexPath.row] else {
-            return
-        }
+        if rowData.id == nil { return }
     
         GLHttpUtil.shared.request(.getDetail, appendUrl: "/\(rowData.id!)") { [weak self] (resp: GLAgendaDetailResp?) in
             guard let resp = resp, let info = resp.info else {
@@ -113,57 +107,14 @@ class AgendaTableViewController: UITableViewController {
     
     // 点击月份
     @objc func didSelectHeader(_ sender: UIButton) {
-
-        guard let beginDate = agendaTableList?[sender.tag][0].beginDate, let headerDate = Date(fromString: beginDate, format: .isoDate) else {
+        guard let headerDate = Date(fromString: GLAgendaDataUtil.shared.agendaArray[sender.tag][0].beginDate!, format: .isoDate) else {
             return
         }
-        
+
         let monthVC = storyboard?.instantiateViewController(withIdentifier: "MonthViewController") as! MonthViewController
         monthVC.startDate = headerDate
         
         navigationController?.pushViewController(monthVC, animated: true)
-        
-    }
-    
-    // 下拉down 上拉up
-    func loadData(down: Bool = true, completion: @escaping () -> Void?) {
-        var topDateStr = Date().toString(format: .isoDate)
-        var viewType = 4
-        
-        if agendaTableList != nil {
-            viewType = 5
-            if down {
-               topDateStr = Date(fromString: agendaTableList!.first!.first!.beginDate!, format: .isoDate)!.adjust(.year, offset: -1).toString(format: .isoDate)
-            } else {
-               topDateStr = Date(fromString: agendaTableList!.last!.last!.beginDate!, format: .isoDate)!.adjust(.month, offset: 1).toString(format: .isoDate)
-            }
-        }
-        GLHttpUtil.shared.request(.getAgendaList, parameters: ["viewType": viewType, "date": topDateStr]) { [weak self] (resp: GLAgendaListResp?) in
-            guard let resp = resp, let info = resp.info else {
-                HUD.flash(.labeledError(title: "请求数据失败", subtitle: nil), delay: 1)
-                completion()
-                return
-            }
-            let result = GLHttpUtil.flatAgendaList(dataList: info)
-            if result.count > 0 {
-                if self?.agendaTableList != nil {
-                    if down {
-                        self?.agendaTableList?.insert(contentsOf: result, at: 0)
-                    } else {
-                        self?.agendaTableList?.append(contentsOf: result)
-                    }
-                } else {
-                    self?.agendaTableList = result
-                }
-                self?.tableView.reloadData()
-               
-            } else {
-                if !down {
-                    self?.tableView.cr.noticeNoMoreData()
-                }
-            }
-             completion()
-        }
     }
 }
 

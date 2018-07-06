@@ -13,7 +13,9 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print(EventKitUtil.shared.getHolidayTitle(date: Date(fromString: "2019-02-06", format: .isoDate)!))
+        let a = calendar(2018, 10)
+        let b = a?["monthData"] as? NSArray
+        print(b?[1]["lunarDayName"])
     }
 
     override func didReceiveMemoryWarning() {
