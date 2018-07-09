@@ -16,19 +16,9 @@ class GLAgendaDataUtil {
     var endDate: Date = Date()
     var isInit = true
     
-    var agendaArray: [[GLAgendaResp]] {
-        get{
-           return GLHttpUtil.flatAgendaList(dataList: agendaList)
-        }
-    }
+    var agendaMap: [String:[GLAgendaResp]] = [:]
     
-//    var agendaMap: [String:[GLAgendaResp]] {
-//        get {
-//
-//        }
-//    }
-    
-    func loadData(after: Bool = true, completion: @escaping (_ succeed: Bool) -> Void) {
+    func loadData(after: Bool = true, completion: @escaping (_ succeed: Bool) -> Void = {_ in }) {
         var requestDate = endDate
         
         if !after {
@@ -58,19 +48,36 @@ class GLAgendaDataUtil {
                 info.append(contentsOf: holiday)
             }
             self?.agendaList.append(contentsOf: info)
+            DispatchQueue.global(qos: .default).async {
+                self?.flatAgendaToMap()
+            }
             completion(true)
         }
     }
     
-    func flatAgendaToMap(dataList: [GLAgendaResp]) -> [String:[GLAgendaResp]] {
-        let monthKeys = Array(Set(dataList.compactMap{ $0.beginDate?.prefix(7) }))
+    func flatAgendaToMap() {
+        let monthKeys = Array(Set(agendaList.compactMap{ $0.beginDate?.prefix(10) }))
         var result = [String:[GLAgendaResp]]()
         
         monthKeys.forEach {
             let tempKey = $0
-            let tempList = dataList.filter{ $0.beginDate?.prefix(7) == tempKey }
+            let tempList = agendaList.filter{ $0.beginDate?.prefix(10) == tempKey }
             result[String(tempKey)] = tempList
+        }
+        agendaMap = result
+    }
+    
+    // 构造事件列表返回结构
+    func flatAgendaList() -> [[GLAgendaResp]] {
+        let monthKeys = Array(Set(agendaList.compactMap{ $0.beginDate?.prefix(7) })).sorted(by: <)
+        var result = [[GLAgendaResp]]()
+        
+        monthKeys.forEach {
+            let tempKey = $0
+            let tempList = agendaList.filter{ $0.beginDate?.prefix(7) == tempKey }
+            result.append(tempList)
         }
         return result
     }
+
 }

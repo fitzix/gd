@@ -14,6 +14,9 @@ import CRRefresh
 
 class AgendaTableViewController: UITableViewController {
     
+    var agendaList: [[GLAgendaResp]] = []
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +37,7 @@ class AgendaTableViewController: UITableViewController {
             GLAgendaDataUtil.shared.loadData(after: false) { succeed in
                 self?.tableView.cr.endHeaderRefresh()
                 if succeed {
+                    self?.agendaList = GLAgendaDataUtil.shared.flatAgendaList()
                     self?.tableView.reloadData()
                 }
             }
@@ -44,40 +48,39 @@ class AgendaTableViewController: UITableViewController {
             GLAgendaDataUtil.shared.loadData { succeed in
                 self?.tableView.cr.endLoadingMore()
                 if succeed {
-                   self?.tableView.reloadData()
+                    self?.agendaList = GLAgendaDataUtil.shared.flatAgendaList()
+                    self?.tableView.reloadData()
                 }
             }
         }
     }
 
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return GLAgendaDataUtil.shared.agendaArray.count
+        return agendaList.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GLAgendaDataUtil.shared.agendaArray[section].count
+        return agendaList[section].count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //用重用的方式获取标识cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "GLAgendaTableViewCell", for: indexPath) as! GLAgendaTableViewCell
-        let data = GLAgendaDataUtil.shared.agendaArray[indexPath.section]
+        let data = agendaList[indexPath.section]
         
         var isHeader = true
         if indexPath.row != 0, data[indexPath.row].beginDate == data[indexPath.row - 1].beginDate {
             isHeader = false
         }
-        
         cell.reloadData(glAgendaResp: data[indexPath.row], indexPath: indexPath.row, isHeader: isHeader)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerDate = Date(fromString: GLAgendaDataUtil.shared.agendaArray[section][0].beginDate!, format: .isoDate)
+        let headerDate = Date(fromString: agendaList[section][0].beginDate!, format: .isoDate)
         
         let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "GLAgendaTableSectionHeader") as? GLAgendaTableSectionHeader
         cell?.labelHeaderBtn.tag = section
@@ -88,7 +91,7 @@ class AgendaTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let rowData = GLAgendaDataUtil.shared.agendaArray[indexPath.section][indexPath.row]
+        let rowData = agendaList[indexPath.section][indexPath.row]
         
         if rowData.id == nil { return }
     
@@ -102,12 +105,11 @@ class AgendaTableViewController: UITableViewController {
             self?.navigationController?.pushViewController(detailVC, animated: true)
         
         }
-        
     }
     
     // 点击月份
     @objc func didSelectHeader(_ sender: UIButton) {
-        guard let headerDate = Date(fromString: GLAgendaDataUtil.shared.agendaArray[sender.tag][0].beginDate!, format: .isoDate) else {
+        guard let headerDate = Date(fromString: agendaList[sender.tag][0].beginDate!, format: .isoDate) else {
             return
         }
 

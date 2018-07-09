@@ -13,16 +13,16 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let a = calendar(2018, 10)
-        let b = a?["monthData"] as? NSArray
-        print(b?[1]["lunarDayName"])
+        let date = Date(fromString: "2018-09-05", format: .isoDate)!
+        let start = date.dateFor(.startOfMonth).component(.weekday)!
+        let num = date.numberOfDaysInMonth()
+       
+        print(start, num,  (num + start - 1)/7)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 

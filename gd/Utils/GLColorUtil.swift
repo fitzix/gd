@@ -12,9 +12,9 @@ class GLColorUtil {
     
     class func random(tableCellIndex: Int) -> UIColor {
         if tableCellIndex % 2 == 0 {
-            return GLColorConf.BlackHaze.color
+            return UIColor(red:0.80, green:0.90, blue:1.00, alpha:1.00)
         } else {
-            return GLColorConf.Mabel.color
+            return UIColor(red:0.97, green:0.97, blue:0.98, alpha:1.00)
         }
     }
 }

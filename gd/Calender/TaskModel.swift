@@ -10,4 +10,6 @@ import Foundation
 
 class TaskModel {
     var date = Date()
+    // 事件字典
+    var agendaMap: [String:[GLAgendaResp]] = [:]
 }

@@ -34,3 +34,11 @@ extension UIColor {
         self.init(red:1.00, green:1.00, blue:1.00, alpha:1.00)
     }
 }
+
+extension Collection {
+    
+    /// Returns the element at the specified index iff it is within bounds, otherwise nil.
+    subscript (safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}

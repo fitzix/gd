@@ -40,16 +40,5 @@ class GLHttpUtil: NSObject {
         }
     }
     
-    // 构造事件列表返回结构
-    class func flatAgendaList(dataList: [GLAgendaResp]) -> [[GLAgendaResp]] {
-        let monthKeys = Array(Set(dataList.compactMap{ $0.beginDate?.prefix(7) })).sorted(by: <)
-        var result = [[GLAgendaResp]]()
-        
-        monthKeys.forEach {
-            let tempKey = $0
-            let tempList = dataList.filter{ $0.beginDate?.prefix(7) == tempKey }
-            result.append(tempList)
-        }
-        return result
-    }
+    
 }

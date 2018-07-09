@@ -14,7 +14,7 @@ class GLCalender: UIView {
     typealias GLCalenderMonthWillChane = (_ month: Date) -> Void
     
     var WillChangeMonth: GLCalenderMonthWillChane!
-    // MARK:
+    
     let startDate = Date(fromString: GLConfig.CAL_START_DATE, format: .isoDate)!
     
     fileprivate var collectionView: UICollectionView!

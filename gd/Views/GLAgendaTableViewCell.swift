@@ -45,9 +45,17 @@ class GLAgendaTableViewCell: UITableViewCell {
             let week = beginDate.toString(style: .shortWeekday)
             dateLabel.text = "\(date)\n\(week)"
         }
-        
-        detailView.backgroundColor = GLColorUtil.random(tableCellIndex: indexPath)
-        
+        if glAgendaResp.id == nil {
+            detailView.backgroundColor = UIColor(red:1.00, green:0.62, blue:0.01, alpha:1.00)
+            titleLabel.textColor = .white
+            timeLabel.textColor = .white
+            locationLabel.textColor = .white
+        } else {
+            detailView.backgroundColor = GLColorUtil.random(tableCellIndex: indexPath)
+            titleLabel.textColor = .black
+            timeLabel.textColor = .black
+            locationLabel.textColor = .black
+        }
         titleLabel.text = glAgendaResp.title
         timeLabel.text = "\(glAgendaResp.beginTime?.prefix(5) ?? "") ~ \(glAgendaResp.endTime?.prefix(5) ?? "")"
         locationLabel.text = glAgendaResp.place

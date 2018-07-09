@@ -20,6 +20,16 @@ struct GLCalenderExpandIndicator {
 }
 
 class GLCalenderMonthCell: UICollectionViewCell {
+    var numberOfRow: Int {
+        get {
+            let allCell = self.taskModel.date.numberOfDaysInMonth() + self.taskModel.date.dateFor(.startOfMonth).component(.weekday)! - 1
+            var temp = 5
+            if allCell/7 == 5 && allCell%7 != 0 {
+                temp = 6
+            }
+            return temp
+        }
+    }
     
     // 展开实际上是添加空白行, targetIndex为需要添加空白行的第一个cell序列号
     var targetIndex = 0
@@ -35,7 +45,7 @@ class GLCalenderMonthCell: UICollectionViewCell {
             layout.scrollDirection = .vertical
             
             self.collectionView = UICollectionView(frame: bounds, collectionViewLayout: layout)
-            collectionView.backgroundColor = UIColor.white
+            collectionView.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.00)
            
             addSubview(collectionView)
             
@@ -149,10 +159,16 @@ class GLCalenderMonthCell: UICollectionViewCell {
 
 extension GLCalenderMonthCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if self.calenderExpandIndicator.expanded {
-            return 36
+        let allCell = self.taskModel.date.numberOfDaysInMonth() + self.taskModel.date.dateFor(.startOfMonth).component(.weekday)! - 1
+        var numberOfRow = 5
+        if allCell/7 == 5 && allCell%7 != 0 {
+            numberOfRow = 6
         }
-        return 35
+        
+        if self.calenderExpandIndicator.expanded {
+            return 7 * numberOfRow + 1
+        }
+        return 7 * numberOfRow
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -160,8 +176,9 @@ extension GLCalenderMonthCell: UICollectionViewDelegateFlowLayout, UICollectionV
         if calenderExpandIndicator.expanded {
             // 空白cell
             if calenderExpandIndicator.expandedIndex == indexPath.item {
+                let cellDate = self.taskModel.date.dateFor(.startOfWeek).adjust(.day, offset: calenderExpandIndicator.selectedIndex)
                 let taskCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLTaskListCell", for: indexPath) as! GLTaskListCell
-                taskCell.loadData(model: "")
+                taskCell.loadData(model: GLAgendaDataUtil.shared.agendaMap[cellDate.toString(format: .isoDate)])
                 return taskCell
             }
             var index = indexPath.item
@@ -171,39 +188,41 @@ extension GLCalenderMonthCell: UICollectionViewDelegateFlowLayout, UICollectionV
             
             let dayCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLCalenderDayCell", for: indexPath) as! GLCalenderDayCell
             
+            
             if calenderExpandIndicator.selectedIndex == indexPath.item {
-                dayCell.backgroundColor = UIColor.groupTableViewBackground.withAlphaComponent(0.7)
+                dayCell.backgroundColor = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.00)
             } else {
                 dayCell.backgroundColor = nil
             }
             
-            dayCell.loadData(model: "")
             let cellDate = self.taskModel.date.dateFor(.startOfWeek).adjust(.day, offset: index)
+            dayCell.loadData(model: GLAgendaDataUtil.shared.agendaMap[cellDate.toString(format: .isoDate)])
             
             if !cellDate.compare(.isSameMonth(as: taskModel.date)) {
-                dayCell.dayLabel.text = ""
-                dayCell.lunarLabel.text = ""
+                dayCell.isHidden = true
                 return dayCell
             }
             
-            
+            dayCell.isHidden = false
             dayCell.dayLabel.text = cellDate.toString(format: .custom("dd"))
             dayCell.lunarLabel.text = EventKitUtil.shared.getHolidayTitle(date: cellDate)
             return dayCell
         // 未展开状态
         } else {
             let dayCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLCalenderDayCell", for: indexPath) as! GLCalenderDayCell
-            dayCell.loadData(model: "")
             dayCell.backgroundColor = nil
             
+            dayCell.borderWidth = 0.28
+            dayCell.borderColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1.00)
+            
             let cellDate = self.taskModel.date.dateFor(.startOfWeek).adjust(.day, offset: indexPath.item)
+            dayCell.loadData(model: GLAgendaDataUtil.shared.agendaMap[cellDate.toString(format: .isoDate)])
             
             if !cellDate.compare(.isSameMonth(as: taskModel.date)) {
-                dayCell.dayLabel.text = ""
-                dayCell.lunarLabel.text = ""
+                dayCell.isHidden = true
                 return dayCell
             }
-            
+            dayCell.isHidden = false
             dayCell.dayLabel.text = cellDate.toString(format: .custom("dd"))
             dayCell.lunarLabel.text = EventKitUtil.shared.getHolidayTitle(date: cellDate)
             return dayCell
@@ -213,9 +232,9 @@ extension GLCalenderMonthCell: UICollectionViewDelegateFlowLayout, UICollectionV
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if self.calenderExpandIndicator.expanded && self.calenderExpandIndicator.expandedIndex == indexPath.item
         {
-            return CGSize.init(width: self.bounds.width, height: self.bounds.height/3)
+            return CGSize.init(width: self.bounds.width, height: self.bounds.height/2)
         }
-        return CGSize.init(width: self.bounds.width/7, height: self.bounds.height/5)
+        return CGSize.init(width: self.bounds.width/7, height: self.bounds.height/CGFloat(numberOfRow))
     }
     
     // 选择事件

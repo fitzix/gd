@@ -27,7 +27,14 @@ class MonthViewController: UIViewController {
         let tabBarHeight = tabBarController?.tabBar.frame.height
         let calHeight = view.bounds.height - (statusBarHeight + tabBarHeight!) - (25 + 44)
         
+       
+        
         let calender = GLCalender(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: calHeight )) { (date) in
+            if date.compare(.isEarlier(than: GLAgendaDataUtil.shared.startDate)) {
+                GLAgendaDataUtil.shared.loadData(after: false)
+            } else if date.compare(.isLater(than: GLAgendaDataUtil.shared.endDate)) {
+                GLAgendaDataUtil.shared.loadData()
+            }
             self.monthButton.setTitle(date.toString(format: .isoYearMonth), for: .normal)
         }
         calender.orientationCurrentDate(start: startDate)
@@ -51,7 +58,7 @@ class MonthViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
 
-    @IBAction func buttonShow(_ sender: UIButton) {
-        
+    @IBAction func viewBackAction(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
     }
 }
