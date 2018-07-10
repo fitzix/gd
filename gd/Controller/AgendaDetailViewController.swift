@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Kingfisher
 import Eureka
 
 class AgendaDetailViewController: FormViewController {
@@ -45,7 +44,12 @@ class AgendaDetailViewController: FormViewController {
             <<< LabelRow () {
                 $0.title = "提醒"
                 if let typeIndex = glAgendaResp?.remind {
-                    $0.value = GLRemindType(rawValue: typeIndex)?.title
+                   $0.value = typeIndex.components(separatedBy: ",").map({
+                    if let temp = GLRemindType(rawValue: $0)?.title {
+                        return temp
+                    }
+                    return "未知"
+                   }).joined(separator: ",")
                 }
             }
             
@@ -55,6 +59,7 @@ class AgendaDetailViewController: FormViewController {
                     $0.value = GLRepeatType(rawValue: typeIndex)?.title
                 }
             }
+            
             
             <<< LabelRow () {
                 $0.title = "摘要:"
@@ -70,7 +75,7 @@ class AgendaDetailViewController: FormViewController {
     
     func loadData() {
         if let icon = glAgendaResp?.userList?[0].icon {
-            detailImg.kf.setImage(with: URL(string: icon))
+            detailImg.load(url: URL(string: icon)!)
         }
         createUserLabel.text = "\(glAgendaResp?.userList?[0].nickname ?? "--") 创建"
         userCountLabel.text = "\(glAgendaResp?.userList?.count ?? 0)人参与"
@@ -81,6 +86,6 @@ class AgendaDetailViewController: FormViewController {
         let createAgendaController = self.storyboard?.instantiateViewController(withIdentifier: "AgendaViewController") as! AgendaViewController
         createAgendaController.glAgendaResp = glAgendaResp
         createAgendaController.isToCreate = false
-        present(createAgendaController, animated: true, completion: nil)
+        navigationController?.pushViewController(createAgendaController, animated: true)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MonkeyKing
 
 
 @UIApplicationMain
@@ -19,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         EventKitUtil.shared.getEvent()
+        MonkeyKing.registerAccount(.weChat(appID: "wxe72e6e1d86a08401", appKey: nil, miniAppID: nil))
+        Switcher.updateRootVC()
         
         return true
     }
@@ -43,6 +46,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        if MonkeyKing.handleOpenURL(url) {
+            return true
+        }
+        return false
     }
 }
 

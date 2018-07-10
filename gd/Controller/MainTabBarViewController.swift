@@ -25,6 +25,7 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
 
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        
         if viewController.tabBarItem.tag == 2 {
             let x = self.storyboard?.instantiateViewController(withIdentifier: "AgendaViewController") as! AgendaViewController
             present(x, animated: true, completion: nil)

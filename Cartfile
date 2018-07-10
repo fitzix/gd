@@ -5,7 +5,6 @@ github "Alamofire/Alamofire" ~> 4.7
 
 github "Hearst-DD/ObjectMapper" ~> 3.3
 github "tristanhimmelman/AlamofireObjectMapper" ~> 5.0
-github "onevcat/Kingfisher" ~> 4.0
-github "pkluz/PKHUD" ~> 4.0
 github "CRAnimation/CRRefresh"
 github "nixzhu/MonkeyKing"
+github "Krimpedance/KRProgressHUD"

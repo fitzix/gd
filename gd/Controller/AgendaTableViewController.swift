@@ -9,7 +9,6 @@
 import UIKit
 import Alamofire
 import AlamofireObjectMapper
-import PKHUD
 import CRRefresh
 
 class AgendaTableViewController: UITableViewController {

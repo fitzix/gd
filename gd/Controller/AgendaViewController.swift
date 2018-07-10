@@ -10,7 +10,6 @@ import UIKit
 import Eureka
 import DateHelper
 import Alamofire
-import PKHUD
 
 class AgendaViewController: FormViewController {
     
@@ -89,6 +88,42 @@ class AgendaViewController: FormViewController {
             //                $0.title = "LocationRow"
             //                $0.value = CLLocation(latitude: -34.91, longitude: -56.1646)
             //            }
+            
+            <<< MultipleSelectorRow<String>("remind") {
+                $0.title = "提醒设置"
+                $0.options = ["0", "1", "2", "3", "4", "5"]
+                if let glAgendaResp = glAgendaResp, let reminds = glAgendaResp.remind {
+                    $0.value = Set(reminds.components(separatedBy: ","))
+                } else if let reminds = LocalStore.get(key: "GL_GD_REMIND") {
+                    $0.value = Set(reminds.components(separatedBy: ","))
+                }
+                
+                $0.displayValueFor = { values in
+                    return values?.map({
+                        if let temp = GLRemindType(rawValue: $0)?.title {
+                            return temp
+                        }
+                        return "未知"
+                    }).joined(separator: ",")
+                }
+                }.onPresent{ from, to in
+                    to.sectionKeyForValue = { option in
+                        switch option {
+                        case "0": return "不提醒"
+                        default: return "提醒(可多选,如果选了不提醒则无效)"
+                        }
+                    }
+                    to.selectableRowCellSetup = { cell,row in
+                        row.title = GLRemindType(rawValue: row.title!)?.title
+                    }
+                }.cellUpdate({ (cell, row) in
+                    if let values = row.value {
+                        if values.contains("0") && values.count > 1 {
+                            row.value = ["0"]
+                            row.updateCell()
+                        }
+                    }
+                })
             <<< PickerInputRow<String>("remind"){
                 $0.title = "提醒"
                 $0.options = ["0", "1", "2", "3", "4", "5"]
@@ -166,5 +201,4 @@ class AgendaViewController: FormViewController {
              print(valid)
         }
     }
-    
 }

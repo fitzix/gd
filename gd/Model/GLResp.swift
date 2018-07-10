@@ -193,3 +193,64 @@ class GLAgendaDetailResp: GLBaseResp {
         info <- map["info"]
     }
 }
+
+// OAUTH
+class GLOauthInfo: Mappable {
+    var token: String?
+    
+    required init?(map: Map) {}
+    func mapping(map: Map) {
+        token <- map["token"]
+    }
+}
+
+class GLOauthResp: GLBaseResp {
+    var info: GLOauthInfo?
+    required init?(map: Map) {
+        super.init(map: map)
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        
+        info <- map["info"]
+    }
+}
+
+class GLUserInfo: Mappable{
+    var uid: Int?
+    var nickname: String?
+    var icon: String?
+    var beginTime: String?
+    var endTime: String?
+    var remind: Int?
+    var viewType: Int?
+    var token: String?
+    var specialId: Int?
+    
+    required init?(map: Map) {}
+    func mapping(map: Map) {
+        uid <- map["uid"]
+        nickname <- map["nickname"]
+        icon <- map["icon"]
+        beginTime <- map["beginTime"]
+        endTime <- map["endTime"]
+        remind <- map["remind"]
+        viewType <- map["viewType"]
+        token <- map["token"]
+        specialId <- map["specialId"]
+    }
+}
+
+class GLUserInfoResp: GLBaseResp {
+    var info: GLUserInfo?
+    required init?(map: Map) {
+        super.init(map: map)
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        
+        info <- map["info"]
+    }
+}

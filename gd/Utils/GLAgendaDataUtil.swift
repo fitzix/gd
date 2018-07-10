@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import PKHUD
 
 class GLAgendaDataUtil {
     static let shared = GLAgendaDataUtil()
@@ -32,7 +31,7 @@ class GLAgendaDataUtil {
         
         GLHttpUtil.shared.request(.getAgendaList, parameters: ["viewType": 5, "date": requestDate.toString(format: .isoDate)]) { [weak self] (resp: GLAgendaListResp?) in
             guard let resp = resp, var info = resp.info else {
-                HUD.flash(.labeledError(title: "请求数据失败", subtitle: nil), delay: 1)
+//                HUD.flash(.labeledError(title: "请求数据失败", subtitle: nil), delay: 1)
                 completion(false)
                 return
             }
