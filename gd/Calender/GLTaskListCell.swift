@@ -69,4 +69,10 @@ class GLTaskListCell: UICollectionViewCell, UITableViewDataSource, UITableViewDe
         cell.backgroundColor = UIColor.white.withAlphaComponent(0)
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let eventId = tableData[safe: indexPath.row]?.id else {
+            return
+        }
+        GLAgendaDataUtil.shared.taskListDidSelect?(eventId)
+    }
 }

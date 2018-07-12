@@ -10,9 +10,9 @@ import ObjectMapper
 
 class GLBaseResp: Mappable {
     
-    var state: Int!
-    var msg: String!
-    var ok: Bool!
+    var state: Int?
+    var msg: String?
+    var ok: Bool?
     
     required init?(map: Map) {
         

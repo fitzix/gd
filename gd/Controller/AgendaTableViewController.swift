@@ -90,20 +90,12 @@ class AgendaTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let rowData = agendaList[indexPath.section][indexPath.row]
-        
-        if rowData.id == nil { return }
-    
-        GLHttpUtil.shared.request(.getDetail, appendUrl: "/\(rowData.id!)") { [weak self] (resp: GLAgendaDetailResp?) in
-            guard let resp = resp, let info = resp.info else {
-                return
-            }
-            let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "AgendaDetailViewController") as! AgendaDetailViewController
-            detailVC.glAgendaResp = info
-            
-            self?.navigationController?.pushViewController(detailVC, animated: true)
-        
+        guard let id = agendaList[indexPath.section][indexPath.row].id  else {
+            return
         }
+        let detailVC = storyboard?.instantiateViewController(withIdentifier: "AgendaDetailViewController") as! AgendaDetailViewController
+        detailVC.agendaId = id
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
     // 点击月份

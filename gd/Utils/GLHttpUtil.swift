@@ -7,6 +7,7 @@
 //
 
 import Alamofire
+import KRProgressHUD
 
 class GLHttpUtil: NSObject {
     
@@ -40,7 +41,7 @@ class GLHttpUtil: NSObject {
     }
     
     // 基础请求方法
-    public func request<T: GLBaseResp>(_ url: GLRequestURL, service:GLService = .gd,  method: Alamofire.HTTPMethod = .get, parameters: Parameters? = nil, appendUrl: String? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: HTTPHeaders? = nil, completion: @escaping (T?) -> Void) {
+    public func request<T: GLBaseResp>(_ url: GLRequestURL, service:GLService = .gd,  method: Alamofire.HTTPMethod = .get, parameters: Parameters? = nil, appendUrl: String? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: HTTPHeaders? = nil, addMask: Bool = true, completion: @escaping (T) -> Void) {
         var localHeader = headers
         if headers == nil {
             localHeader = GLHeaders
@@ -48,13 +49,16 @@ class GLHttpUtil: NSObject {
         
         let req = Alamofire.request("\(httpGateway)\(service.rawValue)\(url.rawValue)\(appendUrl ?? "")", method: method, parameters: parameters, encoding: encoding, headers: localHeader)
         print(req)
+        debugPrint(req)
+        if addMask { KRProgressHUD.show() }
         req.responseObject { (response: DataResponse<T>) in
-            guard let result = response.result.value else {
+            guard let result = response.result.value, let state = result.state  else {
+                KRProgressHUD.showError(withMessage: "请求失败")
                 print("请求失败")
-                completion(nil)
                 return
             }
-            if result.state == -6 {
+            if state == -6 {
+                KRProgressHUD.showError(withMessage: "重新登录")
                 LocalStore.logout()
                 return
             }

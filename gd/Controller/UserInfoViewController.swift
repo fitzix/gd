@@ -35,6 +35,7 @@ class UserInfoViewController: FormViewController  {
                     return values?.map({ GLRemindType(rawValue: $0)!.title }).joined(separator: ",")
                 }
                 }.onPresent{ from, to in
+                    
                     to.sectionKeyForValue = { option in
                         switch option {
                         case "0": return "不提醒"
@@ -47,10 +48,10 @@ class UserInfoViewController: FormViewController  {
                 }.cellUpdate({ (cell, row) in
                     if row.value!.contains("0") && row.value!.count > 1 {
                         row.value = ["0"]
-                        if let values = row.value {
-                            LocalStore.save(key: "GL_GD_REMIND", info: values.joined(separator: ","))
-                        }
                         row.updateCell()
+                    }
+                    if let values = row.value {
+                        LocalStore.save(key: "GL_GD_REMIND", info: values.joined(separator: ","))
                     }
                 })
             // 账号退出

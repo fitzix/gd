@@ -42,14 +42,14 @@ class LoginViewController: UIViewController {
                 return
             }
             KRProgressHUD.show()
-            GLHttpUtil.shared.request(.oauthWx, service: .user_basic, parameters: ["code": code, "appid": 1008]){ (resp: GLOauthResp?) in
-                guard let resp = resp, let info = resp.info else {
+            GLHttpUtil.shared.request(.oauthWx, service: .user_basic, parameters: ["code": code, "appid": 1008]){ (resp: GLOauthResp) in
+                guard let info = resp.info else {
                     KRProgressHUD.showError(withMessage: "userbasic失败")
                     return
                 }
                 let headers: HTTPHeaders = ["Authorization": info.token!, "Accept": "application/json"]
-                GLHttpUtil.shared.request(.appLogin, method: .post, encoding: JSONEncoding.default, headers: headers, completion: { (resp: GLUserInfoResp?) in
-                    guard let resp = resp, let info = resp.info else {
+                GLHttpUtil.shared.request(.appLogin, method: .post, encoding: JSONEncoding.default, headers: headers, completion: { (resp: GLUserInfoResp) in
+                    guard let info = resp.info else {
                         KRProgressHUD.showError(withMessage: "app login失败")
                         return
                     }

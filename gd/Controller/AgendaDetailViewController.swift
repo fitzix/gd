@@ -8,8 +8,11 @@
 
 import UIKit
 import Eureka
+import KRProgressHUD
 
 class AgendaDetailViewController: FormViewController {
+    
+    var agendaId = 0
     
     var glAgendaResp: GLAgendaResp?
     
@@ -28,7 +31,33 @@ class AgendaDetailViewController: FormViewController {
         super.viewDidLoad()
         
         loadData()
-
+        tableView.tableFooterView = UIView()
+    }
+    
+    func loadData() {
+        GLHttpUtil.shared.request(.getDetail, appendUrl: "/\(agendaId)") { [weak self] (resp: GLAgendaDetailResp) in
+            guard let info = resp.info else {
+                KRProgressHUD.showError(withMessage: "获取数据失败")
+                return
+            }
+            
+            KRProgressHUD.dismiss()
+            
+            self?.glAgendaResp = info
+            self?.loadForm()
+            
+            
+            if let icon = info.userList?[0].icon {
+                self?.detailImg.load(url: URL(string: icon)!)
+            }
+            self?.createUserLabel.text = "\(info.userList?[0].nickname ?? "--") 创建"
+            self?.userCountLabel.text = "\(info.userList?.count ?? 0)人参与"
+            self?.eventTypeLabel.text = "\(info.typeName ?? "日常")"
+            
+        }
+    }
+    
+    func loadForm() {
         form
             +++ Section()
             <<< LabelRow () {
@@ -38,18 +67,20 @@ class AgendaDetailViewController: FormViewController {
             <<< LabelRow () {
                 // TODO 判断空值
                 $0.title = "时间"
-                let date = Date(fromString: glAgendaResp!.beginDate!, format: .custom("YYYY-MM-dd"))
-                $0.value = "\(date?.toString(format: .custom("YYYY-MM-dd EE | ")) ?? "")\(glAgendaResp?.beginTime?.prefix(5) ?? "") ~ \(glAgendaResp?.endTime?.prefix(5) ?? "")"
+                if glAgendaResp != nil {
+                    let date = Date(fromString: glAgendaResp!.beginDate!, format: .custom("YYYY-MM-dd"))
+                    $0.value = "\(date?.toString(format: .custom("YYYY-MM-dd EE | ")) ?? "")\(glAgendaResp?.beginTime?.prefix(5) ?? "") ~ \(glAgendaResp?.endTime?.prefix(5) ?? "")"
+                }
             }
             <<< LabelRow () {
                 $0.title = "提醒"
                 if let typeIndex = glAgendaResp?.remind {
-                   $0.value = typeIndex.components(separatedBy: ",").map({
-                    if let temp = GLRemindType(rawValue: $0)?.title {
-                        return temp
-                    }
-                    return "未知"
-                   }).joined(separator: ",")
+                    $0.value = typeIndex.components(separatedBy: ",").map({
+                        if let temp = GLRemindType(rawValue: $0)?.title {
+                            return temp
+                        }
+                        return "未知"
+                    }).joined(separator: ",")
                 }
             }
             
@@ -69,23 +100,16 @@ class AgendaDetailViewController: FormViewController {
                 $0.value = glAgendaResp?.digestContent
                 $0.disabled = true
                 $0.textAreaHeight = .dynamic(initialTextViewHeight: 110)
-            }
-        tableView.tableFooterView = UIView()
-    }
-    
-    func loadData() {
-        if let icon = glAgendaResp?.userList?[0].icon {
-            detailImg.load(url: URL(string: icon)!)
         }
-        createUserLabel.text = "\(glAgendaResp?.userList?[0].nickname ?? "--") 创建"
-        userCountLabel.text = "\(glAgendaResp?.userList?.count ?? 0)人参与"
-        eventTypeLabel.text = "\(glAgendaResp?.typeName ?? "日常")"
     }
     
     @IBAction func editAgendaAction(_ sender: UIButton) {
+        guard let glAgendaResp = glAgendaResp else {
+            return
+        }
+        
         let createAgendaController = self.storyboard?.instantiateViewController(withIdentifier: "AgendaViewController") as! AgendaViewController
         createAgendaController.glAgendaResp = glAgendaResp
-        createAgendaController.isToCreate = false
         navigationController?.pushViewController(createAgendaController, animated: true)
     }
 }

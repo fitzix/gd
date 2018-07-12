@@ -7,13 +7,19 @@
 //
 
 import Foundation
+import KRProgressHUD
 
 class GLAgendaDataUtil {
     static let shared = GLAgendaDataUtil()
+    typealias GLCalenderTaskDidSelect = (_ id: Int) -> Void
+    
+    
     var agendaList: [GLAgendaResp] = []
     var startDate: Date = Date()
     var endDate: Date = Date()
     var isInit = true
+    
+    var taskListDidSelect: GLCalenderTaskDidSelect?
     
     var agendaMap: [String:[GLAgendaResp]] = [:]
     
@@ -29,9 +35,8 @@ class GLAgendaDataUtil {
             }
         }
         
-        GLHttpUtil.shared.request(.getAgendaList, parameters: ["viewType": 5, "date": requestDate.toString(format: .isoDate)]) { [weak self] (resp: GLAgendaListResp?) in
-            guard let resp = resp, var info = resp.info else {
-//                HUD.flash(.labeledError(title: "请求数据失败", subtitle: nil), delay: 1)
+        GLHttpUtil.shared.request(.getAgendaList, parameters: ["viewType": 5, "date": requestDate.toString(format: .isoDate)], addMask: false) { [weak self] (resp: GLAgendaListResp) in
+            guard var info = resp.info else {
                 completion(false)
                 return
             }

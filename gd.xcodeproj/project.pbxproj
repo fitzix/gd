@@ -41,6 +41,7 @@
 		C4D4EBB320EDEA1F00835C43 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D4EBAE20EDEA1F00835C43 /* TaskModel.swift */; };
 		C4D4EBB520EE022E00835C43 /* CRRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4D4EBB420EE022E00835C43 /* CRRefresh.framework */; };
 		C4D5650120EF797600B380BD /* LunarCore.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D564FF20EF797600B380BD /* LunarCore.m */; };
+		C4D9851620F5BCF200CB8A48 /* AgendaCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D9851520F5BCF200CB8A48 /* AgendaCreateViewController.swift */; };
 		C4DD525E20E60D9D00A39CE5 /* AgendaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD525D20E60D9D00A39CE5 /* AgendaDetailViewController.swift */; };
 		C4E8979520F44E7F0053F99A /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48640FD20DBAF480055AA1A /* SnapKit.framework */; };
 		C4E8979720F44EBA0053F99A /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48640F520DB8B090055AA1A /* Eureka.framework */; };
@@ -92,6 +93,7 @@
 		C4D564FE20EF797500B380BD /* gd-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gd-Bridging-Header.h"; sourceTree = "<group>"; };
 		C4D564FF20EF797600B380BD /* LunarCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LunarCore.m; sourceTree = "<group>"; };
 		C4D5650020EF797600B380BD /* LunarCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LunarCore.h; sourceTree = "<group>"; };
+		C4D9851520F5BCF200CB8A48 /* AgendaCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaCreateViewController.swift; sourceTree = "<group>"; };
 		C4DD525D20E60D9D00A39CE5 /* AgendaDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaDetailViewController.swift; sourceTree = "<group>"; };
 		C4F1418E20E0E2170044B393 /* DateHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DateHelper.framework; path = Carthage/Build/iOS/DateHelper.framework; sourceTree = "<group>"; };
 		C4F2501920F4525300879BF5 /* KRActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KRActivityIndicatorView.framework; path = Carthage/Build/iOS/KRActivityIndicatorView.framework; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				C41A50CD20EC824000B458E1 /* MonthViewController.swift */,
 				C423E4EA20F44C1E003840E6 /* LoginViewController.swift */,
 				C4F2501D20F48A6500879BF5 /* Switcher.swift */,
+				C4D9851520F5BCF200CB8A48 /* AgendaCreateViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				C44BCC0120E24CED0036AAE5 /* GLHttpUtil.swift in Sources */,
 				C4D4EBAF20EDEA1F00835C43 /* GLCalenderDayCell.swift in Sources */,
 				C4F2502120F4D29E00879BF5 /* LocalStore.swift in Sources */,
+				C4D9851620F5BCF200CB8A48 /* AgendaCreateViewController.swift in Sources */,
 				C47D007920E36EE7001318B7 /* GLColorUtil.swift in Sources */,
 				C42F90B220EF038100FD8E43 /* GLAgendaDataUtil.swift in Sources */,
 				C4360BA720ECBB42006D2B12 /* GLConfig.swift in Sources */,

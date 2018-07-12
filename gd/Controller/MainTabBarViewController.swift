@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KRProgressHUD
 
 class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
 
@@ -15,6 +16,7 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
 
         // Do any additional setup after loading the view.
         self.delegate = self
+        KRProgressHUD.appearance().style = .black
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,9 +27,10 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
 
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        
         if viewController.tabBarItem.tag == 2 {
-            let x = self.storyboard?.instantiateViewController(withIdentifier: "AgendaViewController") as! AgendaViewController
+            let x = self.storyboard?.instantiateViewController(withIdentifier: "CreateAgendaNavVC") as! UINavigationController
+//            let navController = UINavigationController(rootViewController: x)
+            
             present(x, animated: true, completion: nil)
             return false
         }

@@ -26,9 +26,12 @@ class MonthViewController: UIViewController {
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
         let tabBarHeight = tabBarController?.tabBar.frame.height
         let calHeight = view.bounds.height - (statusBarHeight + tabBarHeight!) - (25 + 44)
-        
+        GLAgendaDataUtil.shared.taskListDidSelect = { [weak self] id in
+            let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "AgendaDetailViewController") as! AgendaDetailViewController
+            detailVC.agendaId = id
+            self?.navigationController?.pushViewController(detailVC, animated: true)
+        }
        
-        
         let calender = GLCalender(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: calHeight )) { (date) in
             if date.compare(.isEarlier(than: GLAgendaDataUtil.shared.startDate)) {
                 GLAgendaDataUtil.shared.loadData(after: false)

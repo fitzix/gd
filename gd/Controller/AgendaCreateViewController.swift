@@ -12,28 +12,30 @@ import DateHelper
 import Alamofire
 import KRProgressHUD
 
-class AgendaViewController: FormViewController {
+class AgendaCreateViewController: FormViewController {
     
     var glAgendaResp: GLAgendaResp?
-
+    var isToCreate = true
+    
     override func viewDidLoad() {
+        
+        let x = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(removeView(_:)))
+        navigationItem.setLeftBarButton(x, animated: false)
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.rowHeight = 40
         
         form
             +++ Section()
-
+            
             <<< TextRow("title"){
                 $0.title = "主题"
                 $0.placeholder = "请输入你的主题(限10个字) 例如: 周会"
-                if let title = glAgendaResp?.title {
-                    $0.value = title
-                }
                 $0.add(rule: RuleMaxLength(maxLength: 15, msg: "主题长度不能超过15个"))
                 $0.add(rule: RuleRequired(msg: "主题不能为空"))
                 $0.validationOptions = .validatesOnChange
-                }
+            }
             
             <<< SegmentedRow<Int>("type") {
                 $0.title = "性质"
@@ -41,27 +43,11 @@ class AgendaViewController: FormViewController {
                 $0.displayValueFor = { type in
                     return GLAgendaType(rawValue: type!)?.title
                 }
-                if let typeIndex = glAgendaResp?.type {
-                    $0.value = typeIndex
-                } else {
-                    $0.value = $0.options?.first
-                }
+                $0.value = $0.options?.first
             }
             <<< DateTimeRow("beginDate"){
                 $0.title = "开始时间"
-                if let glAgendaResp = glAgendaResp {
-                    if let startTime = glAgendaResp.beginTime {
-                        $0.value = Date(fromString: "\(glAgendaResp.beginDate!) \(startTime)", format: .custom("YYYY-MM-dd HH:mm:ss"))
-                    } else {
-                        // TODO null 取备选时间
-                        $0.value = Date(fromString: "", format: .isoDate)
-                    }
-                } else{
-                    
-                    $0.value = Date().dateFor(.nearestHour(hour: 2))
-                }
-                
-                
+                $0.value = Date().dateFor(.nearestHour(hour: 2))
                 let formatter = DateFormatter()
                 formatter.dateFormat = "YYYY-MM-dd EE | HH:mm"
                 $0.dateFormatter = formatter
@@ -71,13 +57,10 @@ class AgendaViewController: FormViewController {
                 }).cellSetup({ (cell, row) in
                     cell.datePicker.minuteInterval = 15
                 })
+            
             <<< TimeRow("endDate"){
                 $0.title = "结束时间"
-                if let glAgendaResp = glAgendaResp, let endTime = glAgendaResp.endTime {
-                    $0.value = Date(fromString: "\(glAgendaResp.endDate!) \(endTime)", format: .custom("YYYY-MM-dd HH:mm:ss"))
-                } else {
-                    $0.value = Date().dateFor(.nearestHour(hour: 2)).adjust(.hour, offset: 1)
-                }
+                $0.value = Date().dateFor(.nearestHour(hour: 2)).adjust(.hour, offset: 1)
                 let formatter = DateFormatter()
                 formatter.dateFormat = "HH:mm"
                 $0.dateFormatter = formatter
@@ -92,9 +75,7 @@ class AgendaViewController: FormViewController {
             <<< MultipleSelectorRow<String>("remind") {
                 $0.title = "提醒设置"
                 $0.options = ["0", "1", "2", "3", "4", "5"]
-                if let glAgendaResp = glAgendaResp, let reminds = glAgendaResp.remind {
-                    $0.value = Set(reminds.components(separatedBy: ","))
-                } else if let reminds = LocalStore.get(key: "GL_GD_REMIND") {
+                if let reminds = LocalStore.get(key: "GL_GD_REMIND") {
                     $0.value = Set(reminds.components(separatedBy: ","))
                 }
                 
@@ -131,31 +112,21 @@ class AgendaViewController: FormViewController {
                 $0.displayValueFor = { type in
                     return GLRepeatType(rawValue: type!)?.title
                 }
-                
-                if let typeIndex = glAgendaResp?.repeatType {
-                    $0.value = typeIndex
-                } else {
-                    $0.value = $0.options.first
-                }
+                $0.value = $0.options.first
             }
             <<< LabelRow() {
                 $0.title = "摘要:"
                 $0.value = ""
-                }
+            }
             
             <<< TextAreaRow("digestContent") {
                 $0.placeholder = "请输入你的摘要\n例如: 1.讨论产品设计风格\n2.确定产品风格"
-                if let value = glAgendaResp?.digestContent {
-                    $0.value = value
-                }
                 $0.textAreaHeight = .dynamic(initialTextViewHeight: 200)
             }
-            tableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView()
     }
-
-
-
-    @IBAction func removeView(_ sender: UIBarButtonItem) {
+    
+    @objc func removeView(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -165,7 +136,6 @@ class AgendaViewController: FormViewController {
         
         if valid.isEmpty {
             var values = form.values()
-            let appendUrl = "/\(glAgendaResp!.id!)"
             
             let beginDate = (values["beginDate"] as? Date)?.toString(format: .custom("YYYY-MM-dd HH:mm:ss"))
             values["beginDate"] = beginDate?.prefix(10)
@@ -173,15 +143,14 @@ class AgendaViewController: FormViewController {
             values["endDate"] = values["beginDate"]
             values["endTime"] = (form.values()["endDate"] as? Date)?.toString(format: .custom("HH:mm:ss"))
             values["remind"] = (form.values()["remind"] as? Set<String>)?.joined(separator: ",")
-            
             KRProgressHUD.show()
-            GLHttpUtil.shared.request(.updateAgenda, method: .post, parameters: values, appendUrl: appendUrl, encoding: JSONEncoding.default) { [weak self] (resp: GLBaseResp) in
+            GLHttpUtil.shared.request(.createAgenda, method: .post, parameters: values, encoding: JSONEncoding.default) { [weak self] (resp: GLBaseResp) in
                 if !resp.ok! {
-                    KRProgressHUD.showError(withMessage: resp.msg)
-                    return
+                   KRProgressHUD.showError(withMessage: resp.msg)
+                   return
                 }
                 KRProgressHUD.dismiss()
-                self?.navigationController?.popViewController(animated: true)
+                self?.dismiss(animated: true, completion: nil)
             }
         } else {
             KRProgressHUD.showWarning(withMessage: valid.first?.msg)
