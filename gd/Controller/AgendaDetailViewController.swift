@@ -30,8 +30,12 @@ class AgendaDetailViewController: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadData()
+        loadForm()
         tableView.tableFooterView = UIView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadData()
     }
     
     func loadData() {
@@ -44,8 +48,6 @@ class AgendaDetailViewController: FormViewController {
             KRProgressHUD.dismiss()
             
             self?.glAgendaResp = info
-            self?.loadForm()
-            
             
             if let icon = info.userList?[0].icon {
                 self?.detailImg.load(url: URL(string: icon)!)
@@ -54,28 +56,34 @@ class AgendaDetailViewController: FormViewController {
             self?.userCountLabel.text = "\(info.userList?.count ?? 0)人参与"
             self?.eventTypeLabel.text = "\(info.typeName ?? "日常")"
             
+            let date = Date(fromString: info.beginDate!, format: .custom("YYYY-MM-dd"))
+            
+            self?.form.setValues([
+                "title": info.title,
+                "beginDate": "\(date?.toString(format: .custom("YYYY-MM-dd EE | ")) ?? "")\(info.beginTime?.prefix(5) ?? "") ~ \(info.endTime?.prefix(5) ?? "")",
+                "remind": info.remind,
+                "repeat": info.repeatType,
+                "digestContent": info.digestContent
+                ])
+            self?.tableView.reloadData()
         }
     }
     
     func loadForm() {
         form
             +++ Section()
-            <<< LabelRow () {
+            <<< LabelRow ("title") {
                 $0.title = "主题"
                 $0.value = glAgendaResp?.title
             }
-            <<< LabelRow () {
+            <<< LabelRow ("beginDate") {
                 // TODO 判断空值
                 $0.title = "时间"
-                if glAgendaResp != nil {
-                    let date = Date(fromString: glAgendaResp!.beginDate!, format: .custom("YYYY-MM-dd"))
-                    $0.value = "\(date?.toString(format: .custom("YYYY-MM-dd EE | ")) ?? "")\(glAgendaResp?.beginTime?.prefix(5) ?? "") ~ \(glAgendaResp?.endTime?.prefix(5) ?? "")"
-                }
             }
-            <<< LabelRow () {
+            <<< LabelRow ("remind") {
                 $0.title = "提醒"
-                if let typeIndex = glAgendaResp?.remind {
-                    $0.value = typeIndex.components(separatedBy: ",").map({
+                $0.displayValueFor = {
+                    return $0?.components(separatedBy: ",").map({
                         if let temp = GLRemindType(rawValue: $0)?.title {
                             return temp
                         }
@@ -84,20 +92,21 @@ class AgendaDetailViewController: FormViewController {
                 }
             }
             
-            <<< LabelRow () {
+            <<< LabelRow ("repeat") {
                 $0.title = "重复"
-                if let typeIndex = glAgendaResp?.repeatType {
-                    $0.value = GLRepeatType(rawValue: typeIndex)?.title
+                $0.displayValueFor = {
+                    if let indexStr = $0, let index = Int(indexStr) {
+                        return GLRepeatType(rawValue: index)?.title
+                    }
+                    return ""
                 }
             }
-            
             
             <<< LabelRow () {
                 $0.title = "摘要:"
                 $0.value = ""
             }
-            <<< TextAreaRow() {
-                $0.value = glAgendaResp?.digestContent
+            <<< TextAreaRow("digestContent") {
                 $0.disabled = true
                 $0.textAreaHeight = .dynamic(initialTextViewHeight: 110)
         }

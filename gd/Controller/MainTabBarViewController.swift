@@ -28,10 +28,8 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
 
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if viewController.tabBarItem.tag == 2 {
-            let x = self.storyboard?.instantiateViewController(withIdentifier: "CreateAgendaNavVC") as! UINavigationController
-//            let navController = UINavigationController(rootViewController: x)
-            
-            present(x, animated: true, completion: nil)
+            let addAgendaNavVC = self.storyboard?.instantiateViewController(withIdentifier: "CreateAgendaNavVC") as! UINavigationController
+            present(addAgendaNavVC, animated: true, completion: nil)
             return false
         }
         return true

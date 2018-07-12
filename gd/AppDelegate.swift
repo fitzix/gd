@@ -8,6 +8,7 @@
 
 import UIKit
 import MonkeyKing
+import UserNotifications
 
 
 @UIApplicationMain
@@ -22,6 +23,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         EventKitUtil.shared.getEvent()
         MonkeyKing.registerAccount(.weChat(appID: "wxe72e6e1d86a08401", appKey: nil, miniAppID: nil))
         Switcher.updateRootVC()
+        
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+                (accepted, error) in
+                if !accepted {
+                    print("用户不允许消息通知。")
+                }
+            }
+        } else {
+            application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
+        }
+        
         
         return true
     }

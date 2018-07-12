@@ -33,7 +33,7 @@ class AgendaViewController: FormViewController {
                 $0.add(rule: RuleMaxLength(maxLength: 15, msg: "主题长度不能超过15个"))
                 $0.add(rule: RuleRequired(msg: "主题不能为空"))
                 $0.validationOptions = .validatesOnChange
-                }
+            }
             
             <<< SegmentedRow<Int>("type") {
                 $0.title = "性质"
@@ -152,8 +152,6 @@ class AgendaViewController: FormViewController {
             }
             tableView.tableFooterView = UIView()
     }
-
-
 
     @IBAction func removeView(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)

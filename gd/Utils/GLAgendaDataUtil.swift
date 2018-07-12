@@ -15,6 +15,12 @@ class GLAgendaDataUtil {
     
     
     var agendaList: [GLAgendaResp] = []
+    
+    // 后端返回事件列表 key为事件id
+    var agendaDic: [Int: GLAgendaResp] = [:]
+    // 事件列表页面数据
+//    var agendaTableView:
+    
     var startDate: Date = Date()
     var endDate: Date = Date()
     var isInit = true
@@ -59,6 +65,26 @@ class GLAgendaDataUtil {
         }
     }
     
+//    func appendAgendaDic(start: Date, info: [GLAgendaResp]) {
+//        let requestEndDate = start.adjust(.year, offset: 1)
+//        var repeatData: [GLAgendaResp] = []
+//        info.forEach {
+//            agendaDic[$0.id!] = $0
+//            let beginDate = Date(fromString: $0.beginDate!, format: .isoDate)!
+//            let endDate = Date(fromString: $0.endDate!, format: .isoDate)
+//
+//            switch $0.repeatType {
+//            case 0:
+//                return
+//            case 1:
+//                for index in 1...Int(beginDate.since(requestEndDate, in: .day)) {
+//
+//                }
+//            }
+//        }
+//    }
+    
+    
     func flatAgendaToMap() {
         let monthKeys = Array(Set(agendaList.compactMap{ $0.beginDate?.prefix(10) }))
         var result = [String:[GLAgendaResp]]()
@@ -83,5 +109,6 @@ class GLAgendaDataUtil {
         }
         return result
     }
-
+    
+    
 }

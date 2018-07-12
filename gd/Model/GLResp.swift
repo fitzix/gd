@@ -86,7 +86,7 @@ class GLUserResp: Mappable {
 }
 
 
-class GLAgendaResp: Mappable {
+class GLAgendaResp: NSObject, NSCopying, Mappable {
     var beginDate: String?
     var beginTime: String?
     var candidatePoList: [GLCandidateResp]?
@@ -119,14 +119,44 @@ class GLAgendaResp: Mappable {
     var userNum: Int?
     var viewType: Int?
     
-    required init?(map: Map) {
-        
-    }
+    required init?(map: Map) {}
     
-    init() {
-        
-    }
+    override init(){}
     
+    init(beginDate: String?, beginTime: String?, candidatePoList: [GLCandidateResp]?, commentList: [GLCommentResp]?, conflict: Int?, deleteUserList: [GLUserResp]?, digestContent: String?, digestTitle: String?, endDate: String?, endTime: String?, id: Int?, place: String?, placeX: Int?, placeY: Int?, quitUserList: [GLUserResp]?, recordState: Int?, remind: String?, repeatEndDate: Date?, repeatExcludeDates: String?, repeatType: Int?, specialContent: String?, specialId: Int?, title: String?, todayBeginTime: String?, todayEndTime: String?, type: Int?, typeName: String?, uid: Int?, userList: [GLUserResp]?, userNum: Int?, viewType: Int?) {
+         self.beginDate = beginDate
+         self.beginTime = beginTime
+         self.candidatePoList = candidatePoList
+         self.commentList = commentList
+         self.conflict = conflict
+         self.deleteUserList = deleteUserList
+         self.digestContent = digestContent
+         self.digestTitle = digestTitle
+         self.endDate = endDate
+         self.endTime = endDate
+         self.id = id
+         self.place = place
+         self.placeX = placeX
+         self.placeY = placeY
+         self.quitUserList = quitUserList
+         self.recordState = recordState
+         self.remind = remind
+         self.repeatEndDate = repeatEndDate
+         self.repeatExcludeDates = repeatExcludeDates
+         self.repeatType = repeatType
+         self.specialContent = specialContent
+         self.specialId = specialId
+         self.title = title
+         self.todayBeginTime = todayBeginTime
+         self.todayEndTime = todayEndTime
+         self.type = type
+         self.typeName = typeName
+         self.uid = uid
+         self.userList = userList
+         self.userNum = userNum
+         self.viewType = viewType
+    }
+
     func mapping(map: Map) {
         beginDate <- map["beginDate"]
         beginTime <- map["beginTime"]
@@ -162,6 +192,9 @@ class GLAgendaResp: Mappable {
         viewType <- map["viewType"]
     }
     
+    func copy(with zone: NSZone? = nil) -> Any {
+        return GLAgendaResp(beginDate: beginDate, beginTime: beginTime, candidatePoList: candidatePoList, commentList: commentList, conflict: conflict, deleteUserList: deleteUserList, digestContent: digestContent, digestTitle: digestTitle, endDate: endDate, endTime: endTime, id: id, place: place, placeX: placeX, placeY: placeY, quitUserList: quitUserList, recordState: recordState, remind: remind, repeatEndDate: repeatEndDate, repeatExcludeDates: repeatExcludeDates, repeatType: repeatType, specialContent: specialContent, specialId: specialId, title: title, todayBeginTime: todayBeginTime, todayEndTime: todayEndTime, type: type, typeName: typeName, uid: uid, userList: userList, userNum: userNum, viewType: viewType)
+    }
 }
 
 // 事件列表
