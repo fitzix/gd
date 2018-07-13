@@ -8,26 +8,30 @@
 
 import Foundation
 import KRProgressHUD
+import DateHelper
 
 class GLAgendaDataUtil {
     static let shared = GLAgendaDataUtil()
-    typealias GLCalenderTaskDidSelect = (_ id: Int) -> Void
+    typealias GLCalenderTaskDidSelect = (_ id: Int, _ curBegin: String, _ curEnd: String) -> Void
     
+    // KEY 为事件ID 所有事件
+    var agendaDic: [Int: [GLAgendaResp]] = [:]
     
-    var agendaList: [GLAgendaResp] = []
-    
-    // 后端返回事件列表 key为事件id
-    var agendaDic: [Int: GLAgendaResp] = [:]
     // 事件列表页面数据
-//    var agendaTableView:
+    var agendaTableData: [[GLAgendaResp]] = []
+    // 日历内事件数据
+    var agendaCalenderData: [String:[GLAgendaResp]] = [:]
     
-    var startDate: Date = Date()
-    var endDate: Date = Date()
+    var startDate: Date = Date().dateFor(.startOfMonth)
+    var endDate: Date = Date().dateFor(.startOfMonth)
     var isInit = true
     
-    var taskListDidSelect: GLCalenderTaskDidSelect?
+    // 返回是否需要刷新数据
+    var needRefresh = false
     
-    var agendaMap: [String:[GLAgendaResp]] = [:]
+    
+    // 日历内事件列表点击回调
+    var taskListDidSelect: GLCalenderTaskDidSelect?
     
     func loadData(after: Bool = true, completion: @escaping (_ succeed: Bool) -> Void = {_ in }) {
         var requestDate = endDate
@@ -57,58 +61,107 @@ class GLAgendaDataUtil {
             if holiday.count > 0 {
                 info.append(contentsOf: holiday)
             }
-            self?.agendaList.append(contentsOf: info)
-            DispatchQueue.global(qos: .default).async {
-                self?.flatAgendaToMap()
-            }
+            self?.appendAgendaDic(after: after, start: requestDate, info: info)
             completion(true)
         }
     }
     
-//    func appendAgendaDic(start: Date, info: [GLAgendaResp]) {
-//        let requestEndDate = start.adjust(.year, offset: 1)
-//        var repeatData: [GLAgendaResp] = []
-//        info.forEach {
-//            agendaDic[$0.id!] = $0
-//            let beginDate = Date(fromString: $0.beginDate!, format: .isoDate)!
-//            let endDate = Date(fromString: $0.endDate!, format: .isoDate)
-//
-//            switch $0.repeatType {
-//            case 0:
-//                return
-//            case 1:
-//                for index in 1...Int(beginDate.since(requestEndDate, in: .day)) {
-//
-//                }
-//            }
-//        }
-//    }
+    // 去重存储数据 计算重复事件
+    func appendAgendaDic(after: Bool, start: Date, info: [GLAgendaResp]) {
+        var requestEndDate = start.adjust(.year, offset: 1)
+        var repeatData: [GLAgendaResp] = []
+        info.forEach {
+            if $0.repeatType != 0 {
+                var beginDate = Date(fromString: $0.beginDate!, format: .isoDate)
+                let repeatEndDate = Date(fromString: $0.repeatEndDate!, format: .isoDate)!
+                if repeatEndDate.compare(.isEarlier(than: requestEndDate)) {
+                    requestEndDate = repeatEndDate
+                }
+                if beginDate!.compare(.isEarlier(than: start)) {
+                    beginDate = start
+                }
+
+                switch $0.repeatType {
+                case 0:
+                    return
+                case 1:
+                    for index in 0..<Int(requestEndDate.since(beginDate!, in: .day)) {
+                        let temp = $0.copy() as! GLAgendaResp
+                        temp.beginDate = beginDate?.adjust(.day, offset: index).toString(format: .isoDate)
+                        temp.endDate = beginDate?.adjust(.day, offset: index + 1).toString(format: .isoDate)
+                        repeatData.append(temp)
+                    }
+                case 2:
+                    for index in 0..<Int(requestEndDate.since(beginDate!, in: .week)) {
+                        let temp = $0.copy() as! GLAgendaResp
+                        temp.beginDate = beginDate?.adjust(.week, offset: index).toString(format: .isoDate)
+                        temp.endDate = beginDate?.adjust(.week, offset: index + 1).toString(format: .isoDate)
+                        repeatData.append(temp)
+                    }
+                case 3:
+                    for index in 0..<Int(requestEndDate.since(beginDate!, in: .month)) {
+                        let temp = $0.copy() as! GLAgendaResp
+                        temp.beginDate = beginDate?.adjust(.month, offset: index).toString(format: .isoDate)
+                        temp.endDate = beginDate?.adjust(.month, offset: index + 1).toString(format: .isoDate)
+                        repeatData.append(temp)
+                    }
+                case 4:
+                    for index in 0..<Int(requestEndDate.since(beginDate!, in: .year)) {
+                        let temp = $0.copy() as! GLAgendaResp
+                        temp.beginDate = beginDate?.adjust(.year, offset: index).toString(format: .isoDate)
+                        temp.endDate = beginDate?.adjust(.year, offset: index + 1).toString(format: .isoDate)
+                        repeatData.append(temp)
+                    }
+                default: break
+                }
+            } else {
+                repeatData.append($0)
+            }
+        }
+    let tableResult = flatAgendaList(info: repeatData)
+        
+    if after {
+        agendaTableData.append(contentsOf: tableResult)
+    } else {
+        agendaTableData.insert(contentsOf: tableResult, at: 0)
+    }
+        
+    DispatchQueue.global(qos: .default).async {
+        self.flatAgendaToMap(info: repeatData)
+    }
+}
     
-    
-    func flatAgendaToMap() {
-        let monthKeys = Array(Set(agendaList.compactMap{ $0.beginDate?.prefix(10) }))
-        var result = [String:[GLAgendaResp]]()
+    // 日历内事件处理
+    func flatAgendaToMap(info: [GLAgendaResp]) {
+        let monthKeys = Array(Set(info.compactMap{ $0.beginDate?.prefix(10) }))
         
         monthKeys.forEach {
             let tempKey = $0
-            let tempList = agendaList.filter{ $0.beginDate?.prefix(10) == tempKey }
-            result[String(tempKey)] = tempList
+            let tempList = info.filter{ $0.beginDate?.prefix(10) == tempKey }
+            agendaCalenderData[String(tempKey)] = tempList
         }
-        agendaMap = result
     }
     
     // 构造事件列表返回结构
-    func flatAgendaList() -> [[GLAgendaResp]] {
-        let monthKeys = Array(Set(agendaList.compactMap{ $0.beginDate?.prefix(7) })).sorted(by: <)
+    func flatAgendaList(info: [GLAgendaResp]) -> [[GLAgendaResp]] {
+        let sortedInfo = info.sorted { return $0.beginDate! < $1.beginDate! }
+        let monthKeys = Array(Set(info.compactMap{ $0.beginDate?.prefix(7) })).sorted(by: <)
         var result = [[GLAgendaResp]]()
         
         monthKeys.forEach {
             let tempKey = $0
-            let tempList = agendaList.filter{ $0.beginDate?.prefix(7) == tempKey }
+            let tempList = sortedInfo.filter{ $0.beginDate?.prefix(7) == tempKey }
             result.append(tempList)
         }
         return result
     }
     
-    
+    func resetAll() {
+        isInit = true
+        startDate = Date().dateFor(.startOfMonth)
+        endDate = startDate
+        
+        agendaTableData = []
+        agendaCalenderData = [:]
+    }
 }

@@ -70,9 +70,9 @@ class GLTaskListCell: UICollectionViewCell, UITableViewDataSource, UITableViewDe
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let eventId = tableData[safe: indexPath.row]?.id else {
+        guard let row = tableData[safe: indexPath.row], let eventId = row.id else {
             return
         }
-        GLAgendaDataUtil.shared.taskListDidSelect?(eventId)
+        GLAgendaDataUtil.shared.taskListDidSelect?(eventId, row.beginDate!, row.endDate!)
     }
 }

@@ -45,7 +45,7 @@ class EventKitUtil {
     
     func getEvent(start: Date, end: Date) -> [GLAgendaResp] {
         var result: [GLAgendaResp] = []
-        let event = events.filter { $0.startDate.compare(.isEarlier(than: end)) && $0.startDate.compare(.isLater(than: start)) }
+        let event = events.filter { $0.startDate.compare(.isEarlier(than: end.adjust(.day, offset: -1))) && $0.startDate.compare(.isLater(than: start)) }
         
         for i in event {
             let temp = GLAgendaResp()
@@ -56,6 +56,7 @@ class EventKitUtil {
             temp.endDate = String(endStr.prefix(10))
             temp.endTime = String(endStr.suffix(5))
             temp.title = i.title
+            temp.repeatType = 0
             result.append(temp)
         }
         return result

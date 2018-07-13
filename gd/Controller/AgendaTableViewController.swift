@@ -36,7 +36,7 @@ class AgendaTableViewController: UITableViewController {
             GLAgendaDataUtil.shared.loadData(after: false) { succeed in
                 self?.tableView.cr.endHeaderRefresh()
                 if succeed {
-                    self?.agendaList = GLAgendaDataUtil.shared.flatAgendaList()
+                    self?.agendaList = GLAgendaDataUtil.shared.agendaTableData
                     self?.tableView.reloadData()
                 }
             }
@@ -47,7 +47,7 @@ class AgendaTableViewController: UITableViewController {
             GLAgendaDataUtil.shared.loadData { succeed in
                 self?.tableView.cr.endLoadingMore()
                 if succeed {
-                    self?.agendaList = GLAgendaDataUtil.shared.flatAgendaList()
+                    self?.agendaList = GLAgendaDataUtil.shared.agendaTableData
                     self?.tableView.reloadData()
                 }
             }
@@ -90,11 +90,11 @@ class AgendaTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let id = agendaList[indexPath.section][indexPath.row].id  else {
+        guard let row = agendaList[indexPath.section][safe: indexPath.row], let id = row.id  else {
             return
         }
         let detailVC = storyboard?.instantiateViewController(withIdentifier: "AgendaDetailViewController") as! AgendaDetailViewController
-        detailVC.agendaId = id
+        detailVC.glAgendaResp = row
         navigationController?.pushViewController(detailVC, animated: true)
     }
     

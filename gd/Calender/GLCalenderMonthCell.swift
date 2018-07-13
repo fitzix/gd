@@ -178,7 +178,7 @@ extension GLCalenderMonthCell: UICollectionViewDelegateFlowLayout, UICollectionV
             if calenderExpandIndicator.expandedIndex == indexPath.item {
                 let cellDate = self.taskModel.date.dateFor(.startOfWeek).adjust(.day, offset: calenderExpandIndicator.selectedIndex)
                 let taskCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GLTaskListCell", for: indexPath) as! GLTaskListCell
-                taskCell.loadData(model: GLAgendaDataUtil.shared.agendaMap[cellDate.toString(format: .isoDate)])
+                taskCell.loadData(model: GLAgendaDataUtil.shared.agendaCalenderData[cellDate.toString(format: .isoDate)])
                 return taskCell
             }
             var index = indexPath.item
@@ -196,7 +196,7 @@ extension GLCalenderMonthCell: UICollectionViewDelegateFlowLayout, UICollectionV
             }
             
             let cellDate = self.taskModel.date.dateFor(.startOfWeek).adjust(.day, offset: index)
-            dayCell.loadData(model: GLAgendaDataUtil.shared.agendaMap[cellDate.toString(format: .isoDate)])
+            dayCell.loadData(model: GLAgendaDataUtil.shared.agendaCalenderData[cellDate.toString(format: .isoDate)])
             
             if !cellDate.compare(.isSameMonth(as: taskModel.date)) {
                 dayCell.isHidden = true
@@ -216,7 +216,7 @@ extension GLCalenderMonthCell: UICollectionViewDelegateFlowLayout, UICollectionV
             dayCell.borderColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1.00)
             
             let cellDate = self.taskModel.date.dateFor(.startOfWeek).adjust(.day, offset: indexPath.item)
-            dayCell.loadData(model: GLAgendaDataUtil.shared.agendaMap[cellDate.toString(format: .isoDate)])
+            dayCell.loadData(model: GLAgendaDataUtil.shared.agendaCalenderData[cellDate.toString(format: .isoDate)])
             
             if !cellDate.compare(.isSameMonth(as: taskModel.date)) {
                 dayCell.isHidden = true

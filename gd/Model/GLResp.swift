@@ -104,7 +104,7 @@ class GLAgendaResp: NSObject, NSCopying, Mappable {
     var quitUserList: [GLUserResp]?
     var recordState: Int?
     var remind: String?
-    var repeatEndDate: Date?
+    var repeatEndDate: String?
     var repeatExcludeDates: String?
     var repeatType: Int?
     var specialContent: String?
@@ -123,7 +123,7 @@ class GLAgendaResp: NSObject, NSCopying, Mappable {
     
     override init(){}
     
-    init(beginDate: String?, beginTime: String?, candidatePoList: [GLCandidateResp]?, commentList: [GLCommentResp]?, conflict: Int?, deleteUserList: [GLUserResp]?, digestContent: String?, digestTitle: String?, endDate: String?, endTime: String?, id: Int?, place: String?, placeX: Int?, placeY: Int?, quitUserList: [GLUserResp]?, recordState: Int?, remind: String?, repeatEndDate: Date?, repeatExcludeDates: String?, repeatType: Int?, specialContent: String?, specialId: Int?, title: String?, todayBeginTime: String?, todayEndTime: String?, type: Int?, typeName: String?, uid: Int?, userList: [GLUserResp]?, userNum: Int?, viewType: Int?) {
+    init(beginDate: String?, beginTime: String?, candidatePoList: [GLCandidateResp]?, commentList: [GLCommentResp]?, conflict: Int?, deleteUserList: [GLUserResp]?, digestContent: String?, digestTitle: String?, endDate: String?, endTime: String?, id: Int?, place: String?, placeX: Int?, placeY: Int?, quitUserList: [GLUserResp]?, recordState: Int?, remind: String?, repeatEndDate: String?, repeatExcludeDates: String?, repeatType: Int?, specialContent: String?, specialId: Int?, title: String?, todayBeginTime: String?, todayEndTime: String?, type: Int?, typeName: String?, uid: Int?, userList: [GLUserResp]?, userNum: Int?, viewType: Int?) {
          self.beginDate = beginDate
          self.beginTime = beginTime
          self.candidatePoList = candidatePoList
@@ -133,7 +133,7 @@ class GLAgendaResp: NSObject, NSCopying, Mappable {
          self.digestContent = digestContent
          self.digestTitle = digestTitle
          self.endDate = endDate
-         self.endTime = endDate
+         self.endTime = endTime
          self.id = id
          self.place = place
          self.placeX = placeX
@@ -277,6 +277,20 @@ class GLUserInfo: Mappable{
 
 class GLUserInfoResp: GLBaseResp {
     var info: GLUserInfo?
+    required init?(map: Map) {
+        super.init(map: map)
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        
+        info <- map["info"]
+    }
+}
+
+// 更新事件返回 新的id
+class GLUpdateAgendaResp: GLBaseResp {
+    var info: Int?
     required init?(map: Map) {
         super.init(map: map)
     }

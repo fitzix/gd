@@ -52,9 +52,9 @@ class GLAgendaTableViewCell: UITableViewCell {
             locationLabel.textColor = .white
         } else {
             detailView.backgroundColor = GLColorUtil.random(tableCellIndex: indexPath)
-            titleLabel.textColor = .black
-            timeLabel.textColor = .black
-            locationLabel.textColor = .black
+            titleLabel.textColor = UIColor(red:0.21, green:0.21, blue:0.21, alpha:1.00)
+            timeLabel.textColor = UIColor(red:0.21, green:0.21, blue:0.21, alpha:1.00)
+            locationLabel.textColor = UIColor(red:0.21, green:0.21, blue:0.21, alpha:1.00)
         }
         titleLabel.text = glAgendaResp.title
         timeLabel.text = "\(glAgendaResp.beginTime?.prefix(5) ?? "") ~ \(glAgendaResp.endTime?.prefix(5) ?? "")"

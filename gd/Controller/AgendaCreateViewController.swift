@@ -14,9 +14,6 @@ import KRProgressHUD
 
 class AgendaCreateViewController: FormViewController {
     
-    var glAgendaResp: GLAgendaResp?
-    var isToCreate = true
-    
     override func viewDidLoad() {
         
         let x = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(removeView(_:)))
@@ -114,6 +111,16 @@ class AgendaCreateViewController: FormViewController {
                 }
                 $0.value = $0.options.first
             }
+            
+            // 重复事件 显示
+            <<< DateTimeRow("repeatEndDate"){
+                $0.title = "重复截止日期"
+                $0.hidden = "$repeatType == 0"
+                let formatter = DateFormatter()
+                formatter.dateFormat = "YYYY-MM-dd EE | HH:mm"
+                $0.dateFormatter = formatter
+            }
+            
             <<< LabelRow() {
                 $0.title = "摘要:"
                 $0.value = ""
@@ -144,6 +151,7 @@ class AgendaCreateViewController: FormViewController {
             values["endTime"] = (form.values()["endDate"] as? Date)?.toString(format: .custom("HH:mm:ss"))
             values["remind"] = (form.values()["remind"] as? Set<String>)?.joined(separator: ",")
             KRProgressHUD.show()
+            
             GLHttpUtil.shared.request(.createAgenda, method: .post, parameters: values, encoding: JSONEncoding.default) { [weak self] (resp: GLBaseResp) in
                 if !resp.ok! {
                    KRProgressHUD.showError(withMessage: resp.msg)
