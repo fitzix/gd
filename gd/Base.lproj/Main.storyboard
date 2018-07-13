@@ -102,6 +102,11 @@
                                         <state key="normal" title="确认">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="confirmBtn:" destination="jc6-9m-dwE" eventType="touchUpInside" id="yH2-zb-QQI"/>
                                         </connections>
@@ -637,6 +642,11 @@
                                         <state key="normal" title="确认">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="confirmBtn:" destination="QFe-A1-mED" eventType="touchUpInside" id="F2y-lO-rV1"/>
                                         </connections>

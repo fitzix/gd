@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import AlamofireObjectMapper
 import CRRefresh
+import KRProgressHUD
 
 class AgendaTableViewController: UITableViewController {
     
@@ -31,7 +32,7 @@ class AgendaTableViewController: UITableViewController {
         let normalHeaderAnimator = NormalHeaderAnimator()
         let normalFooterAnimator = NormalFooterAnimator()
         normalHeaderAnimator.trigger = 130
-        normalFooterAnimator.trigger = 40
+        normalFooterAnimator.trigger = 110
         tableView.cr.addHeadRefresh(animator: normalHeaderAnimator) { [weak self] in
             GLAgendaDataUtil.shared.loadData(after: false) { succeed in
                 self?.tableView.cr.endHeaderRefresh()
@@ -41,7 +42,6 @@ class AgendaTableViewController: UITableViewController {
                 }
             }
         }
-        tableView.cr.beginHeaderRefresh()
         
         tableView.cr.addFootRefresh(animator: normalFooterAnimator) { [weak self] in
             GLAgendaDataUtil.shared.loadData { succeed in
@@ -53,7 +53,25 @@ class AgendaTableViewController: UITableViewController {
             }
         }
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if GLAgendaDataUtil.shared.needRefresh {
+            KRProgressHUD.show()
+            GLAgendaDataUtil.shared.needRefresh = false
+            GLAgendaDataUtil.shared.loadData(after: false) { [weak self] succeed in
+                KRProgressHUD.dismiss()
+                if succeed {
+                    self?.agendaList = GLAgendaDataUtil.shared.agendaTableData
+                    self?.tableView.reloadData()
+                }
+            }
+        } else if GLAgendaDataUtil.shared.hasNewData {
+            agendaList = GLAgendaDataUtil.shared.agendaTableData
+            GLAgendaDataUtil.shared.hasNewData = false
+            tableView.reloadData()
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -90,7 +108,7 @@ class AgendaTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let row = agendaList[indexPath.section][safe: indexPath.row], let id = row.id  else {
+        guard let row = agendaList[indexPath.section][safe: indexPath.row] else {
             return
         }
         let detailVC = storyboard?.instantiateViewController(withIdentifier: "AgendaDetailViewController") as! AgendaDetailViewController

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KRProgressHUD
 
 class MonthViewController: UIViewController {
     
@@ -15,13 +16,15 @@ class MonthViewController: UIViewController {
     @IBOutlet weak var slackView: UIStackView!
     @IBOutlet weak var monthButton: UIButton!
     
+    var calenderView: GLCalender?
+    
     
     var startDate: Date = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.edgesForExtendedLayout = []
+        
 
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
         let tabBarHeight = tabBarController?.tabBar.frame.height
@@ -34,7 +37,7 @@ class MonthViewController: UIViewController {
             self?.navigationController?.pushViewController(detailVC, animated: true)
         }
        
-        let calender = GLCalender(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: calHeight )) { (date) in
+        calenderView = GLCalender(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: calHeight )) { (date) in
             if date.compare(.isEarlier(than: GLAgendaDataUtil.shared.startDate)) {
                 GLAgendaDataUtil.shared.loadData(after: false)
             } else if date.compare(.isLater(than: GLAgendaDataUtil.shared.endDate)) {
@@ -42,12 +45,12 @@ class MonthViewController: UIViewController {
             }
             self.monthButton.setTitle(date.toString(format: .isoYearMonth), for: .normal)
         }
-        calender.orientationCurrentDate(start: startDate)
+        calenderView?.orientationCurrentDate(start: startDate)
         tabBarController?.tabBar.backgroundColor = .white
         
-        view.addSubview(calender)
+        view.addSubview(calenderView!)
         
-        calender.snp.makeConstraints { (constraintMaker) in
+        calenderView?.snp.makeConstraints { (constraintMaker) in
             constraintMaker.top.equalTo(slackView.snp.bottom)
             constraintMaker.left.equalToSuperview()
             constraintMaker.right.equalToSuperview()
@@ -57,6 +60,19 @@ class MonthViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+        
+        if GLAgendaDataUtil.shared.needRefresh {
+            KRProgressHUD.show()
+            GLAgendaDataUtil.shared.needRefresh = false
+            GLAgendaDataUtil.shared.loadData(after: false) { [weak self] succeed in
+                KRProgressHUD.dismiss()
+                if succeed {
+                    self?.calenderView?.reloadData()
+                    GLAgendaDataUtil.shared.hasNewData = true
+                }
+            }
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

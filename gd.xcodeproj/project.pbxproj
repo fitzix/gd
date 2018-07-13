@@ -40,7 +40,6 @@
 		C4D4EBB220EDEA1F00835C43 /* GLCalenderMonthCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D4EBAD20EDEA1F00835C43 /* GLCalenderMonthCell.swift */; };
 		C4D4EBB320EDEA1F00835C43 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D4EBAE20EDEA1F00835C43 /* TaskModel.swift */; };
 		C4D4EBB520EE022E00835C43 /* CRRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4D4EBB420EE022E00835C43 /* CRRefresh.framework */; };
-		C4D5650120EF797600B380BD /* LunarCore.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D564FF20EF797600B380BD /* LunarCore.m */; };
 		C4D9851620F5BCF200CB8A48 /* AgendaCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D9851520F5BCF200CB8A48 /* AgendaCreateViewController.swift */; };
 		C4DD525E20E60D9D00A39CE5 /* AgendaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD525D20E60D9D00A39CE5 /* AgendaDetailViewController.swift */; };
 		C4E8979520F44E7F0053F99A /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48640FD20DBAF480055AA1A /* SnapKit.framework */; };
@@ -90,9 +89,6 @@
 		C4D4EBAD20EDEA1F00835C43 /* GLCalenderMonthCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLCalenderMonthCell.swift; sourceTree = "<group>"; };
 		C4D4EBAE20EDEA1F00835C43 /* TaskModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		C4D4EBB420EE022E00835C43 /* CRRefresh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CRRefresh.framework; path = Carthage/Build/iOS/CRRefresh.framework; sourceTree = "<group>"; };
-		C4D564FE20EF797500B380BD /* gd-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gd-Bridging-Header.h"; sourceTree = "<group>"; };
-		C4D564FF20EF797600B380BD /* LunarCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LunarCore.m; sourceTree = "<group>"; };
-		C4D5650020EF797600B380BD /* LunarCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LunarCore.h; sourceTree = "<group>"; };
 		C4D9851520F5BCF200CB8A48 /* AgendaCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaCreateViewController.swift; sourceTree = "<group>"; };
 		C4DD525D20E60D9D00A39CE5 /* AgendaDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaDetailViewController.swift; sourceTree = "<group>"; };
 		C4F1418E20E0E2170044B393 /* DateHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DateHelper.framework; path = Carthage/Build/iOS/DateHelper.framework; sourceTree = "<group>"; };
@@ -203,7 +199,6 @@
 		C478ED6E20DA5382007A4A3F /* gd */ = {
 			isa = PBXGroup;
 			children = (
-				C4D564FD20EF795F00B380BD /* Bridge */,
 				C4CC09E920EDC27900133EA4 /* Calender */,
 				C4360BA520ECBB28006D2B12 /* Config */,
 				C47D007220E3608A001318B7 /* Extension */,
@@ -239,16 +234,6 @@
 				C4D4EBAE20EDEA1F00835C43 /* TaskModel.swift */,
 			);
 			path = Calender;
-			sourceTree = "<group>";
-		};
-		C4D564FD20EF795F00B380BD /* Bridge */ = {
-			isa = PBXGroup;
-			children = (
-				C4D5650020EF797600B380BD /* LunarCore.h */,
-				C4D564FF20EF797600B380BD /* LunarCore.m */,
-				C4D564FE20EF797500B380BD /* gd-Bridging-Header.h */,
-			);
-			path = Bridge;
 			sourceTree = "<group>";
 		};
 		C4F1418B20E0DA880044B393 /* Utils */ = {
@@ -383,7 +368,6 @@
 			files = (
 				C423E4EB20F44C1E003840E6 /* LoginViewController.swift in Sources */,
 				C422916320DB488C0070F261 /* MainTabBarViewController.swift in Sources */,
-				C4D5650120EF797600B380BD /* LunarCore.m in Sources */,
 				C41A50CA20EC669A00B458E1 /* LunarUtil.swift in Sources */,
 				C478ED7020DA5382007A4A3F /* AppDelegate.swift in Sources */,
 				C44BCBF620E22F3F0036AAE5 /* GLResp.swift in Sources */,
@@ -575,6 +559,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
 			};
 			name = Debug;
 		};
@@ -603,6 +588,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};

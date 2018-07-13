@@ -30,9 +30,8 @@ class AgendaViewController: FormViewController {
             <<< TextRow("title"){
                 $0.title = "主题"
                 $0.placeholder = "请输入你的主题(限10个字) 例如: 周会"
-                if let title = glAgendaResp.title {
-                    $0.value = title
-                }
+                $0.value = glAgendaResp.title
+
                 $0.add(rule: RuleMaxLength(maxLength: 15, msg: "主题长度不能超过15个"))
                 $0.add(rule: RuleRequired(msg: "主题不能为空"))
                 $0.validationOptions = .validatesOnChange
@@ -81,10 +80,14 @@ class AgendaViewController: FormViewController {
                 }.cellSetup({ (cell, row) in
                     cell.datePicker.minuteInterval = 15
                 })
-            //            <<< LocationRow(){
-            //                $0.title = "LocationRow"
-            //                $0.value = CLLocation(latitude: -34.91, longitude: -56.1646)
-            //            }
+            
+            <<< TextRow("place"){
+                $0.title = "地址"
+                $0.placeholder = "请输入地址"
+                $0.value = glAgendaResp.place
+            }
+            
+            
             
             <<< MultipleSelectorRow<String>("remind") {
                 $0.title = "提醒设置"
@@ -137,11 +140,11 @@ class AgendaViewController: FormViewController {
             }
             
             // 重复事件 显示
-            <<< DateTimeRow("repeatEndDate"){
+            <<< DateRow("repeatEndDate"){
                 $0.title = "重复截止日期"
                 $0.hidden = "$repeatType == 0"
                 let formatter = DateFormatter()
-                formatter.dateFormat = "YYYY-MM-dd EE | HH:mm"
+                formatter.dateFormat = "YYYY-MM-dd | EE"
                 $0.dateFormatter = formatter
                 if let repeatEndDate = glAgendaResp.repeatEndDate {
                    $0.value = Date(fromString: repeatEndDate, format: .isoDate)
@@ -181,6 +184,7 @@ class AgendaViewController: FormViewController {
             values["endDate"] = values["beginDate"]
             values["endTime"] = (form.values()["endDate"] as? Date)?.toString(format: .custom("HH:mm:ss"))
             values["remind"] = (form.values()["remind"] as? Set<String>)?.joined(separator: ",")
+            values["repeatEndDate"] = (values["repeatEndDate"] as? Date)?.toString(format: .isoDate)
             values["viewType"] = 2
             
             KRProgressHUD.show()
@@ -189,6 +193,9 @@ class AgendaViewController: FormViewController {
                     KRProgressHUD.showError(withMessage: resp.msg)
                     return
                 }
+                // 设置need refresh
+                GLAgendaDataUtil.shared.rebuildData(start: self?.form.values()["beginDate"] as! Date)
+                
                 KRProgressHUD.dismiss()
                 if let newEvent = resp.info {
                     let preVC = self?.navigationController?.viewControllers[(self?.navigationController?.viewControllers.count)! - 2] as? AgendaDetailViewController

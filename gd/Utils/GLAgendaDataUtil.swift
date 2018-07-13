@@ -27,8 +27,8 @@ class GLAgendaDataUtil {
     var isInit = true
     
     // 返回是否需要刷新数据
-    var needRefresh = false
-    
+    var needRefresh = true
+    var hasNewData = false
     
     // 日历内事件列表点击回调
     var taskListDidSelect: GLCalenderTaskDidSelect?
@@ -158,10 +158,18 @@ class GLAgendaDataUtil {
     
     func resetAll() {
         isInit = true
+        needRefresh = true
         startDate = Date().dateFor(.startOfMonth)
         endDate = startDate
         
         agendaTableData = []
         agendaCalenderData = [:]
+    }
+    
+    func rebuildData(start: Date) {
+        resetAll()
+        
+        startDate = start.dateFor(.startOfMonth)
+        endDate = startDate
     }
 }

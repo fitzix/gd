@@ -64,10 +64,11 @@ class AgendaCreateViewController: FormViewController {
                 }.cellSetup({ (cell, row) in
                     cell.datePicker.minuteInterval = 15
                 })
-            //            <<< LocationRow(){
-            //                $0.title = "LocationRow"
-            //                $0.value = CLLocation(latitude: -34.91, longitude: -56.1646)
-            //            }
+
+            <<< TextRow("place"){
+                $0.title = "地址"
+                $0.placeholder = "请输入地址"
+            }
             
             <<< MultipleSelectorRow<String>("remind") {
                 $0.title = "提醒设置"
@@ -113,11 +114,11 @@ class AgendaCreateViewController: FormViewController {
             }
             
             // 重复事件 显示
-            <<< DateTimeRow("repeatEndDate"){
+            <<< DateRow("repeatEndDate"){
                 $0.title = "重复截止日期"
                 $0.hidden = "$repeatType == 0"
                 let formatter = DateFormatter()
-                formatter.dateFormat = "YYYY-MM-dd EE | HH:mm"
+                formatter.dateFormat = "YYYY-MM-dd | EE"
                 $0.dateFormatter = formatter
             }
             
@@ -150,6 +151,9 @@ class AgendaCreateViewController: FormViewController {
             values["endDate"] = values["beginDate"]
             values["endTime"] = (form.values()["endDate"] as? Date)?.toString(format: .custom("HH:mm:ss"))
             values["remind"] = (form.values()["remind"] as? Set<String>)?.joined(separator: ",")
+            values["repeatEndDate"] = (values["repeatEndDate"] as? Date)?.toString(format: .isoDate)
+            values["viewType"] = 2
+            
             KRProgressHUD.show()
             
             GLHttpUtil.shared.request(.createAgenda, method: .post, parameters: values, encoding: JSONEncoding.default) { [weak self] (resp: GLBaseResp) in
@@ -158,6 +162,10 @@ class AgendaCreateViewController: FormViewController {
                    return
                 }
                 KRProgressHUD.dismiss()
+                
+                // 设置need refresh
+                GLAgendaDataUtil.shared.rebuildData(start: self?.form.values()["beginDate"] as! Date)
+                
                 self?.dismiss(animated: true, completion: nil)
             }
         } else {

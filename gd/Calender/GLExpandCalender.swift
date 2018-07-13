@@ -58,6 +58,7 @@ class GLCalender: UIView {
         }
     }
     
+    
     func orientationCurrentDate(start: Date) {
         
         let index = Int(start.since(self.startDate, in: .month)) - 1
@@ -65,6 +66,10 @@ class GLCalender: UIView {
         
         collectionView.contentOffset = (rect?.origin)!
         self.WillChangeMonth(startDate.adjust(.month, offset: index))
+    }
+    
+    func reloadData() {
+        collectionView.reloadData()
     }
 }
 

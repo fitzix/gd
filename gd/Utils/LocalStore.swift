@@ -17,6 +17,7 @@ class LocalStore {
     }
     
     class func logout() {
+        GLAgendaDataUtil.shared.resetAll()
         UserDefaults.standard.removeObject(forKey: "GL_GD_USER_INFO")
         UserDefaults.standard.removeObject(forKey: "GL_GD_TOKEN")
         Switcher.updateRootVC()

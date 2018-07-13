@@ -79,7 +79,8 @@ class AgendaDetailViewController: FormViewController {
                 "beginDate": "\(date?.toString(format: .custom("YYYY-MM-dd EE | ")) ?? "")\(info.beginTime?.prefix(5) ?? "") ~ \(info.endTime?.prefix(5) ?? "")",
                 "remind": info.remind,
                 "repeat": "\(info.repeatType!)",
-                "digestContent": info.digestContent
+                "digestContent": info.digestContent,
+                "place": info.place
                 ])
             self?.tableView.reloadData()
         }
@@ -96,6 +97,10 @@ class AgendaDetailViewController: FormViewController {
                 // TODO 判断空值
                 $0.title = "时间"
             }
+            <<< LabelRow ("plcae") {
+                $0.title = "地址"
+            }
+            
             <<< LabelRow ("remind") {
                 $0.title = "提醒"
                 $0.displayValueFor = {
@@ -125,7 +130,7 @@ class AgendaDetailViewController: FormViewController {
             <<< TextAreaRow("digestContent") {
                 $0.disabled = true
                 $0.textAreaHeight = .dynamic(initialTextViewHeight: 110)
-        }
+            }
     }
     
     @IBAction func editAgendaAction(_ sender: UIButton) {
