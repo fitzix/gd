@@ -48,8 +48,6 @@ class GLHttpUtil: NSObject {
         }
         
         let req = Alamofire.request("\(httpGateway)\(service.rawValue)\(url.rawValue)\(appendUrl ?? "")", method: method, parameters: parameters, encoding: encoding, headers: localHeader)
-//        print(req)
-        debugPrint(req)
         if addMask { KRProgressHUD.show() }
         req.responseObject { (response: DataResponse<T>) in
             guard let result = response.result.value, let state = result.state  else {
