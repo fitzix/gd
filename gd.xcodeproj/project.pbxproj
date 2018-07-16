@@ -84,6 +84,9 @@
 		C48640F520DB8B090055AA1A /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = Carthage/Build/iOS/Eureka.framework; sourceTree = "<group>"; };
 		C48640FD20DBAF480055AA1A /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		C4AB62E920FC505000191468 /* GLCalenderUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLCalenderUtil.swift; sourceTree = "<group>"; };
+		C4AB62EE20FC883E00191468 /* MiPushSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiPushSDK.h; sourceTree = "<group>"; };
+		C4AB62F220FC8C1200191468 /* gd-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gd-Bridging-Header.h"; sourceTree = "<group>"; };
+		C4AB62F320FCA98000191468 /* gd.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = gd.entitlements; sourceTree = "<group>"; };
 		C4B5282520E29F800088111B /* GLAgendaTableSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GLAgendaTableSectionHeader.xib; sourceTree = "<group>"; };
 		C4D4EBAA20EDEA1F00835C43 /* GLCalenderDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLCalenderDayCell.swift; sourceTree = "<group>"; };
 		C4D4EBAB20EDEA1F00835C43 /* GLExpandCalender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLExpandCalender.swift; sourceTree = "<group>"; };
@@ -201,6 +204,8 @@
 		C478ED6E20DA5382007A4A3F /* gd */ = {
 			isa = PBXGroup;
 			children = (
+				C4AB62F320FCA98000191468 /* gd.entitlements */,
+				C4AB62EB20FC87CA00191468 /* Libs */,
 				C4CC09E920EDC27900133EA4 /* Calender */,
 				C4360BA520ECBB28006D2B12 /* Config */,
 				C47D007220E3608A001318B7 /* Extension */,
@@ -213,6 +218,7 @@
 				C478ED7820DA5384007A4A3F /* Assets.xcassets */,
 				C478ED7A20DA5384007A4A3F /* LaunchScreen.storyboard */,
 				C478ED7D20DA5384007A4A3F /* Info.plist */,
+				C4AB62F220FC8C1200191468 /* gd-Bridging-Header.h */,
 			);
 			path = gd;
 			sourceTree = "<group>";
@@ -224,6 +230,22 @@
 				C484FF6220E9D980004890E1 /* Extensions.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		C4AB62EB20FC87CA00191468 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				C4AB62EC20FC880D00191468 /* MiPush */,
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
+		C4AB62EC20FC880D00191468 /* MiPush */ = {
+			isa = PBXGroup;
+			children = (
+				C4AB62EE20FC883E00191468 /* MiPushSDK.h */,
+			);
+			path = MiPush;
 			sourceTree = "<group>";
 		};
 		C4CC09E920EDC27900133EA4 /* Calender */ = {
@@ -288,7 +310,10 @@
 						LastSwiftMigration = 0940;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
 							};
 						};
 					};
@@ -543,9 +568,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = gd/gd.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T88D69DP6B;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -556,10 +582,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.fitzix.gd;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/gd/Libs/MiPush",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gameley.guandao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "gd/gd-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -572,9 +602,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = gd/gd.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T88D69DP6B;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -585,10 +616,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.fitzix.gd;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/gd/Libs/MiPush",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gameley.guandao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "gd/gd-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

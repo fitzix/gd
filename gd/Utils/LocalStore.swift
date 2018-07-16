@@ -10,6 +10,12 @@ import Foundation
 
 class LocalStore {
     
+    class var isLogin: Bool {
+        get {
+            return UserDefaults.standard.string(forKey: "GL_GD_TOKEN") != nil
+        }
+    }
+    
     class func login(info: GLUserInfo) {
         UserDefaults.standard.set(info.token, forKey: "GL_GD_TOKEN")
         UserDefaults.standard.set(info.toJSONString(), forKey: "GL_GD_USER_INFO")

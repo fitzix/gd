@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
         }
         
+        MiPushSDK.registerMiPush(self)
         
         return true
     }
@@ -66,6 +67,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         return false
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate, MiPushSDKDelegate {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        MiPushSDK.bindDeviceToken(deviceToken)
     }
 }
 
