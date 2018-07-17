@@ -56,3 +56,8 @@ extension UIImageView {
         }
     }
 }
+
+// 事件推送通知
+extension Notification.Name {
+    static let GLDidReceiveEvent = Notification.Name("GLDidReceiveEvent")
+}

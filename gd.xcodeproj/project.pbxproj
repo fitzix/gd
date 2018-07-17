@@ -15,6 +15,15 @@
 		C42B5DBF20DC09B500BEA3D6 /* AgendaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B5DBE20DC09B500BEA3D6 /* AgendaViewController.swift */; };
 		C42F90B220EF038100FD8E43 /* GLAgendaDataUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42F90B120EF038100FD8E43 /* GLAgendaDataUtil.swift */; };
 		C4360BA720ECBB42006D2B12 /* GLConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4360BA620ECBB42006D2B12 /* GLConfig.swift */; };
+		C436360F20FD852F00D5FCD4 /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C436360E20FD852F00D5FCD4 /* libMiPushSDK.a */; };
+		C436361120FDA4FD00D5FCD4 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C436361020FDA4FD00D5FCD4 /* UserNotifications.framework */; };
+		C436361320FDA52300D5FCD4 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C436361220FDA52300D5FCD4 /* libresolv.tbd */; };
+		C436361520FDA53600D5FCD4 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C436361420FDA53500D5FCD4 /* libxml2.tbd */; };
+		C436361720FDA54B00D5FCD4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C436361620FDA54B00D5FCD4 /* libz.tbd */; };
+		C436361920FDA55D00D5FCD4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C436361820FDA55D00D5FCD4 /* SystemConfiguration.framework */; };
+		C436361B20FDA56C00D5FCD4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C436361A20FDA56C00D5FCD4 /* MobileCoreServices.framework */; };
+		C436361D20FDA57700D5FCD4 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C436361C20FDA57700D5FCD4 /* CFNetwork.framework */; };
+		C436361F20FDA58100D5FCD4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C436361E20FDA58000D5FCD4 /* CoreTelephony.framework */; };
 		C44BCBE320E1DC1A0036AAE5 /* DateHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F1418E20E0E2170044B393 /* DateHelper.framework */; };
 		C44BCBEB20E214B70036AAE5 /* GLAgendaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BCBEA20E214B70036AAE5 /* GLAgendaTableViewCell.swift */; };
 		C44BCBEE20E21C8A0036AAE5 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44BCBEC20E21C8A0036AAE5 /* Alamofire.framework */; };
@@ -62,6 +71,15 @@
 		C42B5DBE20DC09B500BEA3D6 /* AgendaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaViewController.swift; sourceTree = "<group>"; };
 		C42F90B120EF038100FD8E43 /* GLAgendaDataUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLAgendaDataUtil.swift; sourceTree = "<group>"; };
 		C4360BA620ECBB42006D2B12 /* GLConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLConfig.swift; sourceTree = "<group>"; };
+		C436360E20FD852F00D5FCD4 /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
+		C436361020FDA4FD00D5FCD4 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		C436361220FDA52300D5FCD4 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		C436361420FDA53500D5FCD4 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		C436361620FDA54B00D5FCD4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		C436361820FDA55D00D5FCD4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C436361A20FDA56C00D5FCD4 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		C436361C20FDA57700D5FCD4 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		C436361E20FDA58000D5FCD4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		C44BCBEA20E214B70036AAE5 /* GLAgendaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLAgendaTableViewCell.swift; sourceTree = "<group>"; };
 		C44BCBEC20E21C8A0036AAE5 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		C44BCBF020E220CD0036AAE5 /* GLAgendaTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GLAgendaTableViewCell.xib; sourceTree = "<group>"; };
@@ -108,6 +126,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C436361F20FDA58100D5FCD4 /* CoreTelephony.framework in Frameworks */,
+				C436361D20FDA57700D5FCD4 /* CFNetwork.framework in Frameworks */,
+				C436361B20FDA56C00D5FCD4 /* MobileCoreServices.framework in Frameworks */,
+				C436361920FDA55D00D5FCD4 /* SystemConfiguration.framework in Frameworks */,
+				C436361720FDA54B00D5FCD4 /* libz.tbd in Frameworks */,
+				C436361520FDA53600D5FCD4 /* libxml2.tbd in Frameworks */,
+				C436361320FDA52300D5FCD4 /* libresolv.tbd in Frameworks */,
+				C436361120FDA4FD00D5FCD4 /* UserNotifications.framework in Frameworks */,
 				C4F2501C20F45AB000879BF5 /* MonkeyKing.framework in Frameworks */,
 				C4F2501A20F4525300879BF5 /* KRActivityIndicatorView.framework in Frameworks */,
 				C4F2501820F4525200879BF5 /* KRProgressHUD.framework in Frameworks */,
@@ -115,6 +141,7 @@
 				C4E8979520F44E7F0053F99A /* SnapKit.framework in Frameworks */,
 				C4D4EBB520EE022E00835C43 /* CRRefresh.framework in Frameworks */,
 				C44BCBF920E232290036AAE5 /* AlamofireObjectMapper.framework in Frameworks */,
+				C436360F20FD852F00D5FCD4 /* libMiPushSDK.a in Frameworks */,
 				C44BCBFA20E232290036AAE5 /* ObjectMapper.framework in Frameworks */,
 				C44BCBEE20E21C8A0036AAE5 /* Alamofire.framework in Frameworks */,
 				C44BCBE320E1DC1A0036AAE5 /* DateHelper.framework in Frameworks */,
@@ -127,6 +154,14 @@
 		C4007C6A20DB7E3600D49866 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C436361E20FDA58000D5FCD4 /* CoreTelephony.framework */,
+				C436361C20FDA57700D5FCD4 /* CFNetwork.framework */,
+				C436361A20FDA56C00D5FCD4 /* MobileCoreServices.framework */,
+				C436361820FDA55D00D5FCD4 /* SystemConfiguration.framework */,
+				C436361620FDA54B00D5FCD4 /* libz.tbd */,
+				C436361420FDA53500D5FCD4 /* libxml2.tbd */,
+				C436361220FDA52300D5FCD4 /* libresolv.tbd */,
+				C436361020FDA4FD00D5FCD4 /* UserNotifications.framework */,
 				C4F2501B20F45AB000879BF5 /* MonkeyKing.framework */,
 				C4F2501920F4525300879BF5 /* KRActivityIndicatorView.framework */,
 				C423E4E820F44726003840E6 /* KRProgressHUD.framework */,
@@ -243,6 +278,7 @@
 		C4AB62EC20FC880D00191468 /* MiPush */ = {
 			isa = PBXGroup;
 			children = (
+				C436360E20FD852F00D5FCD4 /* libMiPushSDK.a */,
 				C4AB62EE20FC883E00191468 /* MiPushSDK.h */,
 			);
 			path = MiPush;
@@ -571,7 +607,7 @@
 				CODE_SIGN_ENTITLEMENTS = gd/gd.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2VBHGQAW4Q;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -586,9 +622,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/gd/Libs/MiPush",
 				);
+				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gameley.guandao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "b73779b6-e3a5-41e1-b4eb-185aeb1a3207";
+				PROVISIONING_PROFILE_SPECIFIER = iOS_dev_guandao;
 				SWIFT_OBJC_BRIDGING_HEADER = "gd/gd-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -605,7 +643,7 @@
 				CODE_SIGN_ENTITLEMENTS = gd/gd.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2VBHGQAW4Q;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -620,9 +658,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/gd/Libs/MiPush",
 				);
+				MiSDKRun = online;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gameley.guandao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "b73779b6-e3a5-41e1-b4eb-185aeb1a3207";
+				PROVISIONING_PROFILE_SPECIFIER = iOS_dev_guandao;
 				SWIFT_OBJC_BRIDGING_HEADER = "gd/gd-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				SWIFT_VERSION = 4.0;

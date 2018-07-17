@@ -11,12 +11,14 @@ import Eureka
 import KRProgressHUD
 
 class AgendaDetailViewController: FormViewController {
+    // true从tableview来 flase从推送通知来
+    var fromTableView = true
     
     var glAgendaResp: GLAgendaResp = GLAgendaResp()
     
     // 原始数据
-    var originBeginDate: String?
-    var originEndDate: String?
+    var originBeginDate: String? = Date().toString(format: .isoDate)
+    var originEndDate: String? = Date().toString(format: .isoDate)
     
     
     @IBOutlet weak var detailImg: UIImageView!
@@ -40,7 +42,12 @@ class AgendaDetailViewController: FormViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
         loadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
     }
     
     func loadData() {
@@ -65,8 +72,11 @@ class AgendaDetailViewController: FormViewController {
                 self?.detailImg.load(url: URL(string: icon)!)
             }
             // 判断是否可编辑
-            let userInfo = GLUserInfo(JSONString: UserDefaults.standard.string(forKey: "GL_GD_USER_INFO")!)
-            self?.editAgendaBtn.isEnabled = userInfo?.uid == info.uid
+            if let userInfoStr = UserDefaults.standard.string(forKey: "GL_GD_USER_INFO"), (self?.fromTableView)!, GLUserInfo(JSONString: userInfoStr)?.uid == info.uid {
+                self?.editAgendaBtn.isEnabled = true
+            } else {
+                self?.editAgendaBtn.isEnabled = false
+            }
             
             self?.createUserLabel.text = "\(info.userList?[0].nickname ?? "--") 创建"
             self?.userCountLabel.text = "\(info.userList?.count ?? 0)人参与"
@@ -171,4 +181,13 @@ class AgendaDetailViewController: FormViewController {
         vc.glAgendaResp = glAgendaResp
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @IBAction func removeView(_ sender: UIBarButtonItem) {
+        if fromTableView {
+            navigationController?.popViewController(animated: true)
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
 }

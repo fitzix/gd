@@ -17,6 +17,7 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
         // Do any additional setup after loading the view.
         self.delegate = self
         KRProgressHUD.appearance().style = .black
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotify(notification:)), name: .GLDidReceiveEvent, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,5 +34,17 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
             return false
         }
         return true
+    }
+    
+    @objc func receiveNotify(notification: Notification) {
+        
+        guard let idStr = notification.userInfo?["id"] as? String, let eventId = Int(idStr) else {
+            return
+        }
+        
+        let detailVC = storyboard?.instantiateViewController(withIdentifier: "AgendaDetailViewController") as! AgendaDetailViewController
+        detailVC.glAgendaResp.id = Int(eventId)
+        detailVC.fromTableView = false
+        present(detailVC, animated: true, completion: nil)
     }
 }

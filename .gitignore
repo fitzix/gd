@@ -70,3 +70,6 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 .idea
 .DS_Store
+
+# 静态库
+*.a

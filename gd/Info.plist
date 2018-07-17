@@ -40,9 +40,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MiSDKAppID</key>
-	<string></string>
+	<string>2882303761517835547</string>
 	<key>MiSDKAppKey</key>
-	<string></string>
+	<string>5461783597547</string>
 	<key>MiSDKRun</key>
 	<string>${MiSDKRun}</string>
 	<key>NSCalendarsUsageDescription</key>

@@ -108,7 +108,7 @@ class AgendaTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let row = agendaList[indexPath.section][safe: indexPath.row] else {
+        guard let row = agendaList[indexPath.section][safe: indexPath.row], let _ = row.id else {
             return
         }
         let detailVC = storyboard?.instantiateViewController(withIdentifier: "AgendaDetailViewController") as! AgendaDetailViewController
