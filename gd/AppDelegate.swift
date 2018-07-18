@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 获取日历事件权限
         EventKitUtil.shared.getEvent()
-        // 注册微信
+        // 注册微信登录
         MonkeyKing.registerAccount(.weChat(appID: "wxe72e6e1d86a08401", appKey: nil, miniAppID: nil))
         // 判断登录
         Switcher.updateRootVC()
@@ -30,20 +30,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MiPushSDK.registerMiPush(self)
         // 获取通知权限
         if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
-                (accepted, error) in
-                if !accepted {
-                    print("用户不允许消息通知。")
-                }
-            }
+//            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+//                (accepted, error) in
+//                if !accepted {
+//                    print("用户不允许消息通知。")
+//                }
+//            }
         } else {
-            application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
+//            application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
+            // iOS10以下 点击通知启动
             if let info = launchOptions?[.remoteNotification], let userInfo = info as? [AnyHashable : Any] {
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) { [weak self] in
                     self?.postAgendaEvent(info: userInfo)
                 }
             }
         }
+        // 初始化提醒设置
+        LocalStore.initRemind()
         
         return true
     }
@@ -87,12 +90,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MiPushSDKDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         if UIApplication.shared.applicationState == .active {
-            let alertController = UIAlertController(title: "提醒", message: "你确定要离开？", preferredStyle:.alert)
+            let alertController = UIAlertController(title: "提醒", message: "", preferredStyle:.alert)
             let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
             let okAction = UIAlertAction(title: "好的", style: .default) { _ in
                 LocalStore.logout()
             }
-            // 添加
+            // 添加action
             alertController.addAction(cancelAction)
             alertController.addAction(okAction)
             

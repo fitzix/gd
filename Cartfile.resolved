@@ -1,5 +1,6 @@
 github "Alamofire/Alamofire" "4.7.2"
 github "CRAnimation/CRRefresh" "1.0.7"
+github "EurekaCommunity/SuggestionRow" "2.1.0"
 github "Hearst-DD/ObjectMapper" "3.3.0"
 github "Krimpedance/KRProgressHUD" "3.2.2"
 github "SnapKit/SnapKit" "4.0.0"

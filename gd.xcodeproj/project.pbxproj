@@ -267,9 +267,17 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		C4A4CB1720FF164B0042BD86 /* EurekaSuggestionRow */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EurekaSuggestionRow;
+			sourceTree = "<group>";
+		};
 		C4AB62EB20FC87CA00191468 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				C4A4CB1720FF164B0042BD86 /* EurekaSuggestionRow */,
 				C4AB62EC20FC880D00191468 /* MiPush */,
 			);
 			path = Libs;
@@ -625,7 +633,7 @@
 				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gameley.guandao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b73779b6-e3a5-41e1-b4eb-185aeb1a3207";
+				PROVISIONING_PROFILE = "9aca28ce-864e-459d-9677-1ad1574c4917";
 				PROVISIONING_PROFILE_SPECIFIER = iOS_dev_guandao;
 				SWIFT_OBJC_BRIDGING_HEADER = "gd/gd-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -661,7 +669,7 @@
 				MiSDKRun = online;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gameley.guandao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b73779b6-e3a5-41e1-b4eb-185aeb1a3207";
+				PROVISIONING_PROFILE = "9aca28ce-864e-459d-9677-1ad1574c4917";
 				PROVISIONING_PROFILE_SPECIFIER = iOS_dev_guandao;
 				SWIFT_OBJC_BRIDGING_HEADER = "gd/gd-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Osize";

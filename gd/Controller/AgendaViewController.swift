@@ -91,10 +91,10 @@ class AgendaViewController: FormViewController {
             
             <<< MultipleSelectorRow<String>("remind") {
                 $0.title = "提醒设置"
-                $0.options = ["0", "1", "2", "3", "4", "5"]
+                $0.options = ["0", "1", "2", "3", "4", "11", "12", "21", "22", "31"]
                 if let reminds = glAgendaResp.remind {
                     $0.value = Set(reminds.components(separatedBy: ","))
-                } else if let reminds = LocalStore.get(key: "GL_GD_REMIND") {
+                } else if let reminds = LocalStore.get(key: .userRemindTypes) {
                     $0.value = Set(reminds.components(separatedBy: ","))
                 }
                 

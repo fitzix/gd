@@ -61,3 +61,10 @@ extension UIImageView {
 extension Notification.Name {
     static let GLDidReceiveEvent = Notification.Name("GLDidReceiveEvent")
 }
+
+extension Date {
+    func nextHour(offset: Int) -> Date {
+        let hour = component(.hour)
+        return adjust(hour: hour! + offset, minute: 0, second: nil)
+    }
+}

@@ -109,6 +109,7 @@ class AgendaDetailViewController: FormViewController {
             }
             <<< LabelRow ("plcae") {
                 $0.title = "地址"
+                $0.value = glAgendaResp.place
             }
             
             <<< LabelRow ("remind") {

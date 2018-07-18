@@ -29,7 +29,7 @@ class UserInfoViewController: FormViewController  {
             +++ Section()
             <<< MultipleSelectorRow<String>("remind") {
                 $0.title = "提醒设置"
-                $0.options = ["0", "1", "2", "3", "4", "5"]
+                $0.options = ["0", "1", "2", "3", "4", "11", "12", "21", "22", "31"]
                 $0.value = ["2","3"]
                 $0.displayValueFor = { values in
                     return values?.map({ GLRemindType(rawValue: $0)!.title }).joined(separator: ",")
@@ -51,7 +51,7 @@ class UserInfoViewController: FormViewController  {
                         row.updateCell()
                     }
                     if let values = row.value {
-                        LocalStore.save(key: "GL_GD_REMIND", info: values.joined(separator: ","))
+                        LocalStore.save(key: .userRemindTypes, info: values.joined(separator: ","))
                     }
                 })
             // 账号退出

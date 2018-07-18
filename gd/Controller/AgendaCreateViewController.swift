@@ -12,10 +12,30 @@ import DateHelper
 import Alamofire
 import KRProgressHUD
 
+struct Scientist: SuggestionValue {
+    var id: Int
+    var firstName: String
+    var lastName: String
+    
+    var suggestionString: String {
+        return "\(firstName) \(lastName)"
+    }
+    
+    init(id: Int, firstName: String, lastName: String) {
+        self.firstName = firstName
+        self.lastName = lastName
+        self.id = id
+    }
+    
+    init?(string stringValue: String) {
+        return nil
+    }
+}
+
+
 class AgendaCreateViewController: FormViewController {
     
     override func viewDidLoad() {
-        
         let x = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(removeView(_:)))
         navigationItem.setLeftBarButton(x, animated: false)
         
@@ -28,7 +48,7 @@ class AgendaCreateViewController: FormViewController {
             
             <<< TextRow("title"){
                 $0.title = "主题"
-                $0.placeholder = "请输入你的主题(限10个字) 例如: 周会"
+                $0.placeholder = "请输入你的主题(限15个字) 例如: 周会"
                 $0.add(rule: RuleMaxLength(maxLength: 15, msg: "主题长度不能超过15个"))
                 $0.add(rule: RuleRequired(msg: "主题不能为空"))
                 $0.validationOptions = .validatesOnChange
@@ -44,7 +64,7 @@ class AgendaCreateViewController: FormViewController {
             }
             <<< DateTimeRow("beginDate"){
                 $0.title = "开始时间"
-                $0.value = Date().dateFor(.nearestHour(hour: 2))
+                $0.value = Date().nextHour(offset: 1)
                 let formatter = DateFormatter()
                 formatter.dateFormat = "YYYY-MM-dd EE | HH:mm"
                 $0.dateFormatter = formatter
@@ -57,14 +77,14 @@ class AgendaCreateViewController: FormViewController {
             
             <<< TimeRow("endDate"){
                 $0.title = "结束时间"
-                $0.value = Date().dateFor(.nearestHour(hour: 2)).adjust(.hour, offset: 1)
+                $0.value = Date().nextHour(offset: 2)
                 let formatter = DateFormatter()
                 formatter.dateFormat = "HH:mm"
                 $0.dateFormatter = formatter
                 }.cellSetup({ (cell, row) in
                     cell.datePicker.minuteInterval = 15
                 })
-
+            
             <<< TextRow("place"){
                 $0.title = "地址"
                 $0.placeholder = "请输入地址"
@@ -72,8 +92,8 @@ class AgendaCreateViewController: FormViewController {
             
             <<< MultipleSelectorRow<String>("remind") {
                 $0.title = "提醒设置"
-                $0.options = ["0", "1", "2", "3", "4", "5"]
-                if let reminds = LocalStore.get(key: "GL_GD_REMIND") {
+                $0.options = ["0", "1", "2", "3", "4", "11", "12", "21", "22", "31"]
+                if let reminds = LocalStore.get(key: .userRemindTypes) {
                     $0.value = Set(reminds.components(separatedBy: ","))
                 }
                 
@@ -131,6 +151,11 @@ class AgendaCreateViewController: FormViewController {
                 $0.placeholder = "请输入你的摘要\n例如: 1.讨论产品设计风格\n2.确定产品风格"
                 $0.textAreaHeight = .dynamic(initialTextViewHeight: 200)
             }
+        
+        
+        
+        
+        
         tableView.tableFooterView = UIView()
     }
     

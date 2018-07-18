@@ -32,20 +32,28 @@ enum GLAgendaType: Int {
 // 提醒类型
 enum GLRemindType: String {
     case no = "0"
-    case five = "1"
-    case fifteen = "2"
-    case thirty = "3"
-    case hour = "4"
-    case day = "5"
+    case current = "1"
+    case five = "2"
+    case fifteen = "3"
+    case thirty = "4"
+    case hour = "11"
+    case twoHour = "12"
+    case day = "21"
+    case twoDay = "22"
+    case week = "31"
     
     var title: String {
         switch self {
         case .no: return "不提醒"
+        case .current: return "事件发生时"
         case .five: return "5分钟"
         case .fifteen: return "15分钟"
         case .thirty: return "30分钟"
         case .hour: return "一小时"
+        case .twoHour: return "两小时"
         case .day: return "一天"
+        case .twoDay: return "二天"
+        case .week: return "一周"
         }
     }
 }

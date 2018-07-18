@@ -18,6 +18,11 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
         self.delegate = self
         KRProgressHUD.appearance().style = .black
         NotificationCenter.default.addObserver(self, selector: #selector(receiveNotify(notification:)), name: .GLDidReceiveEvent, object: nil)
+        
+        if LocalStore.isLogin, let userInfo = LocalStore.getObject(key: .userInfo, object: GLUserInfo()), let uid = userInfo.uid {
+            print(uid)
+            MiPushSDK.setAccount(String(uid))
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,3 +53,4 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
         present(detailVC, animated: true, completion: nil)
     }
 }
+
