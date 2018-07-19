@@ -13,6 +13,7 @@ import DateHelper
 class GLAgendaDataUtil {
     static let shared = GLAgendaDataUtil()
     typealias GLCalenderTaskDidSelect = (_ id: Int, _ curBegin: String, _ curEnd: String) -> Void
+    typealias GLLocationRowKeyChange = (_ key: String) -> Void
     
     // KEY 为事件ID 所有事件
     var agendaDic: [Int: [GLAgendaResp]] = [:]
@@ -32,6 +33,7 @@ class GLAgendaDataUtil {
     
     // 日历内事件列表点击回调
     var taskListDidSelect: GLCalenderTaskDidSelect?
+    var locationRowKeyChange: GLLocationRowKeyChange?
     
     func loadData(after: Bool = true, completion: @escaping (_ succeed: Bool) -> Void = {_ in }) {
         var requestDate = endDate

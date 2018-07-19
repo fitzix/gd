@@ -302,24 +302,3 @@ class GLUpdateAgendaResp: GLBaseResp {
         info <- map["info"]
     }
 }
-
-// 事件地址
-struct GLAgendaPlace: SuggestionValue {
-    var place: String
-    var placeX: Double
-    var placeY: Double
-    
-    var suggestionString: String {
-        return place
-    }
-    
-    init(place: String, placeX: Double, placeY: Double) {
-        self.place = place
-        self.placeX = placeX
-        self.placeY = placeY
-    }
-    
-    init?(string stringValue: String) {
-        return nil
-    }
-}

@@ -12,7 +12,4 @@ class GLCalenderUtil {
     static let minYear = 1890
     static let maxYear = 2100
     static let weekStart = 0 // 周首日
-    
-    
-    
 }

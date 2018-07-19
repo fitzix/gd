@@ -11,6 +11,7 @@ import UIKit
 class GLConfig {
     static let CAL_START_DATE = "1960-01-01"
     static let CAL_END_DATE_AFTER_NOW_YEAR = 100
+    static let AMAP_KEY = "4c45d5a4268c6306674c4c65a96ba6a3"
 }
 
 

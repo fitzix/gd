@@ -48,6 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 初始化提醒设置
         LocalStore.initRemind()
         
+        AMapServices.shared().apiKey = GLConfig.AMAP_KEY
+//        AMapServices.shared().enableHTTPS = true
+        
         return true
     }
 

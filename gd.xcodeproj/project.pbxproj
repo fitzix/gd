@@ -13,6 +13,8 @@
 		C422916320DB488C0070F261 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C422916220DB488C0070F261 /* MainTabBarViewController.swift */; };
 		C423E4EB20F44C1E003840E6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423E4EA20F44C1E003840E6 /* LoginViewController.swift */; };
 		C42B5DBF20DC09B500BEA3D6 /* AgendaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B5DBE20DC09B500BEA3D6 /* AgendaViewController.swift */; };
+		C42CAA9521002B82002EDDDE /* GLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42CAA9421002B82002EDDDE /* GLModel.swift */; };
+		C42CAA9A21002D7E002EDDDE /* GLUserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42CAA9821002D7E002EDDDE /* GLUserInfoCell.swift */; };
 		C42F90B220EF038100FD8E43 /* GLAgendaDataUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42F90B120EF038100FD8E43 /* GLAgendaDataUtil.swift */; };
 		C4360BA720ECBB42006D2B12 /* GLConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4360BA620ECBB42006D2B12 /* GLConfig.swift */; };
 		C436360F20FD852F00D5FCD4 /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C436360E20FD852F00D5FCD4 /* libMiPushSDK.a */; };
@@ -20,10 +22,8 @@
 		C436361320FDA52300D5FCD4 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C436361220FDA52300D5FCD4 /* libresolv.tbd */; };
 		C436361520FDA53600D5FCD4 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C436361420FDA53500D5FCD4 /* libxml2.tbd */; };
 		C436361720FDA54B00D5FCD4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C436361620FDA54B00D5FCD4 /* libz.tbd */; };
-		C436361920FDA55D00D5FCD4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C436361820FDA55D00D5FCD4 /* SystemConfiguration.framework */; };
 		C436361B20FDA56C00D5FCD4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C436361A20FDA56C00D5FCD4 /* MobileCoreServices.framework */; };
 		C436361D20FDA57700D5FCD4 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C436361C20FDA57700D5FCD4 /* CFNetwork.framework */; };
-		C436361F20FDA58100D5FCD4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C436361E20FDA58000D5FCD4 /* CoreTelephony.framework */; };
 		C44BCBE320E1DC1A0036AAE5 /* DateHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F1418E20E0E2170044B393 /* DateHelper.framework */; };
 		C44BCBEB20E214B70036AAE5 /* GLAgendaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BCBEA20E214B70036AAE5 /* GLAgendaTableViewCell.swift */; };
 		C44BCBEE20E21C8A0036AAE5 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44BCBEC20E21C8A0036AAE5 /* Alamofire.framework */; };
@@ -54,6 +54,8 @@
 		C4DD525E20E60D9D00A39CE5 /* AgendaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD525D20E60D9D00A39CE5 /* AgendaDetailViewController.swift */; };
 		C4E8979520F44E7F0053F99A /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48640FD20DBAF480055AA1A /* SnapKit.framework */; };
 		C4E8979720F44EBA0053F99A /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48640F520DB8B090055AA1A /* Eureka.framework */; };
+		C4F026DB21003A9F00126B93 /* GLUserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4F026DA21003A9F00126B93 /* GLUserInfoCell.xib */; };
+		C4F026DD2100425900126B93 /* GLLocationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F026DC2100425900126B93 /* GLLocationRow.swift */; };
 		C4F2501820F4525200879BF5 /* KRProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C423E4E820F44726003840E6 /* KRProgressHUD.framework */; };
 		C4F2501A20F4525300879BF5 /* KRActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F2501920F4525300879BF5 /* KRActivityIndicatorView.framework */; };
 		C4F2501C20F45AB000879BF5 /* MonkeyKing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F2501B20F45AB000879BF5 /* MonkeyKing.framework */; };
@@ -68,7 +70,19 @@
 		C422916220DB488C0070F261 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		C423E4E820F44726003840E6 /* KRProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KRProgressHUD.framework; path = Carthage/Build/iOS/KRProgressHUD.framework; sourceTree = "<group>"; };
 		C423E4EA20F44C1E003840E6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C42B38E721009B5E00E919A4 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		C42B38E92100B62200E919A4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C42B38EB2100B64100E919A4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C42B38ED2100B64D00E919A4 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		C42B38EF2100B66A00E919A4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C42B38F12100B67500E919A4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C42B38F32100B67E00E919A4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		C42B38F52100B6B100E919A4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		C42B38F72100B6B800E919A4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		C42B38F92100B6E100E919A4 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		C42B5DBE20DC09B500BEA3D6 /* AgendaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaViewController.swift; sourceTree = "<group>"; };
+		C42CAA9421002B82002EDDDE /* GLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLModel.swift; sourceTree = "<group>"; };
+		C42CAA9821002D7E002EDDDE /* GLUserInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLUserInfoCell.swift; sourceTree = "<group>"; };
 		C42F90B120EF038100FD8E43 /* GLAgendaDataUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLAgendaDataUtil.swift; sourceTree = "<group>"; };
 		C4360BA620ECBB42006D2B12 /* GLConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLConfig.swift; sourceTree = "<group>"; };
 		C436360E20FD852F00D5FCD4 /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
@@ -114,6 +128,10 @@
 		C4D4EBB420EE022E00835C43 /* CRRefresh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CRRefresh.framework; path = Carthage/Build/iOS/CRRefresh.framework; sourceTree = "<group>"; };
 		C4D9851520F5BCF200CB8A48 /* AgendaCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaCreateViewController.swift; sourceTree = "<group>"; };
 		C4DD525D20E60D9D00A39CE5 /* AgendaDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaDetailViewController.swift; sourceTree = "<group>"; };
+		C4F026DA21003A9F00126B93 /* GLUserInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GLUserInfoCell.xib; sourceTree = "<group>"; };
+		C4F026DC2100425900126B93 /* GLLocationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLLocationRow.swift; sourceTree = "<group>"; };
+		C4F026E121007E9900126B93 /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapFoundationKit.framework; path = Carthage/Build/iOS/AMapFoundationKit.framework; sourceTree = "<group>"; };
+		C4F026E221007E9900126B93 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = Carthage/Build/iOS/AMapSearchKit.framework; sourceTree = "<group>"; };
 		C4F1418E20E0E2170044B393 /* DateHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DateHelper.framework; path = Carthage/Build/iOS/DateHelper.framework; sourceTree = "<group>"; };
 		C4F2501920F4525300879BF5 /* KRActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KRActivityIndicatorView.framework; path = Carthage/Build/iOS/KRActivityIndicatorView.framework; sourceTree = "<group>"; };
 		C4F2501B20F45AB000879BF5 /* MonkeyKing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MonkeyKing.framework; path = Carthage/Build/iOS/MonkeyKing.framework; sourceTree = "<group>"; };
@@ -126,10 +144,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C436361F20FDA58100D5FCD4 /* CoreTelephony.framework in Frameworks */,
 				C436361D20FDA57700D5FCD4 /* CFNetwork.framework in Frameworks */,
 				C436361B20FDA56C00D5FCD4 /* MobileCoreServices.framework in Frameworks */,
-				C436361920FDA55D00D5FCD4 /* SystemConfiguration.framework in Frameworks */,
 				C436361720FDA54B00D5FCD4 /* libz.tbd in Frameworks */,
 				C436361520FDA53600D5FCD4 /* libxml2.tbd in Frameworks */,
 				C436361320FDA52300D5FCD4 /* libresolv.tbd in Frameworks */,
@@ -154,6 +170,18 @@
 		C4007C6A20DB7E3600D49866 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C42B38F92100B6E100E919A4 /* libc++.tbd */,
+				C42B38F72100B6B800E919A4 /* AdSupport.framework */,
+				C42B38F52100B6B100E919A4 /* Security.framework */,
+				C42B38F32100B67E00E919A4 /* CoreLocation.framework */,
+				C42B38F12100B67500E919A4 /* QuartzCore.framework */,
+				C42B38EF2100B66A00E919A4 /* CoreGraphics.framework */,
+				C42B38ED2100B64D00E919A4 /* GLKit.framework */,
+				C42B38EB2100B64100E919A4 /* Foundation.framework */,
+				C42B38E92100B62200E919A4 /* UIKit.framework */,
+				C42B38E721009B5E00E919A4 /* libstdc++.6.0.9.tbd */,
+				C4F026E121007E9900126B93 /* AMapFoundationKit.framework */,
+				C4F026E221007E9900126B93 /* AMapSearchKit.framework */,
 				C436361E20FDA58000D5FCD4 /* CoreTelephony.framework */,
 				C436361C20FDA57700D5FCD4 /* CFNetwork.framework */,
 				C436361A20FDA56C00D5FCD4 /* MobileCoreServices.framework */,
@@ -207,6 +235,9 @@
 				C44BCBF020E220CD0036AAE5 /* GLAgendaTableViewCell.xib */,
 				C460061620E29C5500B09186 /* GLAgendaTableSectionHeader.swift */,
 				C4B5282520E29F800088111B /* GLAgendaTableSectionHeader.xib */,
+				C42CAA9821002D7E002EDDDE /* GLUserInfoCell.swift */,
+				C4F026DA21003A9F00126B93 /* GLUserInfoCell.xib */,
+				C4F026DC2100425900126B93 /* GLLocationRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				C44BCBF520E22F3F0036AAE5 /* GLResp.swift */,
+				C42CAA9421002B82002EDDDE /* GLModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -391,6 +423,7 @@
 				C478ED7920DA5384007A4A3F /* Assets.xcassets in Resources */,
 				C478ED7720DA5382007A4A3F /* Main.storyboard in Resources */,
 				C44BCBF120E220CD0036AAE5 /* GLAgendaTableViewCell.xib in Resources */,
+				C4F026DB21003A9F00126B93 /* GLUserInfoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +475,7 @@
 				C422916320DB488C0070F261 /* MainTabBarViewController.swift in Sources */,
 				C41A50CA20EC669A00B458E1 /* LunarUtil.swift in Sources */,
 				C478ED7020DA5382007A4A3F /* AppDelegate.swift in Sources */,
+				C42CAA9A21002D7E002EDDDE /* GLUserInfoCell.swift in Sources */,
 				C44BCBF620E22F3F0036AAE5 /* GLResp.swift in Sources */,
 				C4DD525E20E60D9D00A39CE5 /* AgendaDetailViewController.swift in Sources */,
 				C42B5DBF20DC09B500BEA3D6 /* AgendaViewController.swift in Sources */,
@@ -460,8 +494,10 @@
 				C484FF6320E9D980004890E1 /* Extensions.swift in Sources */,
 				C44BCBEB20E214B70036AAE5 /* GLAgendaTableViewCell.swift in Sources */,
 				C44BCC0120E24CED0036AAE5 /* GLHttpUtil.swift in Sources */,
+				C4F026DD2100425900126B93 /* GLLocationRow.swift in Sources */,
 				C4D4EBAF20EDEA1F00835C43 /* GLCalenderDayCell.swift in Sources */,
 				C4F2502120F4D29E00879BF5 /* LocalStore.swift in Sources */,
+				C42CAA9521002B82002EDDDE /* GLModel.swift in Sources */,
 				C4D9851620F5BCF200CB8A48 /* AgendaCreateViewController.swift in Sources */,
 				C47D007920E36EE7001318B7 /* GLColorUtil.swift in Sources */,
 				C42F90B220EF038100FD8E43 /* GLAgendaDataUtil.swift in Sources */,

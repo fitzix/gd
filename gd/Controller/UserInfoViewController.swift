@@ -10,22 +10,29 @@ import UIKit
 import Eureka
 import ObjectMapper
 
-class UserInfoViewController: FormViewController  {
+class UserInfoViewController: FormViewController, AMapSearchDelegate  {
     
-    @IBOutlet weak var iconImage: UIImageView!
+    var userInfo = LocalStore.getObject(key: .userInfo, object: GLUserInfo())
     
-    @IBOutlet weak var nicknameLabel: UILabel!
-    
-    var userInfo = GLUserInfo(JSONString: UserDefaults.standard.string(forKey: "GL_GD_USER_INFO")!)
+    var search = AMapSearchAPI()!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        search.delegate = self
+        
+        let request = AMapPOIAroundSearchRequest()
+        request.keywords = "金泰"
+        print(request)
+        search.aMapPOIAroundSearch(request)
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
-        if let iconUrl = userInfo?.icon {
-            iconImage.load(url: URL(string: iconUrl)!)
-        }
-        nicknameLabel.text = userInfo?.nickname
         form
+            +++ Section()
+            <<< GLUserInfoRow {
+                $0.value = GLUserModel(name: userInfo?.nickname, iconURL: userInfo?.icon)
+            }
             +++ Section()
             <<< MultipleSelectorRow<String>("remind") {
                 $0.title = "提醒设置"
@@ -88,7 +95,21 @@ class UserInfoViewController: FormViewController  {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 8.0
+        if section == 0 {
+            return 8
+        }
+        return 4
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 1 {
+            return 13
+        }
+        return 4
+    }
+    
+    func onPOISearchDone(_ request: AMapPOISearchBaseRequest!, response: AMapPOISearchResponse!) {
+        print(23333333)
     }
 }
 

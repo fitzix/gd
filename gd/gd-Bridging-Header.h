@@ -11,4 +11,8 @@
 
 #import "MiPushSDK.h"
 
+// 高德地图
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
+
 #endif /* gd_Bridging_Header_h */

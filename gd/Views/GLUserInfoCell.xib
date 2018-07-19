@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="70" id="iY8-jA-Tte" customClass="GLUserInfoCell" customModule="gd" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="416" height="70"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iY8-jA-Tte" id="49G-vW-FqJ">
+                <rect key="frame" x="0.0" y="0.0" width="416" height="69.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XRp-Ro-oa1">
+                        <rect key="frame" x="20" y="9" width="51.5" height="51.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="51.5" id="DQT-L3-7oV"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="25.75"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Coy-QQ-7Gg">
+                        <rect key="frame" x="86.5" y="25" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="XRp-Ro-oa1" secondAttribute="bottom" constant="9" id="13W-y3-e0d"/>
+                    <constraint firstItem="Coy-QQ-7Gg" firstAttribute="leading" secondItem="XRp-Ro-oa1" secondAttribute="trailing" constant="15" id="GI8-Cs-1Ie"/>
+                    <constraint firstItem="Coy-QQ-7Gg" firstAttribute="centerY" secondItem="XRp-Ro-oa1" secondAttribute="centerY" id="LUv-62-O5m"/>
+                    <constraint firstItem="XRp-Ro-oa1" firstAttribute="leading" secondItem="49G-vW-FqJ" secondAttribute="leading" constant="20" id="nfr-NX-MUG"/>
+                    <constraint firstItem="XRp-Ro-oa1" firstAttribute="top" secondItem="49G-vW-FqJ" secondAttribute="top" constant="9" id="tlY-Yb-9f2"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="userImageView" destination="XRp-Ro-oa1" id="Arn-xx-FcZ"/>
+                <outlet property="userNameLabel" destination="Coy-QQ-7Gg" id="K0T-7s-rGy"/>
+            </connections>
+            <point key="canvasLocation" x="-34" y="23"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -12,32 +12,13 @@ import DateHelper
 import Alamofire
 import KRProgressHUD
 
-struct Scientist: SuggestionValue {
-    var id: Int
-    var firstName: String
-    var lastName: String
-    
-    var suggestionString: String {
-        return "\(firstName) \(lastName)"
-    }
-    
-    init(id: Int, firstName: String, lastName: String) {
-        self.firstName = firstName
-        self.lastName = lastName
-        self.id = id
-    }
-    
-    init?(string stringValue: String) {
-        return nil
-    }
-}
-
 
 class AgendaCreateViewController: FormViewController {
-    
+
     override func viewDidLoad() {
         let x = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(removeView(_:)))
         navigationItem.setLeftBarButton(x, animated: false)
+        
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -152,10 +133,6 @@ class AgendaCreateViewController: FormViewController {
                 $0.textAreaHeight = .dynamic(initialTextViewHeight: 200)
             }
         
-        
-        
-        
-        
         tableView.tableFooterView = UIView()
     }
     
@@ -198,3 +175,9 @@ class AgendaCreateViewController: FormViewController {
         }
     }
 }
+
+//extension AgendaCreateViewController: AMapSearchDelegate {
+//    func onPOISearchDone(_ request: AMapPOISearchBaseRequest!, response: AMapPOISearchResponse!) {
+//        print(response)
+//    }
+//}

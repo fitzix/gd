@@ -19,50 +19,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="VBc-93-iGC">
-                                <rect key="frame" x="0.0" y="168" width="375" height="561"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QYT-IH-QTL">
-                                <rect key="frame" x="15" y="103" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="FIQ-ag-nmm"/>
-                                    <constraint firstAttribute="width" constant="50" id="PVN-sc-k0w"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31c-Lc-wfv">
-                                <rect key="frame" x="85" y="111" width="130" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="130" id="8Wr-YS-sRa"/>
-                                    <constraint firstAttribute="height" constant="35" id="Fo1-09-0kr"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="VBc-93-iGC" firstAttribute="trailing" secondItem="PQr-Ze-W5v" secondAttribute="trailing" id="JWM-Jb-71I"/>
-                            <constraint firstItem="31c-Lc-wfv" firstAttribute="centerY" secondItem="QYT-IH-QTL" secondAttribute="centerY" id="NJg-V4-DTe"/>
                             <constraint firstItem="VBc-93-iGC" firstAttribute="bottom" secondItem="PQr-Ze-W5v" secondAttribute="bottom" id="Nhb-pf-FbO"/>
-                            <constraint firstItem="VBc-93-iGC" firstAttribute="top" secondItem="QYT-IH-QTL" secondAttribute="bottom" constant="15" id="P2N-w2-ich"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="31c-Lc-wfv" secondAttribute="trailing" constant="20" symbolic="YES" id="W70-vH-e0s"/>
-                            <constraint firstItem="QYT-IH-QTL" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="15" id="c9w-np-flF"/>
                             <constraint firstItem="VBc-93-iGC" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="e8H-Hr-Q2P"/>
-                            <constraint firstItem="31c-Lc-wfv" firstAttribute="leading" secondItem="QYT-IH-QTL" secondAttribute="trailing" constant="20" id="gYZ-yJ-wno"/>
-                            <constraint firstItem="QYT-IH-QTL" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="15" id="hG5-fl-e1P"/>
+                            <constraint firstItem="VBc-93-iGC" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="nCP-u9-Sf4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
                     <navigationItem key="navigationItem" title="个人中心" id="Zug-oR-Juj"/>
                     <connections>
-                        <outlet property="iconImage" destination="QYT-IH-QTL" id="QI6-di-myA"/>
-                        <outlet property="nicknameLabel" destination="31c-Lc-wfv" id="kZg-kv-j44"/>
                         <outlet property="tableView" destination="VBc-93-iGC" id="ehO-QJ-3HW"/>
                     </connections>
                 </viewController>
